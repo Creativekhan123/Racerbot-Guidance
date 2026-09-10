@@ -1,0 +1,9 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+
+# Temporary build scripts
+*.pyc
+__pycache__/
