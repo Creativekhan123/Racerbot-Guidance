@@ -2044,7 +2044,7 @@
           <span>arduino_code.ino</span>
           <button class="copy-btn" onclick="copyCode()" id="copyBtn">&#128203; Copy Code</button>
         </div>
-        <pre id="codeBlock">﻿/*
+        <pre id="codeBlock">/*
    Obstacle Avoidance Robot - Arduino Uno
    - 3 Ultrasonic sensors (Left, Center, Right)
    - All motor movement controlled via motorControl(leftSpeed, rightSpeed)
@@ -2389,7 +2389,7 @@ float getDistance(int trigPin, int echoPin) {
     function toggleNav() { var n = document.getElementById('navLinks'); n.classList.toggle('open'); }
     document.querySelectorAll('.nav-links a').forEach(function (a) { a.addEventListener('click', function () { document.getElementById('navLinks').classList.remove('open'); }); });
     function toggleComp(id) { var body = document.getElementById(id); var btn = document.getElementById('btn-' + id); var isOpen = body.classList.contains('open'); body.classList.toggle('open'); if (btn) { btn.innerHTML = isOpen ? 'Details &#9662;' : 'Details &#9652;'; } }
-    function copyCode() { var raw = document.getElementById('codeBlock').textContent; if (navigator.clipboard) { navigator.clipboard.writeText(raw).then(function () { flashCopy(); }).catch(function () { fallbackCopy(raw); }); } else { fallbackCopy(raw); } }
+    function copyCode() { var raw = document.getElementById('codeBlock').textContent.replace(/\uFEFF/g, ''); if (navigator.clipboard) { navigator.clipboard.writeText(raw).then(function () { flashCopy(); }).catch(function () { fallbackCopy(raw); }); } else { fallbackCopy(raw); } }
     function fallbackCopy(text) { var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.top = '-9999px'; document.body.appendChild(ta); ta.focus(); ta.select(); try { document.execCommand('copy'); } catch (e) { } document.body.removeChild(ta); flashCopy(); }
     function flashCopy() { var btn = document.getElementById('copyBtn'); btn.textContent = 'Copied!'; btn.classList.add('copied'); setTimeout(function () { btn.textContent = 'Copy Code'; btn.classList.remove('copied'); }, 2000); }
     function toggleCheck(el) { el.classList.toggle('done'); var sib = el.nextElementSibling || el.previousElementSibling; if (sib && sib.classList.contains('checklist-label')) sib.classList.toggle('done'); }
