@@ -774,6 +774,7 @@
       grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
       gap: 24px;
       margin-top: 20px;
+      align-items: stretch;
     }
 
     @media(max-width:768px) {
@@ -790,6 +791,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      align-self: stretch;
       box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
       transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
     }
@@ -803,7 +805,7 @@
     .comp-card-media {
       position: relative;
       width: 100%;
-      height: 210px;
+      height: 220px;
       background: var(--img-bg);
       border-bottom: 1px solid var(--card-border);
       display: flex;
@@ -856,6 +858,7 @@
       gap: 12px;
       cursor: pointer;
       margin-bottom: 8px;
+      min-height: 46px;
     }
 
     .comp-name {
@@ -896,14 +899,17 @@
       font-size: 13px;
       color: var(--text-body);
       line-height: 1.55;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      min-height: 56px;
+      flex-shrink: 0;
     }
 
     .comp-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
     }
 
     .spec-tag {
@@ -1559,41 +1565,85 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      margin-top: 16px;
-      padding: 9px 18px;
+      gap: 8px;
+      margin-top: auto;
+      padding: 10px 18px;
       width: 100%;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
-      color: #ffffff;
+      color: #ffffff !important;
       background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      border: none;
-      border-radius: 8px;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 9px;
       cursor: pointer;
       text-decoration: none !important;
       letter-spacing: .02em;
-      transition: all .2s ease;
-      box-shadow: 0 2px 8px rgba(245,158,11,.35);
+      transition: all .25s ease;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3);
+      box-sizing: border-box;
+      font-family: inherit;
     }
 
     .buy-btn:hover {
-      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-      box-shadow: 0 4px 14px rgba(245,158,11,.5);
-      transform: translateY(-1px);
-      color: #ffffff;
-      text-decoration: none !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.48);
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      color: #ffffff !important;
     }
 
     .buy-btn:active {
       transform: translateY(0);
-      box-shadow: 0 1px 4px rgba(245,158,11,.3);
     }
 
     .buy-btn-icon {
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1;
     }
-  </style>
+
+    .buy-btn.buy-btn-pending {
+      background: rgba(245, 158, 11, 0.08);
+      color: var(--heading) !important;
+      border: 1.5px dashed rgba(245, 158, 11, 0.7);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .buy-btn.buy-btn-pending:hover {
+      background: rgba(245, 158, 11, 0.16);
+      border-color: #f59e0b;
+      color: #f59e0b !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.22);
+    }
+
+    .buy-mark-needed {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #ef4444;
+      color: #ffffff !important;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2.5px 7px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-left: 6px;
+      box-shadow: 0 1px 4px rgba(239, 68, 68, 0.35);
+      animation: pulse-mark 2.2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-mark {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.85;
+        transform: scale(0.95);
+      }
+    }
+
+</style>
   <script>
     (function () {
       try {
@@ -1877,6 +1927,7 @@
       <div class="comp-grid">
 
         <!-- CARD 1: Arduino UNO -->
+                <!-- CARD 1: Arduino UNO -->
         <div class="comp-card" id="card-c1">
           <div class="comp-card-media" onclick="toggleComp('c1')">
             <img class="comp-img-large"
@@ -1913,12 +1964,10 @@
                   decides which path is clear, and sends driving commands to the motor driver shield.</p>
               </div>
             </div>
-          </div>
 
-
-          <a class="buy-btn" href="https://www.amazon.in/Robocraze-Compatible-Microcontroller-Applications-Electronics/dp/B07G4C4D8F/ref=sr_1_6?crid=26QJ9Z7PADI77&dib=eyJ2IjoiMSJ9.HItDWxJFG_3CiF6lqB9RncbU6z0nFEDWBZ-J1EtPDVT5oOhE8CXHWPl1vLbZeqO1bzexNgy4tfNwnuv3HvznB0nknO7Z_mlcHVWEvc6G40ZCsboNDckqOCHV6HFKB69fzIfuwTssXSd8vQDq6tY1M_QjOJK7K_w4klYeQHdGPit15lQShqkRYh2NiKSJX9eB8vv71oYR4CWWwJaYTQmJlCP_9UsIc55kdpMhdqT8auXrf_2uUAx-KSr6vZ1QVPWKnO8rPH2xCAFUAS-DYTSvZTNKZbJDCuf7q-oZPGnjy4g.h3-yhYHXoieJBGWaSxhNd_hRxYurFYWWgIAa6ph60IQ&dib_tag=se&keywords=arduino+uno&qid=1789110611&sprefix=arduino+un%2Caps%2C317&sr=8-6" target="_blank" rel="noopener noreferrer">
-            <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
-          </a>
+            <a class="buy-btn" href="https://www.amazon.in/Robocraze-Compatible-Microcontroller-Applications-Electronics/dp/B07G4C4D8F/ref=sr_1_6?crid=26QJ9Z7PADI77&dib=eyJ2IjoiMSJ9.HItDWxJFG_3CiF6lqB9RncbU6z0nFEDWBZ-J1EtPDVT5oOhE8CXHWPl1vLbZeqO1bzexNgy4tfNwnuv3HvznB0nknO7Z_mlcHVWEvc6G40ZCsboNDckqOCHV6HFKB69fzIfuwTssXSd8vQDq6tY1M_QjOJK7K_w4klYeQHdGPit15lQShqkRYh2NiKSJX9eB8vv71oYR4CWWwJaYTQmJlCP_9UsIc55kdpMhdqT8auXrf_2uUAx-KSr6vZ1QVPWKnO8rPH2xCAFUAS-DYTSvZTNKZbJDCuf7q-oZPGnjy4g.h3-yhYHXoieJBGWaSxhNd_hRxYurFYWWgIAa6ph60IQ&dib_tag=se&keywords=arduino+uno&qid=1789110611&sprefix=arduino+un%2Caps%2C317&sr=8-6" target="_blank" rel="noopener noreferrer">
+              <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
+            </a>
           </div>
         </div>
 
@@ -1960,6 +2009,10 @@
                   DIR logic.</p>
               </div>
             </div>
+
+            <button type="button" class="buy-btn buy-btn-pending" onclick="noticePendingBuyLink('Motor Driver Shield (Cytron)')" title="Buy link not yet provided - click to provide link">
+              <span class="buy-btn-icon">&#128722;</span> Buy Component <span class="buy-mark-needed">&#9888; Link Needed</span>
+            </button>
           </div>
         </div>
 
@@ -2000,12 +2053,10 @@
                   required pulling power to drive across tile and classroom floors without stalling.</p>
               </div>
             </div>
-          </div>
 
-
-          <a class="buy-btn" href="https://probots.co.in/jgb37-520-dc12v-960-rpm-miniature-speed-reduction-gear-dc-motor.html?gad_source=1&gad_campaignid=15283483193&gbraid=0AAAAADyryWQFi_xcAp6yqSVzGQdDgB3nY&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8mjXvC-63arZj5-mtXzpzIz5z0FC__2Zl4MYh9XOnnAVdFhXPZDOhcaAlGYEALw_wcB" target="_blank" rel="noopener noreferrer">
-            <span class="buy-btn-icon">&#128722;</span> Buy on ProBots
-          </a>
+            <a class="buy-btn" href="https://probots.co.in/jgb37-520-dc12v-960-rpm-miniature-speed-reduction-gear-dc-motor.html?gad_source=1&gad_campaignid=15283483193&gbraid=0AAAAADyryWQFi_xcAp6yqSVzGQdDgB3nY&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8mjXvC-63arZj5-mtXzpzIz5z0FC__2Zl4MYh9XOnnAVdFhXPZDOhcaAlGYEALw_wcB" target="_blank" rel="noopener noreferrer">
+              <span class="buy-btn-icon">&#128722;</span> Buy on ProBots
+            </a>
           </div>
         </div>
 
@@ -2046,12 +2097,10 @@
                   on smooth tile or wood, preventing wheel slipping during quick evasive turns.</p>
               </div>
             </div>
-          </div>
 
-
-          <a class="buy-btn" href="https://www.amazon.in/UNIVERSAL-HUB-BO-RUBBER-YELLOW/dp/B0DNB4N63X/ref=sr_1_8?crid=NOVM0SD97CKW&dib=eyJ2IjoiMSJ9.lZ8oMQJHP4hUyKL3F3rzfygK6x-vg_TOByRboNlz8fAjMfH3oRMgCJCI3rDuDJLPxY71uX2jnhyKLIuRuH99b0b-6F1vHUYA_LAKwMUjANFE93dk3-CY7Kg9QjId_TS7LIKXNdJiqRGvSXZVdWn6fjfJFi9uWNS1u55PFESdbUpdg2NyX6pehGq1N1xLGsz9YUWMkDJcLhHTNEIIe3lWUDC27B4UbfuvNENOeBYjahgSvJmwuR4uGzcP52Il9gDHtyzhTjVG0InFuvb_siBz3XSn2gG41IAcNS5UmuuAXlo.X4Roywi9Dntb6V3ku3b69l0xyCuTu7pgJf-t5pcmbrI&dib_tag=se&keywords=motor+wheel&qid=1789110778&sprefix=motorwheel%2Caps%2C375&sr=8-8" target="_blank" rel="noopener noreferrer">
-            <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
-          </a>
+            <a class="buy-btn" href="https://www.amazon.in/UNIVERSAL-HUB-BO-RUBBER-YELLOW/dp/B0DNB4N63X/ref=sr_1_8?crid=NOVM0SD97CKW&dib=eyJ2IjoiMSJ9.lZ8oMQJHP4hUyKL3F3rzfygK6x-vg_TOByRboNlz8fAjMfH3oRMgCJCI3rDuDJLPxY71uX2jnhyKLIuRuH99b0b-6F1vHUYA_LAKwMUjANFE93dk3-CY7Kg9QjId_TS7LIKXNdJiqRGvSXZVdWn6fjfJFi9uWNS1u55PFESdbUpdg2NyX6pehGq1N1xLGsz9YUWMkDJcLhHTNEIIe3lWUDC27B4UbfuvNENOeBYjahgSvJmwuR4uGzcP52Il9gDHtyzhTjVG0InFuvb_siBz3XSn2gG41IAcNS5UmuuAXlo.X4Roywi9Dntb6V3ku3b69l0xyCuTu7pgJf-t5pcmbrI&dib_tag=se&keywords=motor+wheel&qid=1789110778&sprefix=motorwheel%2Caps%2C375&sr=8-8" target="_blank" rel="noopener noreferrer">
+              <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
+            </a>
           </div>
         </div>
 
@@ -2093,12 +2142,10 @@
                   happen.</p>
               </div>
             </div>
-          </div>
 
-
-          <a class="buy-btn" href="https://www.amazon.in/Robocraze-Ultrasonic-Non-Contact-Resolution-Automation/dp/B01I1ZTPJC/ref=sr_1_6_mod_primary_new?crid=23IB9HO4Z2UFY&dib=eyJ2IjoiMSJ9.xkbwcv5k773ETrOOrbhzrYYZ08LN41xOI3RvGqRsItfS20yT3pGaaKNXlZ6WZIe_IrMOwUZLpXtOhtTwW8QG4jtlhI4w4PPq8HD2IDrr3T1p7ZB6c48ZynQBJA0UmJKr4vkp7Lf3o9u4qDfPwX35rIHd4kGaZLrI_6NuoDgWr039WZCH375e6elfCiwTn9H1JmymQV7yGKx9PKjbpQfeeI30frLNgKwIUtAHKcaCzxoyeBitAri99EfEs1XVVrEEXA6R8i_stHn-0MDIW01JiJDsIKkpknVxghKE-PL9Nlk.QgfK62Q_pXb5KDbrYTZOfTu1-ltOi4E_N3XDbx6zK4A&dib_tag=se&keywords=ultrasonic+sensor&qid=1789110889&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=ultra%2Caps%2C350&sr=8-6" target="_blank" rel="noopener noreferrer">
-            <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
-          </a>
+            <a class="buy-btn" href="https://www.amazon.in/Robocraze-Ultrasonic-Non-Contact-Resolution-Automation/dp/B01I1ZTPJC/ref=sr_1_6_mod_primary_new?crid=23IB9HO4Z2UFY&dib=eyJ2IjoiMSJ9.xkbwcv5k773ETrOOrbhzrYYZ08LN41xOI3RvGqRsItfS20yT3pGaaKNXlZ6WZIe_IrMOwUZLpXtOhtTwW8QG4jtlhI4w4PPq8HD2IDrr3T1p7ZB6c48ZynQBJA0UmJKr4vkp7Lf3o9u4qDfPwX35rIHd4kGaZLrI_6NuoDgWr039WZCH375e6elfCiwTn9H1JmymQV7yGKx9PKjbpQfeeI30frLNgKwIUtAHKcaCzxoyeBitAri99EfEs1XVVrEEXA6R8i_stHn-0MDIW01JiJDsIKkpknVxghKE-PL9Nlk.QgfK62Q_pXb5KDbrYTZOfTu1-ltOi4E_N3XDbx6zK4A&dib_tag=se&keywords=ultrasonic+sensor&qid=1789110889&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=ultra%2Caps%2C350&sr=8-6" target="_blank" rel="noopener noreferrer">
+              <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
+            </a>
           </div>
         </div>
 
@@ -2139,6 +2186,10 @@
                   motor shield, battery, and the three forward-facing ultrasonic sensors.</p>
               </div>
             </div>
+
+            <button type="button" class="buy-btn buy-btn-pending" onclick="noticePendingBuyLink('Plastic Robot Chassis / Frame')" title="Buy link not yet provided - click to provide link">
+              <span class="buy-btn-icon">&#128722;</span> Buy Component <span class="buy-mark-needed">&#9888; Link Needed</span>
+            </button>
           </div>
         </div>
 
@@ -2180,6 +2231,10 @@
                 </p>
               </div>
             </div>
+
+            <button type="button" class="buy-btn buy-btn-pending" onclick="noticePendingBuyLink('11-12V Battery')" title="Buy link not yet provided - click to provide link">
+              <span class="buy-btn-icon">&#128722;</span> Buy Component <span class="buy-mark-needed">&#9888; Link Needed</span>
+            </button>
           </div>
         </div>
 
@@ -2220,6 +2275,10 @@
                   headers and all three ultrasonic sensors mounted on the front chassis.</p>
               </div>
             </div>
+
+            <button type="button" class="buy-btn buy-btn-pending" onclick="noticePendingBuyLink('Jumper Wires')" title="Buy link not yet provided - click to provide link">
+              <span class="buy-btn-icon">&#128722;</span> Buy Component <span class="buy-mark-needed">&#9888; Link Needed</span>
+            </button>
           </div>
         </div>
 
