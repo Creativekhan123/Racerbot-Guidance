@@ -2285,9 +2285,23 @@
               <td>As required</td>
               <td class="price">&#8377;50 &ndash; &#8377;100</td>
             </tr>
+            <tr>
+              <td>9</td>
+              <td>Rod &amp; Bearing</td>
+              <td>Smooth steel axle &amp; miniature bearing set</td>
+              <td>1 Set</td>
+              <td class="price">&#8377;80 &ndash; &#8377;180</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Double-Sided Tape</td>
+              <td>Heavy-duty component mounting tape</td>
+              <td>1 Roll</td>
+              <td class="price">&#8377;100 &ndash; &#8377;200</td>
+            </tr>
             <tr class="total-row">
               <td colspan="4"><strong>Approximate Project Total</strong></td>
-              <td class="price"><strong>&#8377;1,810 &ndash; &#8377;3,600</strong></td>
+              <td class="price"><strong>&#8377;1,990 &ndash; &#8377;3,980</strong></td>
             </tr>
           </tbody>
         </table>
@@ -2706,6 +2720,94 @@
             </div>
 
             <a class="buy-btn" href="https://www.amazon.in/SP-Multicolor-Breadboard-Microcontroller-Prototyping/dp/B0H61V8X2M/ref=sr_1_6?crid=K3CFDT1UB8W0&dib=eyJ2IjoiMSJ9.LK-CxHi51--Enj8NOjD41K-GHHqoPOJnow7_hibYrS90mz7_cU_qOibkhXtsG0-0tjr3K8asoCLxFG8rgvImWW1tgFL5x4tYDJZ8o_3zDG9u-8SgLvPa1RYvdF2kgKSKB0kGMuSnIbGVDIkGjNirG-mhp7p3zelgJeuMiAewHhCsNou7SrAn-bJ5scjU4p5xTZb03CvrAfiL5tBiAD4qL0uHdBxmz68xTToDXhj1byHhLgq-loFYyB7b2Nmp2cNhIXDEPdtrpkEqLRypbj-BwftE8squHfL2HoEXpmwRpOo.OA-rO0KtiQmG3sI5Oky50Oy-avAYnGIMYV2LIWm7H8A&dib_tag=se&keywords=jumper+wires&qid=1789127259&sprefix=jumper+wire%2Caps%2C262&sr=8-6" target="_blank" rel="noopener noreferrer">
+              <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 9: Rod and Bearing -->
+        <div class="comp-card" id="card-c9">
+          <div class="comp-card-media" onclick="toggleComp('c9')">
+            <img class="comp-img-large"
+              src="Rod &amp; Bearing.png"
+              alt="Rod and Bearing Assembly" loading="lazy">
+            <span class="comp-badge">Hardware &middot; Mechanical</span>
+          </div>
+          <div class="comp-card-body">
+            <div class="comp-header-row" onclick="toggleComp('c9')">
+              <div>
+                <h3 class="comp-name">Rod &amp; Bearing</h3>
+                <div class="comp-subtitle">Smooth Steel Axle &amp; Ball Bearing Assembly</div>
+              </div>
+              <button class="toggle-btn" id="btn-c9" onclick="event.stopPropagation();toggleComp('c9')"
+                aria-label="Toggle details">Details &#9662;</button>
+            </div>
+            <p class="comp-desc">Precision ground steel rod paired with miniature ball bearings to provide smooth, low-friction
+              rotation for the robot's idle wheel and caster assembly.</p>
+            <div class="comp-tags">
+              <span class="spec-tag">Steel Shaft</span>
+              <span class="spec-tag">Mini Ball Bearings</span>
+              <span class="spec-tag">Low-Friction</span>
+              <span class="spec-tag">Smooth Rotation</span>
+            </div>
+            <div class="comp-details" id="c9">
+              <div class="comp-detail-box">
+                <h4>What is it?</h4>
+                <p>A precision-machined steel shaft rod fitted with miniature deep-groove ball bearings designed to support rotating
+                  hardware and reduce rotational friction.</p>
+              </div>
+              <div class="comp-detail-box">
+                <h4>Why do we use it?</h4>
+                <p>Provides rigid, wobble-free rotation for the chassis caster and support wheels, significantly reducing
+                  drag and ensuring maximum speed from the drive motors.</p>
+              </div>
+            </div>
+
+            <button type="button" class="buy-btn buy-btn-pending" onclick="noticePendingBuyLink('Rod & Bearing')" title="Buy link not yet provided - click to provide link">
+              <span class="buy-btn-icon">&#128722;</span> Buy Component <span class="buy-mark-needed">&#9888; Link Needed</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 10: Double-Sided Tape -->
+        <div class="comp-card" id="card-c10">
+          <div class="comp-card-media" onclick="toggleComp('c10')">
+            <img class="comp-img-large"
+              src="Double_sided_tape.png"
+              alt="Double Sided Tape" loading="lazy">
+            <span class="comp-badge">Assembly &middot; Mounting</span>
+          </div>
+          <div class="comp-card-body">
+            <div class="comp-header-row" onclick="toggleComp('c10')">
+              <div>
+                <h3 class="comp-name">Double-Sided Tape</h3>
+                <div class="comp-subtitle">Heavy-Duty Component Adhesive Tape</div>
+              </div>
+              <button class="toggle-btn" id="btn-c10" onclick="event.stopPropagation();toggleComp('c10')"
+                aria-label="Toggle details">Details &#9662;</button>
+            </div>
+            <p class="comp-desc">High-strength double-sided adhesive mounting tape to securely bond sensors, motor shield,
+              and battery pack firmly to the chassis frame without drilling.</p>
+            <div class="comp-tags">
+              <span class="spec-tag">Heavy-Duty Adhesion</span>
+              <span class="spec-tag">Vibration-Damping</span>
+              <span class="spec-tag">Residue-Free</span>
+              <span class="spec-tag">Quick Mounting</span>
+            </div>
+            <div class="comp-details" id="c10">
+              <div class="comp-detail-box">
+                <h4>What is it?</h4>
+                <p>A thick, heavy-duty double-sided acrylic/foam mounting tape designed for strong adhesion on plastic, metal,
+                  and electronic circuit board surfaces.</p>
+              </div>
+              <div class="comp-detail-box">
+                <h4>Why do we use it?</h4>
+                <p>Allows rapid, clean, and vibration-absorbing mounting for the battery pack, ultrasonic brackets, and
+                  breadboard modules directly to the 3D-printed chassis without needing extra hardware.</p>
+              </div>
+            </div>
+
+            <a class="buy-btn" href="https://www.amazon.in/NUOVI-Double-Sided-Heavy-Duty-Furniture-Decoration/dp/B0F2N1VTHD/ref=sr_1_6_mod_primary_new?crid=299XB7XPXRR83&amp;dib=eyJ2IjoiMSJ9.-10EyllwjhTQ0ZDl5_F04hdTce9prldFKl8b8990W63zuNwQFRMRxUR9Doldva9dw3awXpVyGdK1U6SIj4frGyUQpohTOTqz01C8sGk3Ey2-AujvWG1DGW8a-ZzEOEZx_MC-DdsGV2ju7-bJAFcIPT-Oda34c6TveRRSo7_mlOxYVNHTQyzux7iXbmfI1wI1YbFAxw4q8vyTFvUAHNRaUBDmAGc4bb2UOhSLNM_T4vj0jJpUnrRMOd8zuF4FqkTFUp1IX64PopVjMVJ04sm3JUTh41A1Yko2w5IjRfmpZnY.hD4sn07MQDxlraNNErsuSVizTGAelmyClUTp7IlavTY&amp;dib_tag=se&amp;keywords=double+sided+tape&amp;qid=1789456007&amp;sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&amp;sprefix=double+sided+tape%2Caps%2C253&amp;sr=8-6" target="_blank" rel="noopener noreferrer">
               <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
             </a>
           </div>
