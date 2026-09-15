@@ -2127,6 +2127,8 @@
       }
     })();
   </script>
+  <!-- Preload 3D Model Asset -->
+  <link rel="preload" href="3D_Models/assembled_model.gltf" as="fetch" type="model/gltf-binary" crossorigin>
   <!-- Google model-viewer for Interactive 3D Model Inspection -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
   <script type="module">
@@ -2529,7 +2531,8 @@
               shadow-softness="0.6"
               exposure="1.15"
               interaction-prompt="auto"
-              loading="lazy"
+              loading="eager"
+              reveal="auto"
               ar-status="not-presenting">
               <div slot="poster" class="model-loading-placeholder">
                 <div class="model-spinner"></div>
