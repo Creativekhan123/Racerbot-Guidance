@@ -1674,8 +1674,12 @@
       z-index: 999999 !important;
       border-radius: 0 !important;
       border: none !important;
-      background: #0b0f19 !important;
+      background: #ffffff !important; /* Pure white background in Light Mode */
       margin: 0 !important;
+    }
+
+    [data-theme="dark"] .comp-card-media-3d.is-fullscreen {
+      background: #0a0e17 !important; /* Sleek black/dark background in Dark Mode */
     }
 
     .comp-card-media-3d.is-fullscreen .viewer-exit-btn {
@@ -1688,11 +1692,19 @@
 
     .comp-card-media-3d.is-fullscreen .viewer-3d-hint {
       bottom: 24px;
-      background: rgba(15, 23, 42, 0.8);
-      color: #94a3b8;
-      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.9);
+      color: #475569;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
       font-size: 12px;
       padding: 6px 16px;
+    }
+
+    [data-theme="dark"] .comp-card-media-3d.is-fullscreen .viewer-3d-hint {
+      background: rgba(15, 23, 42, 0.85);
+      color: #94a3b8;
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
 
     /* INTERACTION HINT PILL */
