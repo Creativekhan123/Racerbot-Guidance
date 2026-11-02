@@ -132,6 +132,13 @@ This repository includes a **complete, standalone interactive documentation webp
 
 ## 🔌 Circuit & Wiring Guide
 
+<div align="center">
+  <img src="circuit_image.png" alt="Autonomous Racer Robot 4WD Circuit Diagram" width="850" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+  <p><em>Full 4WD Circuit Diagram — Arduino UNO, L298N Dual H-Bridge Motor Driver, 3× HC-SR04 Ultrasonic Sensors, 4× M20 Motors, and 7.4V LiPo Battery.</em></p>
+</div>
+
+---
+
 ### 1. Ultrasonic Sensor Connections
 
 All three HC-SR04 sensors share standard `5V` and `GND` power rails from the Arduino. Signal pins connect directly to digital I/O pins D2 through D7:
