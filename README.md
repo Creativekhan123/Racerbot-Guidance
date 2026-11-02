@@ -79,7 +79,7 @@ This repository includes a **complete, standalone interactive documentation webp
 | **Arduino UNO** | ATmega328P, 5V, 16 MHz | 1 | Central controller executing sensor logic and motor commands |
 | **L298N Motor Driver Module** | Dual H-Bridge driver board (2A/ch) | 1 | High-current driver switching power to 4 DC motors |
 | **M20 DC Gear Motors** | Micro metal gearbox, 300 RPM | 4 | All-metal geared motors providing 4WD drive torque |
-| **Orange Treaded Wheels** | Direct-fit rubber treaded wheels | 4 | High-traction drive wheels attached to M20 motor shafts |
+| **Rubber Small Wheels** | 34mm Mini Car M20 Motor Rubber Small Wheels | 4 | High-traction 34mm drive wheels fitted to M20 motor shafts |
 | **Ultrasonic Sensors** | HC-SR04 (40 kHz sound) | 3 | 3-way distance measurement (Left, Center, Right) |
 | **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors |
 | **Battery Pack** | Orange 7.4V 850mAh 2S LiPo Battery | 1 | High-discharge power source for motors and Arduino |
@@ -109,9 +109,9 @@ This repository includes a **complete, standalone interactive documentation webp
       <em>300 RPM Micro Metal Gear Motors (4WD)</em>
     </td>
     <td align="center" width="50%">
-      <img src="wheels.png" width="300" /><br/>
-      <strong>High-Traction Wheels &times;4</strong><br/>
-      <em>Anti-Slip Direct-Fit Treaded Wheels</em>
+      <img src="wheels.jpg" width="300" /><br/>
+      <strong>34mm Mini Car M20 Motor Rubber Small Wheels &times;4</strong><br/>
+      <em>34mm High-Traction Micro Drive Wheels</em>
     </td>
   </tr>
   <tr>
@@ -349,7 +349,7 @@ float getDistance(int trigPin, int echoPin) {
 ## 🔨 Assembly & Setup Steps
 
 1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four M20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
-2. **Mount 4× M20 Motors & Wheels**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right). Press orange treaded wheels firmly onto each motor shaft.
+2. **Mount 4× M20 Motors & Wheels**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right). Press a 34mm rubber small wheel firmly onto each motor shaft.
 3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using mounting screws and standoffs.
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
@@ -368,7 +368,7 @@ float getDistance(int trigPin, int echoPin) {
 - [ ] 7.4V LiPo Battery polarity verified (`+` Red, `-` Black)
 - [ ] Both left M20 motors rotate forward when commanded
 - [ ] Both right M20 motors rotate forward when commanded
-- [ ] All 4 orange wheels spin freely without chassis contact
+- [ ] All 4 small wheels spin freely without chassis contact
 - [ ] Left ultrasonic sensor displays accurate distance on Serial Monitor (D2/D3)
 - [ ] Center ultrasonic sensor displays accurate distance on Serial Monitor (D4/D5)
 - [ ] Right ultrasonic sensor displays accurate distance on Serial Monitor (D6/D7)
