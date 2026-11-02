@@ -89,6 +89,49 @@ This repository includes a **complete, standalone interactive documentation webp
 
 ---
 
+## 🖼 Component Gallery
+
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <img src="arduino_Uno.png" width="300" /><br/>
+      <strong>Arduino UNO</strong><br/>
+      <em>Main Microcontroller &middot; Brain</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="L298_Motor_Driver.jpg" width="300" /><br/>
+      <strong>L298N Motor Driver Module</strong><br/>
+      <em>Dual H-Bridge High-Power Driver</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="M20_Motor.jpg" width="300" /><br/>
+      <strong>M20 DC Gear Motors &times;4</strong><br/>
+      <em>300 RPM Micro Metal Gear Motors (4WD)</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="wheels.png" width="300" /><br/>
+      <strong>High-Traction Wheels &times;4</strong><br/>
+      <em>Anti-Slip Direct-Fit Treaded Wheels</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="ultrasonic_sensor.png" width="300" /><br/>
+      <strong>HC-SR04 Ultrasonic Sensors &times;3</strong><br/>
+      <em>Acoustic 3-Way Distance Sensors</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="battery.png" width="300" /><br/>
+      <strong>8V Rechargeable Battery Pack</strong><br/>
+      <em>Dedicated High-Discharge Power Source</em>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## 🔌 Circuit & Wiring Guide
 
 ### 1. Ultrasonic Sensor Connections
