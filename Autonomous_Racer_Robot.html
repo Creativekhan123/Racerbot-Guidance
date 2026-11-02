@@ -2706,8 +2706,10 @@
     <section id="how-it-works">
       <h2>How the Robot Works</h2>
       <p>The robot continuously reads its three ultrasonic sensors and uses that information to steer its 4WD drivetrain away from obstacles.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;justify-content:center;margin-top:16px">
-        <div class="flow">
+      
+      <!-- Top Row: Architecture Flow + Sensor Positions & Decision Rules -->
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin-top:20px">
+        <div class="flow" style="flex:0 0 220px">
           <div class="flow-box">Ultrasonic Sensors</div>
           <div class="flow-arrow">&#8595;</div>
           <div class="flow-box">Arduino UNO</div>
@@ -2720,7 +2722,8 @@
           <div class="flow-arrow">&#8595;</div>
           <div class="flow-box">Robot Movement</div>
         </div>
-        <div style="flex:1;min-width:240px;max-width:440px">
+
+        <div style="flex:1;min-width:300px">
           <div class="card">
             <h3>Sensor Positions</h3>
             <div class="sensor-row">
@@ -2730,61 +2733,65 @@
             </div>
             <p style="font-size:13px;color:var(--text-muted)">The <strong>center sensor</strong> detects obstacles directly ahead. The <strong>left</strong> and <strong>right sensors</strong> detect obstacles on either side in the angled bumper.</p>
           </div>
-          <div class="card">
+
+          <div class="card" style="margin-bottom:0">
             <h3>Decision Rules (from the code)</h3>
-            <ul style="font-size:13px;margin-top:8px">
+            <ul style="font-size:13.5px;margin-top:10px;line-height:1.6">
               <li><strong>Emergency Reverse &amp; Turn (Center &lt; 15 cm)</strong>: Back up straight (220 ms at -200 PWM), then pivot left in place (220 ms at left -200, right +200 PWM).</li>
               <li><strong>Left Obstacle Evade (Left &lt; 12 cm)</strong>: Differential spin right in place (left +200, right -200 PWM).</li>
               <li><strong>Right Obstacle Evade (Right &lt; 12 cm)</strong>: Differential spin left in place (left -200, right +200 PWM).</li>
               <li><strong>Clear Path</strong>: Move forward smoothly at PWM <strong>130</strong> on all four wheels.</li>
             </ul>
           </div>
-          <div class="card" style="margin-top:16px">
-            <h3>Autonomous Decision Matrix</h3>
-            <div style="overflow-x:auto;margin-top:8px">
-              <table class="wiring-table" style="font-size:13px">
-                <thead>
-                  <tr>
-                    <th>Sensor Condition</th>
-                    <th>Distance Threshold</th>
-                    <th>Robot Behavior</th>
-                    <th>Left Motors (OUT1/2)</th>
-                    <th>Right Motors (OUT3/4)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Path Ahead Clear</strong></td>
-                    <td>Center &ge; 15cm, Left &amp; Right &ge; 12cm</td>
-                    <td>Cruise forward smoothly</td>
-                    <td><span class="pin-badge">FORWARD (130)</span></td>
-                    <td><span class="pin-badge">FORWARD (130)</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Obstacle on Left</strong></td>
-                    <td>Left &lt; 12cm, Right &ge; 12cm</td>
-                    <td>Differential pivot right</td>
-                    <td><span class="pin-badge">FORWARD (200)</span></td>
-                    <td><span class="pin-badge">REVERSE (-200)</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Obstacle on Right</strong></td>
-                    <td>Right &lt; 12cm, Left &ge; 12cm</td>
-                    <td>Differential pivot left</td>
-                    <td><span class="pin-badge">REVERSE (-200)</span></td>
-                    <td><span class="pin-badge">FORWARD (200)</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Front Obstacle / Corner</strong></td>
-                    <td>Center &lt; 15cm</td>
-                    <td>1. Reverse 220 ms<br/>2. Pivot Left 220 ms</td>
-                    <td>1. <span class="pin-badge">REVERSE (-200)</span><br/>2. <span class="pin-badge">REVERSE (-200)</span></td>
-                    <td>1. <span class="pin-badge">REVERSE (-200)</span><br/>2. <span class="pin-badge">FORWARD (200)</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Full-Width Autonomous Decision Matrix -->
+      <div class="card" style="margin-top:24px;width:100%">
+        <h3 style="margin-bottom:6px">&#129518; Autonomous Decision Matrix</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">Real-time obstacle evaluation matrix executed in the 50 ms loop in <code>autoracerl298n.ino</code>:</p>
+        <div style="overflow-x:auto">
+          <table class="wiring-table" style="font-size:13.5px;width:100%">
+            <thead>
+              <tr>
+                <th style="white-space:nowrap">Sensor Condition</th>
+                <th>Distance Threshold</th>
+                <th>Robot Behavior</th>
+                <th style="text-align:center">Left Motors (OUT1/2)</th>
+                <th style="text-align:center">Right Motors (OUT3/4)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="white-space:nowrap"><strong>Path Ahead Clear</strong></td>
+                <td>Center &ge; 15 cm, Left &amp; Right &ge; 12 cm</td>
+                <td>Cruise forward smoothly</td>
+                <td style="text-align:center"><span class="pin-badge">FORWARD (130)</span></td>
+                <td style="text-align:center"><span class="pin-badge">FORWARD (130)</span></td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap"><strong>Obstacle on Left</strong></td>
+                <td>Left &lt; 12 cm, Right &ge; 12 cm</td>
+                <td>Differential pivot right</td>
+                <td style="text-align:center"><span class="pin-badge">FORWARD (200)</span></td>
+                <td style="text-align:center"><span class="pin-badge">REVERSE (-200)</span></td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap"><strong>Obstacle on Right</strong></td>
+                <td>Right &lt; 12 cm, Left &ge; 12 cm</td>
+                <td>Differential pivot left</td>
+                <td style="text-align:center"><span class="pin-badge">REVERSE (-200)</span></td>
+                <td style="text-align:center"><span class="pin-badge">FORWARD (200)</span></td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap"><strong>Front Obstacle / Corner</strong></td>
+                <td>Center &lt; 15 cm</td>
+                <td>1. Reverse 220 ms<br/>2. Pivot Left 220 ms</td>
+                <td style="text-align:center;line-height:2">1. <span class="pin-badge">REVERSE (-200)</span><br/>2. <span class="pin-badge">REVERSE (-200)</span></td>
+                <td style="text-align:center;line-height:2">1. <span class="pin-badge">REVERSE (-200)</span><br/>2. <span class="pin-badge">FORWARD (200)</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
