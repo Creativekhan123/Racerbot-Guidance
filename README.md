@@ -84,6 +84,7 @@ This repository includes a **complete, standalone interactive documentation webp
 | **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors | [Download AutonomousRacerBot.stl](./AutonomousRacerBot.stl) |
 | **Battery Pack** | Orange 7.4V 850mAh 2S LiPo Battery | 1 | High-discharge power source for motors and Arduino | [Robu.in](https://robu.in/product/orange-850mah-2s-30c-60c-lithium-polymer-battery-pack-lipo/) |
 | **Jumper Wires** | DuPont Male-to-Female & M-M | ~20 | Signal and power interconnects between boards and sensors | [Amazon India](https://www.amazon.in/Fly-Robo-Breadboard-Wires-10cm-Male-Female-Female-Female/dp/B0CYLN6Z17) |
+| **Cricket Bat Grip** | Octopus textured rubber sleeve for wheels | 1 | High-traction tire sleeves cut & stretched over 4 wheels | [Amazon India](https://www.amazon.in/DSC-Octopus-Cricket-Grip-Color/dp/B0BG8SYZB7) |
 
 ---
 
@@ -124,6 +125,18 @@ This repository includes a **complete, standalone interactive documentation webp
       <img src="battery.jpg" width="300" /><br/>
       <strong>Orange 7.4V 850mAh 2S LiPo Battery</strong><br/>
       <em>High-Discharge 2S Lithium Polymer Battery Pack</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="bat_grip.jpg" width="300" /><br/>
+      <strong>Cricket Bat Grip</strong><br/>
+      <em>Octopus Textured Wheel Tire Sleeves</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="jumper_wires.png" width="300" /><br/>
+      <strong>Multi-Color Jumper Wires</strong><br/>
+      <em>DuPont Signal & Power Interconnects</em>
     </td>
   </tr>
 </table>
@@ -369,7 +382,7 @@ float getDistance(int trigPin, int echoPin) {
 ## 🔨 Assembly & Setup Steps
 
 1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four M20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
-2. **Mount 4× M20 Motors & Wheels**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right). Press a 34mm rubber small wheel firmly onto each motor shaft.
+2. **Mount 4× M20 Motors & Wheels (with Bat Grip)**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right). Cut four rings from the rubber cricket bat grip and stretch them securely over the 34mm small wheels for enhanced octopus-pattern traction, then press each wheel firmly onto the motor shaft.
 3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using mounting screws and standoffs.
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
@@ -388,7 +401,7 @@ float getDistance(int trigPin, int echoPin) {
 - [ ] 7.4V LiPo Battery polarity verified (`+` Red, `-` Black)
 - [ ] Both left M20 motors rotate forward when commanded
 - [ ] Both right M20 motors rotate forward when commanded
-- [ ] All 4 small wheels spin freely without chassis contact
+- [ ] All 4 small wheels fitted with rubber bat grip tire sleeves, spinning freely without chassis contact
 - [ ] Left ultrasonic sensor displays accurate distance on Serial Monitor (D2/D3)
 - [ ] Center ultrasonic sensor displays accurate distance on Serial Monitor (D4/D5)
 - [ ] Right ultrasonic sensor displays accurate distance on Serial Monitor (D6/D7)
