@@ -1,22 +1,24 @@
-# 🤖 Autonomous Racer Robot (Fork Robot) — Guidance & Documentation
+# 🤖 Autonomous Racer Robot (Fork Robot — 4WD Edition) — Guidance & Documentation
 
 [![Arduino](https://img.shields.io/badge/Platform-Arduino%20UNO-00979D?style=for-the-badge&logo=arduino&logoColor=white)](https://www.arduino.cc/)
 [![Language](https://img.shields.io/badge/Language-C%2B%2B-blue?style=for-the-badge&logo=c%2B%2B)](https://isocpp.org/)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://creativekhan123.github.io/Racerbot-Guidance/)
 [![Documentation](https://img.shields.io/badge/Documentation-Interactive%20HTML-blueviolet?style=for-the-badge)](./Autonomous_Racer_Robot.html)
 [![Sensors](https://img.shields.io/badge/Sensors-HC--SR04%20x3-green?style=for-the-badge)]()
-[![Motors](https://img.shields.io/badge/Motors-JGB37--520%2012V-orange?style=for-the-badge)]()
+[![Motors](https://img.shields.io/badge/Motors-M20%20300%20RPM%20x4-orange?style=for-the-badge)]()
+[![Driver](https://img.shields.io/badge/Driver-L298N%20Dual%20H--Bridge-red?style=for-the-badge)]()
+[![Power](https://img.shields.io/badge/Power-8V%20Pack-yellow?style=for-the-badge)]()
 [![Status](https://img.shields.io/badge/Status-Complete%20%26%20Tested-brightgreen?style=for-the-badge)]()
 
-> **Teacher-friendly assembly, wiring, logic, and code guidance for building an autonomous obstacle-avoiding racer robot.**
+> **Teacher-friendly assembly, wiring, logic, and code guidance for building a 4WD autonomous obstacle-avoiding racer robot.**
 
 ---
 
 ## 📸 Project Showcase
 
 <div align="center">
-  <img src="Automonus_racer_Bot.png" alt="Autonomous Racer Robot" width="600" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
-  <p><em>The assembled Autonomous Racer Robot ("Fork Robot") equipped with 3 forward-facing ultrasonic sensors, Cytron motor shield, and geared drive motors.</em></p>
+  <img src="Automonus_racer_Bot_v2.jpg" alt="Autonomous Racer Robot 4WD" width="600" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+  <p><em>The assembled 4WD Autonomous Racer Robot ("Fork Robot") equipped with 3 forward-facing ultrasonic sensors in an angled bumper, L298N dual H-bridge motor driver, and 4 high-traction orange treaded wheels driven by M20 micro gear motors.</em></p>
 </div>
 
 ---
@@ -29,7 +31,7 @@
 - [Component Gallery](#-component-gallery)
 - [Circuit & Wiring Guide](#-circuit--wiring-guide)
   - [Ultrasonic Sensors](#1-ultrasonic-sensor-connections)
-  - [Motor Driver Shield & Motors](#2-motor-driver-shield-connections)
+  - [Motor Driver & Motors](#2-l298n-motor-driver-connections)
   - [Power Supply](#3-power-supply-connections)
 - [How It Works (Autonomous Logic)](#-how-it-works-autonomous-logic)
 - [Arduino Source Code](#-arduino-source-code)
@@ -42,13 +44,14 @@
 
 ## 🎯 Project Overview
 
-The **Autonomous Racer Robot** (nicknamed **"Fork Robot"** due to its three forward-pointing sensor mounts resembling a fork) is an intelligent, self-navigating mobile robot built using an **Arduino UNO** microcontroller board.
+The **Autonomous Racer Robot** (nicknamed **"Fork Robot"** due to its three forward-pointing sensor prongs) is an intelligent, self-navigating 4WD mobile robot built using an **Arduino UNO** microcontroller board.
 
 ### Key Capabilities:
-- **3-Way Real-Time Radar Perception**: Continuously scans distance on the **Left**, **Center**, and **Right** using three HC-SR04 ultrasonic sensors.
-- **Dynamic Obstacle Avoidance**: Automatically steers away from walls, obstacles, and dead ends without human intervention.
-- **Differential Drive Steering**: Uses two high-torque 12V DC gear motors with PWM speed control for agile turning and smooth straight-line racing.
-- **Beginner & Classroom Friendly**: Uses standard Arduino libraries and straightforward C++ control loops, making it an ideal STEM robotics project.
+- **3-Way Real-Time Radar Perception**: Continuously scans distance on the **Left**, **Center**, and **Right** using three HC-SR04 ultrasonic sensors mounted at optimal forward detection angles.
+- **Dynamic 4WD Obstacle Avoidance**: Automatically steers away from walls, obstacles, and dead ends without human intervention using high-traction 4-wheel differential steering.
+- **4× M20 300 RPM Micro Gear Motors**: Heavy-duty metal reduction gearboxes provide all-wheel drive pulling power, stable low-noise running, and responsive cornering.
+- **L298N Dual H-Bridge Motor Driver**: Proven high-current dual motor driver switching 8V battery power smoothly across the left and right motor pairs.
+- **Beginner & Classroom Friendly**: Uses standard Arduino built-in functions with zero external dependencies, making it an ideal STEM robotics curriculum project.
 
 ---
 
@@ -59,13 +62,13 @@ This repository includes a **complete, standalone interactive documentation webp
 📄 **[`Autonomous_Racer_Robot.html`](./Autonomous_Racer_Robot.html)**
 
 ### Webpage Highlights:
-- **100% Self-Contained**: Works offline by simply double-clicking the file in any browser (Chrome, Edge, Safari, Firefox). All images and styles are embedded.
-- **Dark Mode & Light Mode**: Built-in toggle button in the navbar and a thumb-friendly floating action button (FAB).
+- **100% Self-Contained**: Works offline by double-clicking the file in any browser (Chrome, Edge, Safari, Firefox).
+- **Dark Mode & Light Mode**: Built-in toggle button in the navbar and a floating action button (FAB).
 - **Mobile & Android Responsive**: Specially optimized layout that renders cleanly on smartphones and tablets.
 - **Interactive Component Gallery Grid**: Click any component card to reveal detailed specifications and teacher notes.
-- **One-Click Code Copy**: Easily copy the full Arduino code into the Arduino IDE.
-- **Interactive Testing Checklist**: Check off testing steps before deployment.
-- **Print Friendly**: Formatted for printing physical classroom handouts.
+- **One-Click Code Copy & Download**: Download `Autonomous_Racer_Robot.ino` with a single click or copy directly into the Arduino IDE.
+- **Interactive Testing Checklist**: Check off testing steps before deployment with automatic state persistence.
+- **Print Friendly**: Specially formatted CSS for printing physical classroom handouts.
 
 ---
 
@@ -74,56 +77,15 @@ This repository includes a **complete, standalone interactive documentation webp
 | Component | Specification | Qty | Function in Robot |
 | :--- | :--- | :---: | :--- |
 | **Arduino UNO** | ATmega328P, 5V, 16 MHz | 1 | Central controller executing sensor logic and motor commands |
-| **Motor Driver Shield** | Cytron 2-Channel H-Bridge | 1 | High-current interface driving the dual DC motors safely |
-| **DC Gear Motors** | JGB37-520, 12V, 960 RPM | 2 | Heavy-duty all-metal geared motors providing drive torque |
-| **Rubber Wheels** | Direct-fit treaded tyres | 2 | High-traction drive wheels attached to motor shafts |
+| **L298N Motor Driver Module** | Dual H-Bridge driver board (2A/ch) | 1 | High-current driver switching power to 4 DC motors |
+| **M20 DC Gear Motors** | Micro metal gearbox, 300 RPM | 4 | All-metal geared motors providing 4WD drive torque |
+| **Orange Treaded Wheels** | Direct-fit rubber treaded wheels | 4 | High-traction drive wheels attached to M20 motor shafts |
 | **Ultrasonic Sensors** | HC-SR04 (40 kHz sound) | 3 | 3-way distance measurement (Left, Center, Right) |
-| **Robot Chassis** | 2WD laser-cut acrylic base | 1 | Structural skeleton holding all modules and caster wheel |
-| **Battery Pack** | 11.1V – 12V Li-ion / 3S pack | 1 | Provides high-current power for motors and Arduino |
+| **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors |
+| **Battery Pack** | 8V rechargeable battery pack | 1 | Provides high-current power for motors and Arduino |
 | **Jumper Wires** | DuPont Male-to-Female & M-M | ~20 | Signal and power interconnects between boards and sensors |
-
----
-
-## 🖼 Component Gallery
-
-<table align="center">
-  <tr>
-    <td align="center" width="50%">
-      <img src="arduino_Uno.png" width="300" /><br/>
-      <strong>Arduino UNO</strong><br/>
-      <em>Main Microcontroller &middot; Brain</em>
-    </td>
-    <td align="center" width="50%">
-      <img src="Arduino shield.png" width="300" /><br/>
-      <strong>Motor Driver Shield (Cytron)</strong><br/>
-      <em>Dual H-Bridge Motor Control</em>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <img src="DC_Gear_motors.png" width="300" /><br/>
-      <strong>JGB37-520 DC Gear Motors</strong><br/>
-      <em>12V High-Torque 960 RPM Geared Motors</em>
-    </td>
-    <td align="center" width="50%">
-      <img src="wheels.png" width="300" /><br/>
-      <strong>High-Traction Rubber Wheels</strong><br/>
-      <em>Anti-Slip Treaded Drive Wheels</em>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <img src="ultrasonic_sensor.png" width="300" /><br/>
-      <strong>HC-SR04 Ultrasonic Sensors &times;3</strong><br/>
-      <em>Acoustic 3-Way Distance Sensors</em>
-    </td>
-    <td align="center" width="50%">
-      <img src="jumper_wires.png" width="300" /><br/>
-      <strong>DuPont Jumper Wires</strong><br/>
-      <em>Color-Coded Solderless Interconnects</em>
-    </td>
-  </tr>
-</table>
+| **Rod & Bearing** | Smooth steel axle & miniature bearing set | 1 Set | Low-friction structural axle and bearing assembly |
+| **Double-Sided Tape** | Heavy-duty mounting tape | 1 Roll | Secure mounting for battery and modules |
 
 ---
 
@@ -131,33 +93,38 @@ This repository includes a **complete, standalone interactive documentation webp
 
 ### 1. Ultrasonic Sensor Connections
 
-All three HC-SR04 sensors share the standard `5V` and `GND` power rails from the shield. Signal pins are connected to Arduino analog pins configured as digital I/O:
+All three HC-SR04 sensors share standard `5V` and `GND` power rails from the Arduino. Signal pins connect directly to digital I/O pins D2 through D7:
 
 | Sensor Position | Sensor Pin | Arduino Pin | Pin Function |
 | :--- | :--- | :--- | :--- |
 | **Left Sensor** | `VCC` | `5V` | 5V Power |
 | **Left Sensor** | `GND` | `GND` | Ground |
-| **Left Sensor** | `TRIG` | `A0` (D14) | Trigger output pulse |
-| **Left Sensor** | `ECHO` | `A1` (D15) | Echo input signal |
+| **Left Sensor** | `TRIG` | `D2` | Trigger output pulse |
+| **Left Sensor** | `ECHO` | `D3` | Echo input signal |
 | **Center Sensor** | `VCC` | `5V` | 5V Power |
 | **Center Sensor** | `GND` | `GND` | Ground |
-| **Center Sensor** | `TRIG` | `A2` (D16) | Trigger output pulse |
-| **Center Sensor** | `ECHO` | `A3` (D17) | Echo input signal |
+| **Center Sensor** | `TRIG` | `D4` | Trigger output pulse |
+| **Center Sensor** | `ECHO` | `D5` | Echo input signal |
 | **Right Sensor** | `VCC` | `5V` | 5V Power |
 | **Right Sensor** | `GND` | `GND` | Ground |
-| **Right Sensor** | `TRIG` | `A4` (D18) | Trigger output pulse |
-| **Right Sensor** | `ECHO` | `A5` (D19) | Echo input signal |
+| **Right Sensor** | `TRIG` | `D6` | Trigger output pulse |
+| **Right Sensor** | `ECHO` | `D7` | Echo input signal |
 
 ---
 
-### 2. Motor Driver Shield Connections
+### 2. L298N Motor Driver Connections
 
-The Cytron motor driver shield connects directly onto the Arduino UNO header pins. Terminal blocks connect to the DC motors:
+The L298N driver receives logic signals from the Arduino and powers the 4 M20 motors (two left motors in parallel, two right motors in parallel):
 
-| Terminal / Pin | Connected To | Arduino Signal Pin | Description |
+| L298N Pin / Terminal | Connected To | Arduino Pin | Description |
 | :--- | :--- | :--- | :--- |
-| **Motor 1 (+) / (-)** | Left DC Motor | `PWM = D9`, `DIR = D8` | Left motor speed & direction |
-| **Motor 2 (+) / (-)** | Right DC Motor | `PWM = D11`, `DIR = D12` | Right motor speed & direction |
+| **IN1** | Left Motors PWM Speed | `D9` | Speed PWM signal for left motor pair |
+| **IN2** | Left Motors Direction | `D8` | Direction control for left motor pair |
+| **IN3** | Right Motors PWM Speed | `D11` | Speed PWM signal for right motor pair |
+| **IN4** | Right Motors Direction | `D12` | Direction control for right motor pair |
+| **ENA & ENB** | 5V Jumper Caps | Fitted | Keep jumpers fitted to enable both channels |
+| **OUT1 & OUT2** | Left M20 Motors (&times;2) | Motor Terminals | 2 Left motors connected in parallel |
+| **OUT3 & OUT4** | Right M20 Motors (&times;2) | Motor Terminals | 2 Right motors connected in parallel |
 
 ---
 
@@ -165,12 +132,15 @@ The Cytron motor driver shield connects directly onto the Arduino UNO header pin
 
 | Terminal | Power Wire | Voltage | Notes |
 | :--- | :--- | :--- | :--- |
-| **Shield VIN (+)** | Battery Red Wire (+) | `+11V to +12V` | **Verify polarity before connecting!** |
-| **Shield GND (-)** | Battery Black Wire (-) | `0V (GND)` | Common ground reference |
+| **L298N 12V / VMS (+)** | 8V Battery Red Wire (+) | `+8V` | Powers the 4 M20 motors. **Verify polarity!** |
+| **L298N GND (-)** | 8V Battery Black Wire (-) | `0V (GND)` | Ground reference from battery |
+| **L298N GND (-)** | Arduino GND Pin | `GND` | **Crucial!** Common ground reference |
+| **L298N 5V Out** | Arduino 5V / VIN Pin | `5V` | Optional regulated 5V to power Arduino |
 
 > ⚠️ **IMPORTANT POWER SAFETY**:
-> - Always double-check battery polarity (`+` to `+`, `-` to `-`). Reversing polarity can permanently damage the shield and Arduino.
-> - Never connect the 11–12V battery directly to Arduino 5V or signal pins. Always connect battery power to the shield's external power terminals.
+> - Always verify battery polarity (`+` to `+`, `-` to `-`). Reversing polarity can permanently damage the L298N driver and Arduino.
+> - Never connect the 8V battery directly to Arduino 5V or I/O pins.
+> - Always connect L298N GND and Arduino GND together to establish a shared ground reference.
 
 ---
 
@@ -187,21 +157,21 @@ The robot operates using a continuous sense-think-act control loop:
      ├───────────────────────────────────────────────────────┐
      │                                                       │
      ▼                                                       ▼
-[Center < 20 cm?]                                      [Center Clear (>= 20 cm)]
+[Center < 15 cm?]                                      [Center Clear (>= 15 cm)]
      │ YES                                                   │
-     ▼                                                       ├─ Left < 30 cm?  ──► Turn RIGHT
-[Reverse & Turn]                                             ├─ Right < 30 cm? ──► Turn LEFT
-(Back up, then spin toward the open side)                    └─ Both Clear?    ──► Drive FORWARD
+     ▼                                                       ├─ Left < 12 cm?  ──► Turn RIGHT (+200, -200)
+[Reverse & Turn]                                             ├─ Right < 12 cm? ──► Turn LEFT  (-200, +200)
+(Back up 220ms, then pivot left 220ms)                       └─ Both Clear?    ──► Cruise FORWARD (130, 130)
 ```
 
 ### Decision Matrix:
 
-| Sensor Condition | Distance Thresholds | Robot Behavior | Left Motor | Right Motor |
+| Sensor Condition | Distance Thresholds | Robot Action | Left Motors | Right Motors |
 | :--- | :--- | :--- | :---: | :---: |
-| **Path Ahead Clear** | Center &ge; 20cm, Left & Right &ge; 30cm | Drive straight forward | `FORWARD (PWM 200)` | `FORWARD (PWM 200)` |
-| **Obstacle on Left** | Left &lt; 30cm, Right &ge; 30cm | Steer right into open space | `FORWARD (PWM 200)` | `REVERSE (PWM 150)` |
-| **Obstacle on Right** | Right &lt; 30cm, Left &ge; 30cm | Steer left into open space | `REVERSE (PWM 150)` | `FORWARD (PWM 200)` |
-| **Dead End / Corner** | Center &lt; 20cm | Reverse back, then pivot turn | `REVERSE (PWM 180)` | `REVERSE (PWM 180)` |
+| **Path Ahead Clear** | Center &ge; 15cm, Left & Right &ge; 12cm | Cruise forward smoothly | `FORWARD (PWM 130)` | `FORWARD (PWM 130)` |
+| **Obstacle on Left** | Left &lt; 12cm, Right &ge; 12cm | Steer right in place | `FORWARD (PWM 200)` | `REVERSE (PWM 200)` |
+| **Obstacle on Right** | Right &lt; 12cm, Left &ge; 12cm | Steer left in place | `REVERSE (PWM 200)` | `FORWARD (PWM 200)` |
+| **Front Obstacle / Corner** | Center &lt; 15cm | Reverse 220ms, then pivot left | `REVERSE (PWM 200)` | `REVERSE (PWM 200)` |
 
 ---
 
@@ -209,67 +179,177 @@ The robot operates using a continuous sense-think-act control loop:
 
 The full, tested Arduino sketch is located at:
 
-📁 **[`arduino_code/arduino_code.ino`](./arduino_code/arduino_code.ino)**
+📁 **[`arduino_code/arduino_code.ino`](./arduino_code/arduino_code.ino)** (also available as **[`autoracerl298n.ino`](./autoracerl298n.ino)**)
 
-### Code Highlights:
-- **Zero External Dependencies**: Uses built-in `pulseIn()` and `digitalWrite()`. No third-party libraries needed.
-- **Clear Distance Function**: `readDistance(trigPin, echoPin)` triggers a 10µs pulse and calculates distance in centimeters (`duration * 0.034 / 2`).
-- **Modular Movement Routines**:
-  - `moveForward(speed)`
-  - `turnLeft(speed)`
-  - `turnRight(speed)`
-  - `moveBackward(speed)`
-  - `stopMotors()`
-- **Serial Debugging**: Prints live sensor distances (`Left`, `Center`, `Right`) to the Serial Monitor at `9600 baud` for easy troubleshooting.
+```cpp
+// Motor Driver Pins (PWM pins on Uno: 3,5,6,9,10,11)
+const int IN1 = 9;   // Left motor speed
+const int IN2 = 8;   // Left motor direction
+const int IN3 = 11;  // Right motor speed
+const int IN4 = 12;  // Right motor direction (D12)
+
+// Ultrasonic Sensor Pins
+const int trig1 = 2;  const int echo1 = 3;   // Left sensor
+const int trig2 = 4;  const int echo2 = 5;   // Center sensor
+const int trig3 = 6;  const int echo3 = 7;   // Right sensor
+
+const float MAX_SENSOR_DISTANCE       = 200.0;  // cm
+const float FRONT_OBSTACLE_THRESHOLD  = 15.0;   // cm - center sensor triggers backup + turn
+const float SIDE_OBSTACLE_THRESHOLD   = 12.0;   // cm - left/right sensors trigger turn
+const unsigned long SENSOR_INTERVAL   = 50;     // ms between sensor reads
+const unsigned long BACKUP_DURATION   = 220;    // ms to reverse when front obstacle detected
+
+unsigned long lastSensorReadTime = 0;
+
+void motor1(int speed) {       // Left Motor speed
+  if (speed > 0) {
+    digitalWrite(IN1, LOW);
+    analogWrite(IN2, speed);       // Forward
+  } else if (speed < 0) {
+    digitalWrite(IN1, HIGH);
+    analogWrite(IN2, speed);      // Backward 
+  } else {
+    digitalWrite(IN1, HIGH);
+    analogWrite(IN2, HIGH);       // Stop
+  }
+}
+
+void motor2(int speed) {      // Right Motor speed 
+  if (speed > 0) {
+    digitalWrite(IN3, LOW);
+    analogWrite(IN4, speed);       // Forward
+  } else if (speed < 0) {
+    digitalWrite(IN3, HIGH);
+    analogWrite(IN4, speed);      // Backward
+  } else {
+    digitalWrite(IN3, HIGH);
+    analogWrite(IN4, HIGH);       // Stop
+  }
+}
+
+void motorControl(int leftSpeed, int rightSpeed) {
+  motor1(leftSpeed);
+  motor2(rightSpeed);
+}
+
+void setup() {
+  Serial.begin(9600);
+
+  // Ultrasonic pins
+  pinMode(trig1, OUTPUT); pinMode(echo1, INPUT);
+  pinMode(trig2, OUTPUT); pinMode(echo2, INPUT);
+  pinMode(trig3, OUTPUT); pinMode(echo3, INPUT);
+
+  // Motor pins
+  pinMode(IN1, OUTPUT); pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT); pinMode(IN4, OUTPUT);
+
+  motorControl(0, 0); // Start stopped
+  Serial.println("Robot Ready!");
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - lastSensorReadTime >= SENSOR_INTERVAL) {
+    lastSensorReadTime = currentMillis;
+
+    float leftDist   = getDistance(trig1, echo1);
+    float centerDist = getDistance(trig2, echo2);
+    float rightDist  = getDistance(trig3, echo3);
+
+    Serial.print(leftDist);
+    Serial.print("       ");
+    Serial.print(centerDist);
+    Serial.print("       ");
+    Serial.println(rightDist);
+
+    if (centerDist < FRONT_OBSTACLE_THRESHOLD) {
+      motorControl(-200, -200);
+      delay(BACKUP_DURATION);
+      motorControl(-200, 200);  // Turn Left in place
+      delay(BACKUP_DURATION);
+    }
+    else if (leftDist < SIDE_OBSTACLE_THRESHOLD) {
+      motorControl(200, -200);  // Turn Right in place
+    }
+    else if (rightDist < SIDE_OBSTACLE_THRESHOLD) {
+      motorControl(-200, 200);  // Turn Left in place
+    }
+    else {
+      motorControl(130, 130);   // Go Forward
+    }
+  }
+}
+
+float getDistance(int trigPin, int echoPin) {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+                                                                                                                                          
+  long timeout = (MAX_SENSOR_DISTANCE * 2.0 / 0.0343) + 3000;
+  long duration = pulseIn(echoPin, HIGH, timeout);
+
+  if (duration == 0) return MAX_SENSOR_DISTANCE;
+
+  float distance = duration * 0.0343 / 2.0;
+
+  if (distance > MAX_SENSOR_DISTANCE) return MAX_SENSOR_DISTANCE;
+  if (distance < 0) return 0.0;
+
+  return distance;
+}
+```
 
 ---
 
 ## 🔨 Assembly & Setup Steps
 
-1. **Prepare Chassis**: Unpack the acrylic base and identify mounting slots for motors, Arduino, and sensors.
-2. **Mount Motors & Wheels**: Secure the two JGB37-520 motors onto chassis brackets using screws. Press rubber wheels onto the motor D-shafts.
-3. **Mount Arduino & Shield**: Stack the Cytron motor driver shield firmly onto the Arduino UNO headers. Fasten the stack to the chassis.
-4. **Mount 3 Ultrasonic Sensors**: Fix one sensor at Left, one at Center, and one at Right facing horizontally forward.
-5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, and TRIG/ECHO lines to pins A0 through A5 as specified in the wiring table.
-6. **Connect Motor Terminals**: Connect left motor leads to Motor 1 terminals, right motor leads to Motor 2 terminals.
-7. **Connect Power Supply**: Connect the 11–12V battery pack to the shield's screw terminals. **Carefully check polarity before tightening.**
-8. **Upload Arduino Program**: Connect the Arduino to your computer via USB, open `arduino_code.ino` in the Arduino IDE, select Board: **Arduino UNO**, select your COM port, and click **Upload**.
-9. **Field Test**: Place the robot on a flat, clear floor, switch on battery power, and watch it navigate and steer around obstacles!
+1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four M20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
+2. **Mount 4× M20 Motors & Wheels**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right). Press orange treaded wheels firmly onto each motor shaft.
+3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using screws or heavy-duty tape.
+4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
+5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
+6. **Connect Motor Terminals**: Wire the two left M20 motors in parallel to OUT1 & OUT2, and the two right M20 motors in parallel to OUT3 & OUT4. Connect IN1&rarr;D9, IN2&rarr;D8, IN3&rarr;D11, IN4&rarr;D12.
+7. **Connect 8V Power Supply**: Connect the 8V battery (+) to the L298N 12V terminal, battery (-) to GND, and link L298N GND to Arduino GND (common ground). **Check polarity!**
+8. **Upload Arduino Program**: Connect Arduino to computer via USB, open `autoracerl298n.ino` in Arduino IDE, select **Arduino UNO**, and click **Upload**.
+9. **Field Test**: Place the 4WD robot on a clear floor, power on the 8V battery, and watch it cruise and steer smoothly around obstacles!
 
 ---
 
 ## ✅ Pre-Flight Testing Checklist
 
-Go through this checklist before letting the robot run freely:
-
-- [ ] Arduino UNO powers on (green power LED lit)
-- [ ] Motor driver shield power LED indicates steady supply
-- [ ] Battery polarity verified (`+` Red, `-` Black)
-- [ ] Left motor rotates forward when commanded
-- [ ] Right motor rotates forward when commanded
-- [ ] Left ultrasonic sensor displays accurate distance on Serial Monitor
-- [ ] Center ultrasonic sensor displays accurate distance on Serial Monitor
-- [ ] Right ultrasonic sensor displays accurate distance on Serial Monitor
-- [ ] Robot drives forward when path is clear
-- [ ] Robot turns right when an obstacle is placed near the left sensor
-- [ ] Robot turns left when an obstacle is placed near the right sensor
-- [ ] Robot reverses and spins when an obstacle is placed &lt; 20 cm in front
-- [ ] All jumper wires and screw terminals are mechanically secure
+- [ ] Arduino UNO powers on (green LED lit)
+- [ ] L298N motor driver power LED lit steadily
+- [ ] Common ground connected between L298N GND and Arduino GND
+- [ ] 8V Battery polarity verified (`+` Red, `-` Black)
+- [ ] Both left M20 motors rotate forward when commanded
+- [ ] Both right M20 motors rotate forward when commanded
+- [ ] All 4 orange wheels spin freely without chassis contact
+- [ ] Left ultrasonic sensor displays accurate distance on Serial Monitor (D2/D3)
+- [ ] Center ultrasonic sensor displays accurate distance on Serial Monitor (D4/D5)
+- [ ] Right ultrasonic sensor displays accurate distance on Serial Monitor (D6/D7)
+- [ ] Robot cruises forward smoothly (PWM 130) when path is clear
+- [ ] Robot turns right in place when obstacle placed &lt; 12 cm near left sensor
+- [ ] Robot turns left in place when obstacle placed &lt; 12 cm near right sensor
+- [ ] Robot reverses (220 ms) and pivots when obstacle &lt; 15 cm directly in front
 
 ---
 
 ## ⚠️ Safety & Battery Guidelines
 
-- **Polarity Warning**: Never reverse battery polarity. Reversing `+` and `-` will burn the driver IC immediately.
-- **Short-Circuit Prevention**: Keep bare wire strands trimmed and covered with insulation tape or heat shrink.
-- **Voltage Separation**: Never feed 11–12V directly into Arduino I/O pins (pins operate at 5V logic only).
-- **Mechanical Safety**: Keep fingers, hair, and loose wires away from spinning wheels and motor gears while powered.
-- **Safe Testing Area**: Test the robot on an open, flat floor away from staircases, table edges, and drop-offs.
+- **Polarity Warning**: Never reverse battery polarity. Reversing `+` and `-` will burn the L298N driver IC immediately.
+- **Common Ground Requirement**: Always ensure L298N GND and Arduino GND are connected together so logic signals have a reference point.
+- **Voltage Separation**: Never feed 8V directly into Arduino 5V or I/O pins (pins operate at 5V logic only).
+- **Mechanical Safety**: Keep fingers, hair, and loose wires away from the 4 spinning wheels and motor gears while powered.
+- **Safe Testing Area**: Test the robot on an open, flat floor away from staircases and table edges.
 
 ---
 
 ## 👤 Author & License
 
 - **Author**: Mohd Zeeshan ([@Creativekhan123](https://github.com/Creativekhan123))
-- **Project**: Autonomous Racer Robot ("Fork Robot")
+- **Project**: Autonomous Racer Robot ("Fork Robot" — 4WD Edition)
 - **License**: [MIT License](LICENSE) &mdash; Free for educational, student, and personal use.
