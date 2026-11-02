@@ -7,7 +7,7 @@
 [![Sensors](https://img.shields.io/badge/Sensors-HC--SR04%20x3-green?style=for-the-badge)]()
 [![Motors](https://img.shields.io/badge/Motors-M20%20300%20RPM%20x4-orange?style=for-the-badge)]()
 [![Driver](https://img.shields.io/badge/Driver-L298N%20Dual%20H--Bridge-red?style=for-the-badge)]()
-[![Power](https://img.shields.io/badge/Power-8V%20Pack-yellow?style=for-the-badge)]()
+[![Power](https://img.shields.io/badge/Power-7.4V%20850mAh%20LiPo-yellow?style=for-the-badge)]()
 [![Status](https://img.shields.io/badge/Status-Complete%20%26%20Tested-brightgreen?style=for-the-badge)]()
 
 > **Teacher-friendly assembly, wiring, logic, and code guidance for building a 4WD autonomous obstacle-avoiding racer robot.**
@@ -50,7 +50,7 @@ The **Autonomous Racer Robot** (nicknamed **"Fork Robot"** due to its three forw
 - **3-Way Real-Time Radar Perception**: Continuously scans distance on the **Left**, **Center**, and **Right** using three HC-SR04 ultrasonic sensors mounted at optimal forward detection angles.
 - **Dynamic 4WD Obstacle Avoidance**: Automatically steers away from walls, obstacles, and dead ends without human intervention using high-traction 4-wheel differential steering.
 - **4× M20 300 RPM Micro Gear Motors**: Heavy-duty metal reduction gearboxes provide all-wheel drive pulling power, stable low-noise running, and responsive cornering.
-- **L298N Dual H-Bridge Motor Driver**: Proven high-current dual motor driver switching 8V battery power smoothly across the left and right motor pairs.
+- **L298N Dual H-Bridge Motor Driver**: Proven high-current dual motor driver switching 7.4V LiPo battery power smoothly across the left and right motor pairs.
 - **Beginner & Classroom Friendly**: Uses standard Arduino built-in functions with zero external dependencies, making it an ideal STEM robotics curriculum project.
 
 ---
@@ -82,10 +82,8 @@ This repository includes a **complete, standalone interactive documentation webp
 | **Orange Treaded Wheels** | Direct-fit rubber treaded wheels | 4 | High-traction drive wheels attached to M20 motor shafts |
 | **Ultrasonic Sensors** | HC-SR04 (40 kHz sound) | 3 | 3-way distance measurement (Left, Center, Right) |
 | **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors |
-| **Battery Pack** | 8V rechargeable battery pack | 1 | Provides high-current power for motors and Arduino |
+| **Battery Pack** | Orange 7.4V 850mAh 2S LiPo Battery | 1 | High-discharge power source for motors and Arduino |
 | **Jumper Wires** | DuPont Male-to-Female & M-M | ~20 | Signal and power interconnects between boards and sensors |
-| **Rod & Bearing** | Smooth steel axle & miniature bearing set | 1 Set | Low-friction structural axle and bearing assembly |
-| **Double-Sided Tape** | Heavy-duty mounting tape | 1 Roll | Secure mounting for battery and modules |
 
 ---
 
@@ -123,9 +121,9 @@ This repository includes a **complete, standalone interactive documentation webp
       <em>Acoustic 3-Way Distance Sensors</em>
     </td>
     <td align="center" width="50%">
-      <img src="battery.png" width="300" /><br/>
-      <strong>8V Rechargeable Battery Pack</strong><br/>
-      <em>Dedicated High-Discharge Power Source</em>
+      <img src="battery.jpg" width="300" /><br/>
+      <strong>Orange 7.4V 850mAh 2S LiPo Battery</strong><br/>
+      <em>High-Discharge 2S Lithium Polymer Battery Pack</em>
     </td>
   </tr>
 </table>
@@ -175,14 +173,14 @@ The L298N driver receives logic signals from the Arduino and powers the 4 M20 mo
 
 | Terminal | Power Wire | Voltage | Notes |
 | :--- | :--- | :--- | :--- |
-| **L298N 12V / VMS (+)** | 8V Battery Red Wire (+) | `+8V` | Powers the 4 M20 motors. **Verify polarity!** |
-| **L298N GND (-)** | 8V Battery Black Wire (-) | `0V (GND)` | Ground reference from battery |
+| **L298N 12V / VMS (+)** | 7.4V Battery Red Wire (+) | `+7.4V` | Powers the 4 M20 motors. **Verify polarity!** |
+| **L298N GND (-)** | 7.4V Battery Black Wire (-) | `0V (GND)` | Ground reference from battery |
 | **L298N GND (-)** | Arduino GND Pin | `GND` | **Crucial!** Common ground reference |
 | **L298N 5V Out** | Arduino 5V / VIN Pin | `5V` | Optional regulated 5V to power Arduino |
 
 > ⚠️ **IMPORTANT POWER SAFETY**:
 > - Always verify battery polarity (`+` to `+`, `-` to `-`). Reversing polarity can permanently damage the L298N driver and Arduino.
-> - Never connect the 8V battery directly to Arduino 5V or I/O pins.
+> - Never connect the 7.4V LiPo battery directly to Arduino 5V or I/O pins.
 > - Always connect L298N GND and Arduino GND together to establish a shared ground reference.
 
 ---
@@ -352,13 +350,13 @@ float getDistance(int trigPin, int echoPin) {
 
 1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four M20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
 2. **Mount 4× M20 Motors & Wheels**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right). Press orange treaded wheels firmly onto each motor shaft.
-3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using screws or heavy-duty tape.
+3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using mounting screws and standoffs.
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
 6. **Connect Motor Terminals**: Wire the two left M20 motors in parallel to OUT1 & OUT2, and the two right M20 motors in parallel to OUT3 & OUT4. Connect IN1&rarr;D9, IN2&rarr;D8, IN3&rarr;D11, IN4&rarr;D12.
-7. **Connect 8V Power Supply**: Connect the 8V battery (+) to the L298N 12V terminal, battery (-) to GND, and link L298N GND to Arduino GND (common ground). **Check polarity!**
+7. **Connect 8V Power Supply**: Connect the 7.4V LiPo battery (+) to the L298N 12V terminal, battery (-) to GND, and link L298N GND to Arduino GND (common ground). **Check polarity!**
 8. **Upload Arduino Program**: Connect Arduino to computer via USB, open `autoracerl298n.ino` in Arduino IDE, select **Arduino UNO**, and click **Upload**.
-9. **Field Test**: Place the 4WD robot on a clear floor, power on the 8V battery, and watch it cruise and steer smoothly around obstacles!
+9. **Field Test**: Place the 4WD robot on a clear floor, power on the 7.4V LiPo battery, and watch it cruise and steer smoothly around obstacles!
 
 ---
 
@@ -367,7 +365,7 @@ float getDistance(int trigPin, int echoPin) {
 - [ ] Arduino UNO powers on (green LED lit)
 - [ ] L298N motor driver power LED lit steadily
 - [ ] Common ground connected between L298N GND and Arduino GND
-- [ ] 8V Battery polarity verified (`+` Red, `-` Black)
+- [ ] 7.4V LiPo Battery polarity verified (`+` Red, `-` Black)
 - [ ] Both left M20 motors rotate forward when commanded
 - [ ] Both right M20 motors rotate forward when commanded
 - [ ] All 4 orange wheels spin freely without chassis contact
@@ -385,7 +383,7 @@ float getDistance(int trigPin, int echoPin) {
 
 - **Polarity Warning**: Never reverse battery polarity. Reversing `+` and `-` will burn the L298N driver IC immediately.
 - **Common Ground Requirement**: Always ensure L298N GND and Arduino GND are connected together so logic signals have a reference point.
-- **Voltage Separation**: Never feed 8V directly into Arduino 5V or I/O pins (pins operate at 5V logic only).
+- **Voltage Separation**: Never feed 7.4V directly into Arduino 5V or I/O pins (pins operate at 5V logic only).
 - **Mechanical Safety**: Keep fingers, hair, and loose wires away from the 4 spinning wheels and motor gears while powered.
 - **Safe Testing Area**: Test the robot on an open, flat floor away from staircases and table edges.
 

@@ -2205,7 +2205,7 @@
             <span class="badge">3 Ultrasonic Sensors</span>
             <span class="badge">4 M20 Motors (300 RPM)</span>
             <span class="badge">L298N Motor Driver</span>
-            <span class="badge">8V Power</span>
+            <span class="badge">7.4V LiPo Power</span>
             <span class="badge">4WD All-Wheel Drive</span>
           </div>
         </div>
@@ -2272,10 +2272,10 @@
             </tr>
             <tr>
               <td>7</td>
-              <td>8V Rechargeable Battery Pack</td>
-              <td>8V DC power pack for motors &amp; logic</td>
+              <td>Orange 7.4V 850mAh 2S LiPo Battery</td>
+              <td>Rechargeable 2S LiPo, 30C/60C discharge</td>
               <td>1</td>
-              <td class="price">&#8377;300 &ndash; &#8377;550</td>
+              <td class="price">&#8377;500 &ndash; &#8377;750</td>
             </tr>
             <tr>
               <td>8</td>
@@ -2284,23 +2284,9 @@
               <td>As required</td>
               <td class="price">&#8377;50 &ndash; &#8377;100</td>
             </tr>
-            <tr>
-              <td>9</td>
-              <td>Rod &amp; Bearing</td>
-              <td>Smooth steel axle &amp; miniature bearing set</td>
-              <td>1 Set</td>
-              <td class="price">&#8377;80 &ndash; &#8377;180</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Double-Sided Tape</td>
-              <td>Heavy-duty component mounting tape</td>
-              <td>1 Roll</td>
-              <td class="price">&#8377;100 &ndash; &#8377;200</td>
-            </tr>
             <tr class="total-row">
               <td colspan="4"><strong>Approximate Project Total</strong></td>
-              <td class="price"><strong>&#8377;1,860 &ndash; &#8377;3,630</strong></td>
+              <td class="price"><strong>&#8377;2,260 &ndash; &#8377;3,950</strong></td>
             </tr>
           </tbody>
         </table>
@@ -2627,44 +2613,44 @@
           </div>
         </div>
 
-        <!-- CARD 7: 8V Rechargeable Battery Pack -->
+        <!-- CARD 7: Orange 7.4V 850mAh 2S LiPo Battery -->
         <div class="comp-card" id="card-c7">
           <div class="comp-card-media" onclick="toggleComp('c7')">
             <img class="comp-img-large"
-              src="battery.png"
-              alt="8V Rechargeable Battery Pack" loading="lazy">
-            <span class="comp-badge">Power Supply &middot; 8V DC</span>
+              src="battery.jpg"
+              alt="Orange 7.4V 850mAh 2S LiPo Battery" loading="lazy">
+            <span class="comp-badge">Power Supply &middot; 7.4V 2S</span>
           </div>
           <div class="comp-card-body">
             <div class="comp-header-row" onclick="toggleComp('c7')">
               <div>
-                <h3 class="comp-name">8V Rechargeable Battery Pack</h3>
-                <div class="comp-subtitle">High-Discharge 8V Power Source</div>
+                <h3 class="comp-name">Orange 7.4V 850mAh 2S LiPo Battery</h3>
+                <div class="comp-subtitle">High-Discharge 2S Lithium Polymer Battery Pack</div>
               </div>
               <button class="toggle-btn" id="btn-c7" onclick="event.stopPropagation();toggleComp('c7')"
                 aria-label="Toggle details">Details &#9662;</button>
             </div>
-            <p class="comp-desc">Provides continuous electrical power required to drive all four M20 gear motors through the L298N driver and power the Arduino logic.</p>
+            <p class="comp-desc">Provides continuous high-discharge electrical power required to drive all four M20 gear motors through the L298N driver and power onboard Arduino logic.</p>
             <div class="comp-tags">
-              <span class="spec-tag">8V DC Nominal</span>
-              <span class="spec-tag">Rechargeable Pack</span>
-              <span class="spec-tag">High Current Delivery</span>
-              <span class="spec-tag">Compact &amp; Lightweight</span>
+              <span class="spec-tag">7.4V (2S LiPo)</span>
+              <span class="spec-tag">850mAh Capacity</span>
+              <span class="spec-tag">30C / 60C Discharge</span>
+              <span class="spec-tag">JST-XH Balance Port</span>
             </div>
             <div class="comp-details" id="c7">
               <div class="comp-detail-box">
                 <h4>What is it?</h4>
-                <p>A compact rechargeable battery pack delivering a nominal 8V output designed to supply steady current to the L298N motor driver module and onboard electronics.</p>
+                <p>A compact, high-performance 2-cell (2S) Lithium Polymer rechargeable battery pack delivering a nominal 7.4V output with an 850mAh capacity and 30C continuous / 60C burst discharge rating, fitted with red JST discharge leads and standard JST-XH balance plug.</p>
               </div>
               <div class="comp-detail-box">
                 <h4>Why do we use it?</h4>
-                <p>The 8V power pack delivers the optimal voltage for 300 RPM M20 micro gear motors through the L298N driver, delivering robust 4WD drive power without over-volting the micro motors.</p>
+                <p>Standard alkaline batteries cannot supply the high burst current demanded by four 4WD DC gear motors during acceleration and sharp turns. This 7.4V 850mAh LiPo supplies strong, stable voltage to the L298N driver without causing microcontroller brownouts or resets, while keeping the robot light and agile.</p>
               </div>
             </div>
 
-            <button type="button" class="buy-btn buy-btn-pending" onclick="noticePendingBuyLink('8V Rechargeable Battery Pack')" title="Buy link to be updated">
-              <span class="buy-btn-icon">&#128722;</span> Buy Link Pending
-            </button>
+            <a class="buy-btn" href="https://robu.in/product/orange-850mah-2s-30c-60c-lithium-polymer-battery-pack-lipo/" target="_blank" rel="noopener noreferrer">
+              <span class="buy-btn-icon">&#128722;</span> Buy on Robu.in
+            </a>
           </div>
         </div>
 
@@ -2712,95 +2698,7 @@
           </div>
         </div>
 
-        <!-- CARD 9: Rod and Bearing -->
-        <div class="comp-card" id="card-c9">
-          <div class="comp-card-media" onclick="toggleComp('c9')">
-            <img class="comp-img-large"
-              src="Rod &amp; Bearing.png"
-              alt="Rod and Bearing Assembly" loading="lazy">
-            <span class="comp-badge">Hardware &middot; Mechanical</span>
-          </div>
-          <div class="comp-card-body">
-            <div class="comp-header-row" onclick="toggleComp('c9')">
-              <div>
-                <h3 class="comp-name">Rod &amp; Bearing</h3>
-                <div class="comp-subtitle">Smooth Steel Axle &amp; Ball Bearing Assembly</div>
-              </div>
-              <button class="toggle-btn" id="btn-c9" onclick="event.stopPropagation();toggleComp('c9')"
-                aria-label="Toggle details">Details &#9662;</button>
-            </div>
-            <p class="comp-desc">Precision ground steel rod paired with miniature ball bearings to provide smooth, low-friction
-              rotation for the robot's idle wheel and caster assembly.</p>
-            <div class="comp-tags">
-              <span class="spec-tag">Steel Shaft</span>
-              <span class="spec-tag">Mini Ball Bearings</span>
-              <span class="spec-tag">Low-Friction</span>
-              <span class="spec-tag">Smooth Rotation</span>
-            </div>
-            <div class="comp-details" id="c9">
-              <div class="comp-detail-box">
-                <h4>What is it?</h4>
-                <p>A precision-machined steel shaft rod fitted with miniature deep-groove ball bearings designed to support rotating
-                  hardware and reduce rotational friction.</p>
-              </div>
-              <div class="comp-detail-box">
-                <h4>Why do we use it?</h4>
-                <p>Provides rigid, wobble-free rotation for the chassis caster and support wheels, significantly reducing
-                  drag and ensuring maximum speed from the drive motors.</p>
-              </div>
-            </div>
-
-            <button type="button" class="buy-btn buy-btn-pending" onclick="noticePendingBuyLink('Rod & Bearing')" title="Buy link not yet provided - click to provide link">
-              <span class="buy-btn-icon">&#128722;</span> Buy Component <span class="buy-mark-needed">&#9888; Link Needed</span>
-            </button>
-          </div>
         </div>
-
-        <!-- CARD 10: Double-Sided Tape -->
-        <div class="comp-card" id="card-c10">
-          <div class="comp-card-media" onclick="toggleComp('c10')">
-            <img class="comp-img-large"
-              src="Double_sided_tape.png"
-              alt="Double Sided Tape" loading="lazy">
-            <span class="comp-badge">Assembly &middot; Mounting</span>
-          </div>
-          <div class="comp-card-body">
-            <div class="comp-header-row" onclick="toggleComp('c10')">
-              <div>
-                <h3 class="comp-name">Double-Sided Tape</h3>
-                <div class="comp-subtitle">Heavy-Duty Component Adhesive Tape</div>
-              </div>
-              <button class="toggle-btn" id="btn-c10" onclick="event.stopPropagation();toggleComp('c10')"
-                aria-label="Toggle details">Details &#9662;</button>
-            </div>
-            <p class="comp-desc">High-strength double-sided adhesive mounting tape to securely bond sensors, motor shield,
-              and battery pack firmly to the chassis frame without drilling.</p>
-            <div class="comp-tags">
-              <span class="spec-tag">Heavy-Duty Adhesion</span>
-              <span class="spec-tag">Vibration-Damping</span>
-              <span class="spec-tag">Residue-Free</span>
-              <span class="spec-tag">Quick Mounting</span>
-            </div>
-            <div class="comp-details" id="c10">
-              <div class="comp-detail-box">
-                <h4>What is it?</h4>
-                <p>A thick, heavy-duty double-sided acrylic/foam mounting tape designed for strong adhesion on plastic, metal,
-                  and electronic circuit board surfaces.</p>
-              </div>
-              <div class="comp-detail-box">
-                <h4>Why do we use it?</h4>
-                <p>Allows rapid, clean, and vibration-absorbing mounting for the battery pack, ultrasonic brackets, and
-                  breadboard modules directly to the 3D-printed chassis without needing extra hardware.</p>
-              </div>
-            </div>
-
-            <a class="buy-btn" href="https://www.amazon.in/NUOVI-Double-Sided-Heavy-Duty-Furniture-Decoration/dp/B0F2N1VTHD/ref=sr_1_6_mod_primary_new?crid=299XB7XPXRR83&amp;dib=eyJ2IjoiMSJ9.-10EyllwjhTQ0ZDl5_F04hdTce9prldFKl8b8990W63zuNwQFRMRxUR9Doldva9dw3awXpVyGdK1U6SIj4frGyUQpohTOTqz01C8sGk3Ey2-AujvWG1DGW8a-ZzEOEZx_MC-DdsGV2ju7-bJAFcIPT-Oda34c6TveRRSo7_mlOxYVNHTQyzux7iXbmfI1wI1YbFAxw4q8vyTFvUAHNRaUBDmAGc4bb2UOhSLNM_T4vj0jJpUnrRMOd8zuF4FqkTFUp1IX64PopVjMVJ04sm3JUTh41A1Yko2w5IjRfmpZnY.hD4sn07MQDxlraNNErsuSVizTGAelmyClUTp7IlavTY&amp;dib_tag=se&amp;keywords=double+sided+tape&amp;qid=1789456007&amp;sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&amp;sprefix=double+sided+tape%2Caps%2C253&amp;sr=8-6" target="_blank" rel="noopener noreferrer">
-              <span class="buy-btn-icon">&#128722;</span> Buy on Amazon
-            </a>
-          </div>
-        </div>
-
-      </div>
     </section>
 
     <!-- SECTION 4: HOW IT WORKS -->
@@ -2985,13 +2883,13 @@
           <tbody>
             <tr>
               <td><strong>L298N 12V / VMS (+)</strong></td>
-              <td>8V Battery Red Wire (+)</td>
-              <td><span class="pin-badge">+8V</span></td>
-              <td>Powers the 4 M20 gear motors</td>
+              <td>7.4V Battery Red Wire (+)</td>
+              <td><span class="pin-badge">+7.4V</span></td>
+              <td>Powers the 4 M20 gear motors. <strong>Verify polarity!</strong></td>
             </tr>
             <tr>
               <td><strong>L298N GND (&minus;)</strong></td>
-              <td>8V Battery Black Wire (&minus;)</td>
+              <td>7.4V Battery Black Wire (&minus;)</td>
               <td><span class="pin-badge">0V (GND)</span></td>
               <td>Ground reference from battery</td>
             </tr>
@@ -3244,7 +3142,7 @@ float getDistance(int trigPin, int echoPin) {
           <div class="step-num"></div>
           <div class="step-content">
             <h3>Prepare the 4WD Chassis</h3>
-            <p>Lay out the 4WD chassis base and identify the mounting points for the four M20 motors, L298N driver, Arduino UNO, 8V battery, and front sensor bumper.</p>
+            <p>Lay out the 4WD chassis base and identify the mounting points for the four M20 motors, L298N driver, Arduino UNO, 7.4V LiPo battery, and front sensor bumper.</p>
           </div>
         </li>
         <li>
@@ -3258,7 +3156,7 @@ float getDistance(int trigPin, int echoPin) {
           <div class="step-num"></div>
           <div class="step-content">
             <h3>Mount Arduino UNO and L298N Motor Driver</h3>
-            <p>Fasten the Arduino UNO and the L298N motor driver module securely onto the chassis platform using mounting screws or heavy-duty double-sided tape.</p>
+            <p>Fasten the Arduino UNO and the L298N motor driver module securely onto the chassis platform using mounting screws and standoffs.</p>
           </div>
         </li>
         <li>
@@ -3286,7 +3184,7 @@ float getDistance(int trigPin, int echoPin) {
           <div class="step-num"></div>
           <div class="step-content">
             <h3>Connect the 8V Power Supply</h3>
-            <p>Connect the 8V battery (+) to the L298N 12V terminal, battery (&minus;) to L298N GND, and run a wire from L298N GND to Arduino GND for common ground. <strong>Carefully double-check polarity!</strong></p>
+            <p>Connect the 7.4V LiPo battery (+) to the L298N 12V terminal, battery (&minus;) to L298N GND, and run a wire from L298N GND to Arduino GND for common ground. <strong>Carefully double-check polarity!</strong></p>
           </div>
         </li>
         <li>
@@ -3300,7 +3198,7 @@ float getDistance(int trigPin, int echoPin) {
           <div class="step-num"></div>
           <div class="step-content">
             <h3>Test the Robot</h3>
-            <p>Place the robot on a clear floor, switch on the 8V battery, and observe it cruising forward smoothly at PWM 130 and steering away from obstacles when detected!</p>
+            <p>Place the robot on a clear floor, switch on the 7.4V battery, and observe it cruising forward smoothly at PWM 130 and steering away from obstacles when detected!</p>
           </div>
         </li>
       </ol>
@@ -3326,7 +3224,7 @@ float getDistance(int trigPin, int echoPin) {
           </li>
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
-              onclick="toggleCheck(this.previousElementSibling)">8V Battery polarity verified (+ Red, &minus; Black)</span>
+              onclick="toggleCheck(this.previousElementSibling)">7.4V Battery polarity verified (+ Red, &minus; Black)</span>
           </li>
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
@@ -3380,7 +3278,7 @@ float getDistance(int trigPin, int echoPin) {
             connecting it to the circuit. Reversed polarity can permanently damage components.</span></div>
         <div class="safety-item"><span class="warn-icon">&#9888;&#65039;</span><span>Do not short-circuit the battery
             terminals. Never let bare wires touch both terminals at the same time.</span></div>
-        <div class="safety-item"><span class="warn-icon">&#9888;&#65039;</span><span>Do not connect the 8V
+        <div class="safety-item"><span class="warn-icon">&#9888;&#65039;</span><span>Do not connect the 7.4V
             battery directly to Arduino signal or I/O pins. Use the motor driver shield&apos;s regulated supply
             path.</span></div>
         <div class="safety-item"><span class="warn-icon">&#9888;&#65039;</span><span>Keep fingers, loose wires, and
