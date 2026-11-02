@@ -2025,7 +2025,7 @@
 
   </script>
   <!-- Preload 3D Model Asset -->
-  <link rel="preload" href="3D_Models/assembled_model.gltf" as="fetch" type="model/gltf-binary" crossorigin>
+  <link rel="preload" href="3D_Models/AutonomousRacerBot.glb" as="fetch" type="model/gltf-binary" crossorigin>
   <!-- Google model-viewer for Interactive 3D Model Inspection -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
   <script type="module">
@@ -2311,8 +2311,8 @@
               </div>
             </div>
 
-            <a class="buy-btn" href="https://robocraze.com/products/6v-n20-600-rpm-miniature-gear-motor?variant=41491539886233&amp;country=IN&amp;currency=INR&amp;utm_medium=product_sync&amp;utm_source=google&amp;utm_content=sag_organic&amp;utm_campaign=sag_organic&amp;campaignid=22271813913&amp;adgroupid=&amp;keyword=&amp;device=c&amp;gad_source=4&amp;gad_campaignid=22271815110&amp;gbraid=0AAAAADgHQvbLolNBsWfPds5Tne39Z4ps2&amp;gclid=CjwKCAiAhqHXBhAXEiwATbksU9XUencHuQSsm9veNWdSW5N9ZL9qhrIvFRR223CElDfmgKrvhePKFxoCzMEQAvD_BwE" target="_blank" rel="noopener noreferrer">
-              <span class="buy-btn-icon">&#128722;</span> Buy on Robocraze
+            <a class="buy-btn" href="https://robu.in/product/n20-6v-300-rpm-micro-metal-gear-motor/" target="_blank" rel="noopener noreferrer">
+              <span class="buy-btn-icon">&#128722;</span> Buy on Robu.in
             </a>
           </div>
         </div>
@@ -2404,13 +2404,13 @@
           </div>
         </div>
 
-        <!-- CARD 6: 4WD Robot Chassis Platform (3D Printed) -->
+        <!-- CARD 6: 4WD Robot Chassis Platform (3D Printed AutonomousRacerBot.stl) -->
         <div class="comp-card" id="card-c6">
           <div class="comp-card-media comp-card-media-3d" id="media-c6">
             <model-viewer
               id="chassisModelViewer"
-              src="3D_Models/assembled_model.gltf"
-              alt="Interactive 3D Model of 4WD Robot Chassis Platform"
+              src="3D_Models/AutonomousRacerBot.glb"
+              alt="Interactive 3D Model of Autonomous Racer Bot Chassis (AutonomousRacerBot.stl)"
               camera-controls
               touch-action="pan-y"
               auto-rotate
@@ -2425,11 +2425,11 @@
               ar-status="not-presenting">
               <div slot="poster" class="model-loading-placeholder">
                 <div class="model-spinner"></div>
-                <span>Loading 3D Model...</span>
+                <span>Loading 3D Model (AutonomousRacerBot.stl)...</span>
               </div>
             </model-viewer>
 
-            <span class="comp-badge">Frame &middot; 3D Model</span>
+            <span class="comp-badge">Chassis &middot; AutonomousRacerBot.stl</span>
 
             <!-- Fullscreen / Expand Button in Top-Right Corner -->
             <button type="button" class="viewer-fullscreen-btn" id="chassisFullscreenBtn" onclick="toggle3DFullscreen(event)" aria-label="Toggle Fullscreen" title="Inspect 3D model in fullscreen">
@@ -2459,7 +2459,7 @@
             <div class="comp-header-row" onclick="toggleComp('c6')">
               <div>
                 <h3 class="comp-name">4WD Robot Chassis Platform</h3>
-                <div class="comp-subtitle">3D-Printed Custom Structural Base</div>
+                <div class="comp-subtitle">3D-Printed Custom Base (AutonomousRacerBot.stl)</div>
               </div>
               <button class="toggle-btn" id="btn-c6" onclick="event.stopPropagation();toggleComp('c6')"
                 aria-label="Toggle details">Details &#9662;</button>
@@ -2467,7 +2467,7 @@
             <p class="comp-desc">The structural skeleton that securely holds motors, electronics, battery, and sensors
               into a single mobile robot.</p>
             <div class="comp-tags">
-              <span class="spec-tag">3D-Printed STL</span>
+              <span class="spec-tag">AutonomousRacerBot.stl</span>
               <span class="spec-tag">4WD Platform</span>
               <span class="spec-tag">Pre-Modeled Slots</span>
               <span class="spec-tag">4WD Motor Mounts</span>
@@ -2476,7 +2476,7 @@
             <div class="comp-details" id="c6">
               <div class="comp-detail-box">
                 <h4>What is it?</h4>
-                <p>A durable, custom 3D-printed robotics platform designed with precise mounting slots and brackets
+                <p>A durable, custom 3D-printed robotics platform (AutonomousRacerBot.stl) designed with precise mounting slots and brackets
                   for hardware, motors, and electronics.</p>
               </div>
               <div class="comp-detail-box">
@@ -2486,7 +2486,7 @@
               </div>
             </div>
 
-            <a class="buy-btn comp-download-btn" href="3D_Models/3D_Models.zip" download="3D_Models.zip" title="Download 3D Print STL Files (ZIP)">
+            <a class="buy-btn comp-download-btn" href="AutonomousRacerBot.stl" download="AutonomousRacerBot.stl" title="Download AutonomousRacerBot.stl 3D Print File">
               <span class="buy-btn-icon">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -2494,7 +2494,7 @@
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
               </span>
-              Download 3D Print Files
+              Download AutonomousRacerBot.stl
             </a>
           </div>
         </div>
@@ -3644,7 +3644,7 @@ float getDistance(int trigPin, int echoPin) {
         // Fallback if gltf path needs glb
         mv.addEventListener('error', function () {
           if (mv.src && !mv.src.endsWith('.glb')) {
-            mv.src = '3D_Models/assembled_model.glb';
+            mv.src = '3D_Models/AutonomousRacerBot.glb';
           }
         });
 
