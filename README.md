@@ -219,7 +219,7 @@ The robot operates using a continuous sense-think-act control loop:
 | **Path Ahead Clear** | Center &ge; 15cm, Left & Right &ge; 12cm | Cruise forward smoothly | `FORWARD (PWM 130)` | `FORWARD (PWM 130)` |
 | **Obstacle on Left** | Left &lt; 12cm, Right &ge; 12cm | Steer right in place | `FORWARD (PWM 200)` | `REVERSE (PWM 200)` |
 | **Obstacle on Right** | Right &lt; 12cm, Left &ge; 12cm | Steer left in place | `REVERSE (PWM 200)` | `FORWARD (PWM 200)` |
-| **Front Obstacle / Corner** | Center &lt; 15cm | Reverse 220ms, then pivot left | `REVERSE (PWM 200)` | `REVERSE (PWM 200)` |
+| **Front Obstacle / Corner** | Center &lt; 15cm | 1. Reverse 220ms<br/>2. Pivot Left 220ms | 1. `REVERSE (-200)`<br/>2. `REVERSE (-200)` | 1. `REVERSE (-200)`<br/>2. `FORWARD (+200)` |
 
 ---
 
@@ -241,6 +241,8 @@ const int trig1 = 2;  const int echo1 = 3;   // Left sensor
 const int trig2 = 4;  const int echo2 = 5;   // Center sensor
 const int trig3 = 6;  const int echo3 = 7;   // Right sensor
 
+
+
 const float MAX_SENSOR_DISTANCE       = 200.0;  // cm
 const float FRONT_OBSTACLE_THRESHOLD  = 15.0;   // cm - center sensor triggers backup + turn
 const float SIDE_OBSTACLE_THRESHOLD   = 12.0;   // cm - left/right sensors trigger turn
@@ -249,7 +251,11 @@ const unsigned long BACKUP_DURATION   = 220;    // ms to reverse when front obst
 
 unsigned long lastSensorReadTime = 0;
 
-void motor1(int speed) {       // Left Motor speed
+// ==========================================
+// MOTOR CONTROL
+// ==========================================
+
+void motor1(int speed) {       //Left Motor speed
   if (speed > 0) {
     digitalWrite(IN1, LOW);
     analogWrite(IN2, speed);       // Forward
@@ -258,20 +264,20 @@ void motor1(int speed) {       // Left Motor speed
     analogWrite(IN2, speed);      // Backward 
   } else {
     digitalWrite(IN1, HIGH);
-    analogWrite(IN2, HIGH);       // Stop
+    analogWrite(IN2, HIGH);           // Stop
   }
 }
 
-void motor2(int speed) {      // Right Motor speed 
+void motor2(int speed) {      //Right Motor speed 
   if (speed > 0) {
     digitalWrite(IN3, LOW);
     analogWrite(IN4, speed);       // Forward
   } else if (speed < 0) {
     digitalWrite(IN3, HIGH);
-    analogWrite(IN4, speed);      // Backward
+    analogWrite(IN4, speed);      // Backward (negate to get positive PWM value)
   } else {
     digitalWrite(IN3, HIGH);
-    analogWrite(IN4, HIGH);       // Stop
+    analogWrite(IN4, HIGH);           // Stop
   }
 }
 
@@ -279,6 +285,8 @@ void motorControl(int leftSpeed, int rightSpeed) {
   motor1(leftSpeed);
   motor2(rightSpeed);
 }
+
+
 
 void setup() {
   Serial.begin(9600);
@@ -296,8 +304,10 @@ void setup() {
   Serial.println("Robot Ready!");
 }
 
+
 void loop() {
   unsigned long currentMillis = millis();
+
 
   if (currentMillis - lastSensorReadTime >= SENSOR_INTERVAL) {
     lastSensorReadTime = currentMillis;
@@ -312,7 +322,9 @@ void loop() {
     Serial.print("       ");
     Serial.println(rightDist);
 
+
     if (centerDist < FRONT_OBSTACLE_THRESHOLD) {
+      // Back up briefly, then turn left for the same duration
       motorControl(-200, -200);
       delay(BACKUP_DURATION);
       motorControl(-200, 200);  // Turn Left in place
@@ -336,7 +348,7 @@ float getDistance(int trigPin, int echoPin) {
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-                                                                                                                                          
+                                                                                                                                                                         
   long timeout = (MAX_SENSOR_DISTANCE * 2.0 / 0.0343) + 3000;
   long duration = pulseIn(echoPin, HIGH, timeout);
 
@@ -348,6 +360,7 @@ float getDistance(int trigPin, int echoPin) {
   if (distance < 0) return 0.0;
 
   return distance;
+
 }
 ```
 
@@ -361,7 +374,7 @@ float getDistance(int trigPin, int echoPin) {
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
 6. **Connect Motor Terminals**: Wire the two left M20 motors in parallel to OUT1 & OUT2, and the two right M20 motors in parallel to OUT3 & OUT4. Connect IN1&rarr;D9, IN2&rarr;D8, IN3&rarr;D11, IN4&rarr;D12.
-7. **Connect 8V Power Supply**: Connect the 7.4V LiPo battery (+) to the L298N 12V terminal, battery (-) to GND, and link L298N GND to Arduino GND (common ground). **Check polarity!**
+7. **Connect 7.4V Power Supply**: Connect the 7.4V LiPo battery (+) to the L298N 12V terminal, battery (-) to GND, and link L298N GND to Arduino GND (common ground). **Check polarity!**
 8. **Upload Arduino Program**: Connect Arduino to computer via USB, open `autoracerl298n.ino` in Arduino IDE, select **Arduino UNO**, and click **Upload**.
 9. **Field Test**: Place the 4WD robot on a clear floor, power on the 7.4V LiPo battery, and watch it cruise and steer smoothly around obstacles!
 

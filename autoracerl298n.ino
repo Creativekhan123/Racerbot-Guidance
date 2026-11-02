@@ -130,6 +130,5 @@ float getDistance(int trigPin, int echoPin) {
   if (distance < 0) return 0.0;
 
   return distance;
-  Serial.println(distance);
 
 }

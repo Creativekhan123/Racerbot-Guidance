@@ -2338,7 +2338,7 @@
               <div class="comp-detail-box">
                 <h4>Why do we use it?</h4>
                 <p>It acts as the robot's central brain. It reads distance data from the three ultrasonic sensors,
-                  decides which path is clear, and sends driving commands to the motor driver shield.</p>
+                  decides which path is clear, and sends driving commands to the L298N motor driver module.</p>
               </div>
             </div>
 
@@ -2371,7 +2371,7 @@
               <span class="spec-tag">IN1&ndash;IN4 Control</span>
               <span class="spec-tag">D9, D8 (Left Motors)</span>
               <span class="spec-tag">D11, D12 (Right Motors)</span>
-              <span class="spec-tag">8V Motor Supply</span>
+              <span class="spec-tag">7.4V Motor Supply</span>
             </div>
             <div class="comp-details" id="c2">
               <div class="comp-detail-box">
@@ -2380,7 +2380,7 @@
               </div>
               <div class="comp-detail-box">
                 <h4>Why do we use it?</h4>
-                <p>Arduino pins can only supply 5V at 20mA, which is not enough to power DC motors. The L298N module draws power from the 8V battery and safely delivers high current to the left and right motor pairs based on PWM and direction inputs from the Arduino.</p>
+                <p>Arduino pins can only supply 5V at 20mA, which is not enough to power DC motors. The L298N module draws power from the 7.4V LiPo battery and safely delivers high current to the left and right motor pairs based on PWM and direction inputs from the Arduino.</p>
               </div>
             </div>
 
@@ -2597,7 +2597,7 @@
               <div class="comp-detail-box">
                 <h4>Why do we use it?</h4>
                 <p>Provides rigid mechanical support to mount the four M20 drive motors, Arduino board,
-                  motor shield, battery, and the three forward-facing ultrasonic sensors.</p>
+                  L298N motor driver, battery, and the three forward-facing ultrasonic sensors.</p>
               </div>
             </div>
 
@@ -2684,11 +2684,11 @@
               <div class="comp-detail-box">
                 <h4>What is it?</h4>
                 <p>Flexible insulated copper connecting wires terminated with molded DuPont female and male pins,
-                  designed for quick solderless breadboards and shield headers.</p>
+                  designed for quick solderless breadboards and module headers.</p>
               </div>
               <div class="comp-detail-box">
                 <h4>Why do we use it?</h4>
-                <p>Routes 5V power, ground (GND), and signal lines (TRIG and ECHO) cleanly between the motor shield
+                <p>Routes 5V power, ground (GND), and signal lines (TRIG and ECHO) cleanly between the Arduino and L298N driver
                   headers and all three ultrasonic sensors mounted on the front chassis.</p>
               </div>
             </div>
@@ -2733,11 +2733,57 @@
           <div class="card">
             <h3>Decision Rules (from the code)</h3>
             <ul style="font-size:13px;margin-top:8px">
-              <li>Center &lt; <strong>15 cm</strong> &rarr; Back up briefly (220 ms at -200 PWM), then turn left in place (220 ms)</li>
-              <li>Left &lt; <strong>12 cm</strong> &rarr; Turn right in place (+200, -200 PWM)</li>
-              <li>Right &lt; <strong>12 cm</strong> &rarr; Turn left in place (-200, +200 PWM)</li>
-              <li>Clear path &rarr; Move forward smoothly at PWM <strong>130</strong></li>
+              <li><strong>Emergency Reverse &amp; Turn (Center &lt; 15 cm)</strong>: Back up straight (220 ms at -200 PWM), then pivot left in place (220 ms at left -200, right +200 PWM).</li>
+              <li><strong>Left Obstacle Evade (Left &lt; 12 cm)</strong>: Differential spin right in place (left +200, right -200 PWM).</li>
+              <li><strong>Right Obstacle Evade (Right &lt; 12 cm)</strong>: Differential spin left in place (left -200, right +200 PWM).</li>
+              <li><strong>Clear Path</strong>: Move forward smoothly at PWM <strong>130</strong> on all four wheels.</li>
             </ul>
+          </div>
+          <div class="card" style="margin-top:16px">
+            <h3>Autonomous Decision Matrix</h3>
+            <div style="overflow-x:auto;margin-top:8px">
+              <table class="wiring-table" style="font-size:13px">
+                <thead>
+                  <tr>
+                    <th>Sensor Condition</th>
+                    <th>Distance Threshold</th>
+                    <th>Robot Behavior</th>
+                    <th>Left Motors (OUT1/2)</th>
+                    <th>Right Motors (OUT3/4)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Path Ahead Clear</strong></td>
+                    <td>Center &ge; 15cm, Left &amp; Right &ge; 12cm</td>
+                    <td>Cruise forward smoothly</td>
+                    <td><span class="pin-badge">FORWARD (130)</span></td>
+                    <td><span class="pin-badge">FORWARD (130)</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Obstacle on Left</strong></td>
+                    <td>Left &lt; 12cm, Right &ge; 12cm</td>
+                    <td>Differential pivot right</td>
+                    <td><span class="pin-badge">FORWARD (200)</span></td>
+                    <td><span class="pin-badge">REVERSE (-200)</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Obstacle on Right</strong></td>
+                    <td>Right &lt; 12cm, Left &ge; 12cm</td>
+                    <td>Differential pivot left</td>
+                    <td><span class="pin-badge">REVERSE (-200)</span></td>
+                    <td><span class="pin-badge">FORWARD (200)</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Front Obstacle / Corner</strong></td>
+                    <td>Center &lt; 15cm</td>
+                    <td>1. Reverse 220 ms<br/>2. Pivot Left 220 ms</td>
+                    <td>1. <span class="pin-badge">REVERSE (-200)</span><br/>2. <span class="pin-badge">REVERSE (-200)</span></td>
+                    <td>1. <span class="pin-badge">REVERSE (-200)</span><br/>2. <span class="pin-badge">FORWARD (200)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -3115,7 +3161,6 @@ float getDistance(int trigPin, int echoPin) {
   if (distance < 0) return 0.0;
 
   return distance;
-  Serial.println(distance);
 
 }
 </pre>
@@ -3184,7 +3229,7 @@ float getDistance(int trigPin, int echoPin) {
         <li>
           <div class="step-num"></div>
           <div class="step-content">
-            <h3>Connect the 8V Power Supply</h3>
+            <h3>Connect the 7.4V LiPo Power Supply</h3>
             <p>Connect the 7.4V LiPo battery (+) to the L298N 12V terminal, battery (&minus;) to L298N GND, and run a wire from L298N GND to Arduino GND for common ground. <strong>Carefully double-check polarity!</strong></p>
           </div>
         </li>
