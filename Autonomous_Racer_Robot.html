@@ -2026,6 +2026,7 @@
   </script>
   <!-- Preload 3D Model Asset -->
   <link rel="preload" href="3D_Models/AutonomousRacerBot.glb" as="fetch" type="model/gltf-binary" crossorigin>
+  <link rel="preload" href="3D_Models/motor_clamp.glb" as="fetch" type="model/gltf-binary" crossorigin>
   <!-- Google model-viewer for Interactive 3D Model Inspection -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
   <script type="module">
@@ -2176,9 +2177,16 @@
               <td>1</td>
               <td class="price">&#8377;80 &ndash; &#8377;150</td>
             </tr>
+            <tr>
+              <td>10</td>
+              <td>3D-Printed Motor Mounting Clamps</td>
+              <td>Custom 3D-printable brackets to clamp 4&times; micro gear motors onto the chassis (<code>motor clamp.stl</code>)</td>
+              <td>4</td>
+              <td class="price">&#8377;40 &ndash; &#8377;100 (4&times; 3D printed)</td>
+            </tr>
             <tr class="total-row">
               <td colspan="4"><strong>Approximate Project Total</strong></td>
-              <td class="price"><strong>&#8377;2,340 &ndash; &#8377;4,100</strong></td>
+              <td class="price"><strong>&#8377;2,380 &ndash; &#8377;4,200</strong></td>
             </tr>
           </tbody>
         </table>
@@ -2448,7 +2456,7 @@
             <span class="comp-badge">Chassis &middot; AutonomousRacerBot.stl</span>
 
             <!-- Fullscreen / Expand Button in Top-Right Corner -->
-            <button type="button" class="viewer-fullscreen-btn" id="chassisFullscreenBtn" onclick="toggle3DFullscreen(event)" aria-label="Toggle Fullscreen" title="Inspect 3D model in fullscreen">
+            <button type="button" class="viewer-fullscreen-btn" id="chassisFullscreenBtn" onclick="toggle3DFullscreen(event, 'media-c6')" aria-label="Toggle Fullscreen" title="Inspect 3D model in fullscreen">
               <svg class="icon-expand" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
               </svg>
@@ -2458,7 +2466,7 @@
             </button>
 
             <!-- Obvious Exit Fullscreen Button visible in Fullscreen mode -->
-            <button type="button" class="viewer-exit-btn" id="chassisExitBtn" onclick="exit3DFullscreen(event)" aria-label="Exit fullscreen" title="Exit fullscreen mode">
+            <button type="button" class="viewer-exit-btn" id="chassisExitBtn" onclick="exit3DFullscreen(event, 'media-c6')" aria-label="Exit fullscreen" title="Exit fullscreen mode">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -2641,7 +2649,102 @@
           </div>
         </div>
 
+
+        <!-- CARD 10: 3D-Printed N20/M20 Motor Mounting Clamps (motor clamp.stl) -->
+        <div class="comp-card" id="card-c10">
+          <div class="comp-card-media comp-card-media-3d" id="media-c10">
+            <model-viewer
+              id="clampModelViewer"
+              src="3D_Models/motor_clamp.glb"
+              alt="Interactive 3D Model of 3D-Printed Motor Mounting Clamp (motor clamp.stl)"
+              camera-controls
+              touch-action="pan-y"
+              auto-rotate
+              auto-rotate-delay="1200"
+              rotation-per-second="25deg"
+              shadow-intensity="1.2"
+              shadow-softness="0.5"
+              exposure="1.15"
+              interaction-prompt="auto"
+              loading="eager"
+              reveal="auto"
+              ar-status="not-presenting">
+              <div slot="poster" class="model-loading-placeholder">
+                <div class="model-spinner"></div>
+                <span>Loading 3D Model (motor clamp.stl)...</span>
+              </div>
+            </model-viewer>
+
+            <span class="comp-badge">3D Print &middot; motor clamp.stl</span>
+
+            <!-- Fullscreen / Expand Button in Top-Right Corner -->
+            <button type="button" class="viewer-fullscreen-btn" id="clampFullscreenBtn" onclick="toggle3DFullscreen(event, 'media-c10')" aria-label="Toggle Fullscreen" title="Inspect 3D model in fullscreen">
+              <svg class="icon-expand" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+              </svg>
+              <svg class="icon-compress" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14L3 21"/>
+              </svg>
+            </button>
+
+            <!-- Obvious Exit Fullscreen Button visible in Fullscreen mode -->
+            <button type="button" class="viewer-exit-btn" id="clampExitBtn" onclick="exit3DFullscreen(event, 'media-c10')" aria-label="Exit fullscreen" title="Exit fullscreen mode">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              <span>Exit Fullscreen</span>
+            </button>
+
+            <!-- Interaction hint for users -->
+            <div class="viewer-3d-hint" id="clamp3dHint">
+              <span>&#x27F2; Rotate &bull; Pinch / Scroll to zoom</span>
+            </div>
+          </div>
+          <div class="comp-card-body">
+            <div class="comp-header-row" onclick="toggleComp('c10')">
+              <div>
+                <h3 class="comp-name">3D-Printed N20/M20 Motor Mounting Clamps &times;4</h3>
+                <div class="comp-subtitle">Custom Motor Brackets (motor clamp.stl)</div>
+              </div>
+              <button class="toggle-btn" id="btn-c10" onclick="event.stopPropagation();toggleComp('c10')"
+                aria-label="Toggle details">Details &#9662;</button>
+            </div>
+            <p class="comp-desc">Four custom 3D-printed mounting brackets engineered to firmly clamp each N20/M20 micro gear motor down onto the robot chassis, preventing motor vibration, slipping, and gear misalignment.</p>
+            <div class="comp-tags">
+              <span class="spec-tag">motor clamp.stl</span>
+              <span class="spec-tag">32mm &times; 13.5mm &times; 12mm</span>
+              <span class="spec-tag">M2/M2.5 Screw Fit</span>
+              <span class="spec-tag">PLA / PETG / ABS</span>
+              <span class="spec-tag">Anti-Vibration Clamp</span>
+            </div>
+            <div class="comp-details" id="c10">
+              <div class="comp-detail-box">
+                <h4>What is it?</h4>
+                <p>A precision-contoured 3D-printable bracket that wraps around the cylindrical and rectangular profile of an N20/M20 micro metal gear motor. Features dual side mounting ears with through-holes for M2/M2.5 screws.</p>
+              </div>
+              <div class="comp-detail-box">
+                <h4>Why do we use it?</h4>
+                <p>High-speed skid-steering produces torque vibrations that can loosen adhesive or friction fits. These custom clamps mechanically lock each of the four gear motors directly into the chassis baseplate, ensuring 100% rigid power delivery to the wheels.</p>
+              </div>
+              <div class="comp-detail-box">
+                <h4>3D Printing Recommendations</h4>
+                <p>Print 4 pieces in PLA, PETG, or ABS with <strong>0.15mm &ndash; 0.20mm layer height</strong> and <strong>100% infill</strong> for maximum mechanical rigidity around the screw mounting ears.</p>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+              <a class="buy-btn comp-download-btn" style="flex:1;min-width:140px;margin-top:0" href="motor clamp.stl" download="motor clamp.stl" title="Download motor clamp.stl 3D Print File">
+                <span class="buy-btn-icon">&#128190;</span> Download Motor Clamp CAD (.STL)
+              </a>
+              <a class="buy-btn comp-download-btn" style="flex:1;min-width:140px;margin-top:0;background:linear-gradient(135deg,#059669,#10b981)" href="3D_Models/3D_Models.zip" download="3D_Models.zip" title="Download All 3D Files Package">
+                <span class="buy-btn-icon">&#128230;</span> Download All 3D Files (.ZIP)
+              </a>
+            </div>
+          </div>
         </div>
+
+      </div>
     </section>
 
     <!-- SECTION 4: HOW IT WORKS -->
@@ -3143,8 +3246,8 @@ float getDistance(int trigPin, int echoPin) {
         <li>
           <div class="step-num"></div>
           <div class="step-content">
-            <h3>Attach 4&times; M20 Motors &amp; Wheels (with Bat Grip)</h3>
-            <p>Mount the four 300 RPM M20 micro gear motors into the chassis side brackets (2 on the left side, 2 on the right side). Cut four rings from the rubber cricket bat grip and stretch them securely over the 34mm small wheels for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.</p>
+            <h3>Attach 4&times; M20 Motors &amp; Wheels (with 3D Clamps &amp; Bat Grip)</h3>
+            <p>Secure the four 300 RPM M20 micro gear motors into the chassis slots (2 on the left, 2 on the right) using the 3D-printed motor clamps (<code>motor clamp.stl</code>) fastened tightly with M2/M2.5 machine screws. Cut four rings from the rubber cricket bat grip and stretch them securely over the 34mm small wheels for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.</p>
           </div>
         </li>
         <li>
@@ -3228,6 +3331,10 @@ float getDistance(int trigPin, int echoPin) {
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
               onclick="toggleCheck(this.previousElementSibling)">Both right M20 motors rotate forward when commanded</span>
+          </li>
+          <li>
+            <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
+              onclick="toggleCheck(this.previousElementSibling)">All 4 M20 gear motors securely fastened to chassis with 3D-printed clamps (motor clamp.stl)</span>
           </li>
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
@@ -3604,23 +3711,25 @@ float getDistance(int trigPin, int echoPin) {
     })();
   
     /* 3D MODEL VIEWER CONTROLS & FULLSCREEN MANAGER */
-    function toggle3DFullscreen(e) {
+    function toggle3DFullscreen(e, targetId) {
       if (e) {
         e.stopPropagation();
         e.preventDefault();
       }
-      var media = document.getElementById('media-c6');
+      var mediaId = (typeof targetId === 'string' && targetId) ? targetId : 'media-c6';
+      var media = document.getElementById(mediaId);
       if (!media) return;
 
       if (media.classList.contains('is-fullscreen') || document.fullscreenElement === media) {
-        exit3DFullscreen(e);
+        exit3DFullscreen(e, mediaId);
       } else {
-        enter3DFullscreen();
+        enter3DFullscreen(mediaId);
       }
     }
 
-    function enter3DFullscreen() {
-      var media = document.getElementById('media-c6');
+    function enter3DFullscreen(targetId) {
+      var mediaId = (typeof targetId === 'string' && targetId) ? targetId : 'media-c6';
+      var media = document.getElementById(mediaId);
       if (!media) return;
 
       media.classList.add('is-fullscreen');
@@ -3641,21 +3750,22 @@ float getDistance(int trigPin, int echoPin) {
       if (compIcon) compIcon.style.display = 'block';
     }
 
-    function exit3DFullscreen(e) {
+    function exit3DFullscreen(e, targetId) {
       if (e) {
         e.stopPropagation();
         e.preventDefault();
       }
-      var media = document.getElementById('media-c6');
-      if (media) {
-        media.classList.remove('is-fullscreen');
-        document.body.style.overflow = '';
-
-        var expIcon = media.querySelector('.icon-expand');
-        var compIcon = media.querySelector('.icon-compress');
-        if (expIcon) expIcon.style.display = 'block';
-        if (compIcon) compIcon.style.display = 'none';
-      }
+      var medias = targetId ? [document.getElementById(targetId)] : Array.from(document.querySelectorAll('.comp-card-media-3d.is-fullscreen'));
+      medias.forEach(function (media) {
+        if (media) {
+          media.classList.remove('is-fullscreen');
+          var expIcon = media.querySelector('.icon-expand');
+          var compIcon = media.querySelector('.icon-compress');
+          if (expIcon) expIcon.style.display = 'block';
+          if (compIcon) compIcon.style.display = 'none';
+        }
+      });
+      document.body.style.overflow = '';
 
       try {
         if (document.fullscreenElement) {
@@ -3670,15 +3780,13 @@ float getDistance(int trigPin, int echoPin) {
 
     // Sync state when native fullscreen changes (e.g. Esc pressed)
     document.addEventListener('fullscreenchange', function () {
-      var media = document.getElementById('media-c6');
-      if (!document.fullscreenElement && media && media.classList.contains('is-fullscreen')) {
+      if (!document.fullscreenElement) {
         exit3DFullscreen();
       }
     });
 
     document.addEventListener('webkitfullscreenchange', function () {
-      var media = document.getElementById('media-c6');
-      if (!document.webkitFullscreenElement && media && media.classList.contains('is-fullscreen')) {
+      if (!document.webkitFullscreenElement) {
         exit3DFullscreen();
       }
     });
@@ -3686,37 +3794,40 @@ float getDistance(int trigPin, int echoPin) {
     // Handle Escape key
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' || e.key === 'Esc') {
-        var media = document.getElementById('media-c6');
-        if (media && media.classList.contains('is-fullscreen')) {
-          exit3DFullscreen();
-        }
+        exit3DFullscreen();
       }
     });
 
     // Auto-dismiss interaction hint after first user interaction or timeout
     (function init3DViewer() {
-      var mv = document.getElementById('chassisModelViewer');
-      var hint = document.getElementById('chassis3dHint');
-      if (mv) {
-        // Fallback if gltf path needs glb
-        mv.addEventListener('error', function () {
-          if (mv.src && !mv.src.endsWith('.glb')) {
-            mv.src = '3D_Models/AutonomousRacerBot.glb';
-          }
-        });
+      var viewers = [
+        { mvId: 'chassisModelViewer', hintId: 'chassis3dHint', fallback: '3D_Models/AutonomousRacerBot.glb' },
+        { mvId: 'clampModelViewer', hintId: 'clamp3dHint', fallback: '3D_Models/motor_clamp.glb' }
+      ];
 
-        if (hint) {
-          var hideHint = function () {
-            hint.style.opacity = '0';
-            setTimeout(function () {
-              if (hint) hint.style.display = 'none';
-            }, 400);
-          };
-          mv.addEventListener('camera-change', hideHint, { once: true });
-          mv.addEventListener('pointerdown', hideHint, { once: true });
-          setTimeout(hideHint, 4500);
+      viewers.forEach(function (item) {
+        var mv = document.getElementById(item.mvId);
+        var hint = document.getElementById(item.hintId);
+        if (mv) {
+          mv.addEventListener('error', function () {
+            if (mv.src && !mv.src.endsWith('.glb')) {
+              mv.src = item.fallback;
+            }
+          });
+
+          if (hint) {
+            var hideHint = function () {
+              hint.style.opacity = '0';
+              setTimeout(function () {
+                if (hint) hint.style.display = 'none';
+              }, 400);
+            };
+            mv.addEventListener('camera-change', hideHint, { once: true });
+            mv.addEventListener('pointerdown', hideHint, { once: true });
+            setTimeout(hideHint, 4500);
+          }
         }
-      }
+      });
     })();
 </script>
 
