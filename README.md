@@ -72,27 +72,26 @@ This repository includes a **complete, standalone interactive documentation webp
 
 ---
 
-## 🛠 Hardware Components
+## 🛒 Hardware Components
 
 | Component | Specification | Qty | Function in Robot | Purchase / Source Link |
 | :--- | :--- | :---: | :--- | :--- |
 | **Arduino UNO** | ATmega328P, 5V, 16 MHz | 1 | Central controller executing sensor logic and motor commands | [Amazon India](https://www.amazon.in/Arduino-Uno-Rev3-SMD-A000073/dp/B00CL79U6S) |
+| **Ultrasonic Sensors** | HC-SR04 (40 kHz acoustic radar) | 3 | 3-way distance measurement (Left, Center, Right) | [Amazon India](https://www.amazon.in/REES52-Ultrasonic-Distance-Sensor-Arduino/dp/B01FDI6AHS) |
+| **Battery Pack** | Orange 7.4V 850mAh 2S LiPo Battery | 1 | High-discharge power source for motors and Arduino | [Robu.in](https://robu.in/product/orange-850mah-2s-30c-60c-lithium-polymer-battery-pack-lipo/) |
 | **L298N Motor Driver Module** | Dual H-Bridge driver board (2A/ch) | 1 | High-current driver switching power to 4 DC motors | [Robu.in](https://robu.in/product/l298n-2a-based-motor-driver-module-good-quality/?gad_source=1&gad_campaignid=20387462343&gbraid=0AAAAADvLFWdPHBJ4WOo7tem7nL7nw4T4g&gclid=CjwKCAiAhqHXBhAXEiwATbksU4IZXTA4FEj_z3hYBTVaAXA_3XAA7-emdi2HB8lAHeeJk7ujOfHiMhoCWfEQAvD_BwE) |
 | **M20 / N20 DC Gear Motors** | Micro metal gearbox, 300 RPM | 4 | All-metal geared motors providing 4WD drive torque | [Robu.in](https://robu.in/product/n20-6v-300-rpm-micro-metal-gear-motor/) |
-| **Wheel 3D model &times;4** | Custom 3D-printed drive wheels with M20/N20 D-shaft hub (`Original Robojunkies.step`) | 4 | 3D-printed drive wheels fitted with octopus bat grip tire sleeves | [Download STEP](./Original%20Robojunkies.step) &bull; [Download STL](./Original_Robojunkies_wheel.stl) |
-| **Ultrasonic Sensors** | HC-SR04 (40 kHz sound) | 3 | 3-way distance measurement (Left, Center, Right) | [Amazon India](https://www.amazon.in/REES52-Ultrasonic-Distance-Sensor-Arduino/dp/B01FDI6AHS) |
-| **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors | [Download AutonomousRacerBot.stl](./AutonomousRacerBot.stl) |
-| **Battery Pack** | Orange 7.4V 850mAh 2S LiPo Battery | 1 | High-discharge power source for motors and Arduino | [Robu.in](https://robu.in/product/orange-850mah-2s-30c-60c-lithium-polymer-battery-pack-lipo/) |
 | **Jumper Wires** | DuPont Male-to-Female & M-M | ~20 | Signal and power interconnects between boards and sensors | [Amazon India](https://www.amazon.in/Fly-Robo-Breadboard-Wires-10cm-Male-Female-Female-Female/dp/B0CYLN6Z17) |
 | **Cricket Bat Grip** | Octopus textured rubber sleeve for wheels | 1 | High-traction tire sleeves cut & stretched over 4 wheels | [Amazon India](https://www.amazon.in/DSC-Octopus-Cricket-Grip-Color/dp/B0BG8SYZB7) |
+| **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors | [Download AutonomousRacerBot.stl](./AutonomousRacerBot.stl) |
+| **Wheel 3D model &times;4** | Custom 3D-printed drive wheels with M20/N20 D-shaft hub (`Original Robojunkies.step`) | 4 | 3D-printed drive wheels fitted with octopus bat grip tire sleeves | [Download STEP](./Original%20Robojunkies.step) &bull; [Download STL](./Original_Robojunkies_wheel.stl) |
 | **3D-Printed Motor Clamps** | Custom brackets for N20/M20 motors (`motor clamp.stl`) | 4 | Clamp 4&times; micro gear motors firmly onto chassis | [Download STL](./motor%20clamp.stl) &bull; [3D Bundle](./3D_Models/3D_Models.zip) |
 | **M2 &times; 10mm Socket Head Cap Bolts** | Stainless steel 304 Allen cap bolts | 8–12 | Secure 3D-printed motor clamps (`motor clamp.stl`) to chassis | [Robokits](https://robokits.co.in/robot-parts/nut-bolts-standoffs/allen-cap-socket-head-bolts/m2-x-10mm-socket-head-cap-stainless-steel-304-bolt-moq-12-pcs?srsltid=AYCX9vIl3XfMImSpwQeJgNYU7eYxyWvO1huRkra0ZrYR0H0_df9LIzPK) |
 | **Stainless steel hex nuts &times;3** | EasyMech M2 stainless steel hex nuts | As req. | Fasten & lock M2 bolts underneath the chassis | [Robu.in](https://robu.in/product/easymech-m2-ss-hex-nut-50-pcs/) |
 | **M3 &times; 10mm Hex CSK Screws &times;3** | Grade 10.9 High Tensile Black Oxide (Dia 3mm, Length 10mm) | 3 | Flush-head structural chassis & board mounting | [OnlyScrews.in](https://onlyscrews.in/products/m3-x-10mm-hex-allen-csk-high-tensile10-9-black-oxide-screw-dia-3mm-length-10mm?currency=INR&country=IN&variant=51455871484217&stkn=6e84ebfba1b8&utm_source=google&utm_medium=cpc&utm_campaign=Inderans_Campaign&utm_content=Other_than_fasteners_wala_copy&gad_source=1&gad_campaignid=22229905346&gclid=EAIaIQobChMIh7HMhZfrlwMVhYhmAh0E0QY9EAQYBSABEgKS3_D_BwE) |
-
 ---
 
-## 🖼 Component Gallery
+## 📸 Component Gallery
 
 <table align="center">
   <tr>
@@ -100,6 +99,18 @@ This repository includes a **complete, standalone interactive documentation webp
       <img src="arduino_Uno.png" width="300" /><br/>
       <strong>Arduino UNO</strong><br/>
       <em>Main Microcontroller &middot; Brain</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="ultrasonic_sensor.png" width="300" /><br/>
+      <strong>HC-SR04 Ultrasonic Sensors &times;3</strong><br/>
+      <em>Acoustic 3-Way Distance Sensors</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="battery.jpg" width="300" /><br/>
+      <strong>Orange 7.4V 850mAh 2S LiPo Battery</strong><br/>
+      <em>High-Discharge 2S Lithium Polymer Battery Pack</em>
     </td>
     <td align="center" width="50%">
       <img src="L298_Motor_Driver.jpg" width="300" /><br/>
@@ -114,21 +125,9 @@ This repository includes a **complete, standalone interactive documentation webp
       <em>300 RPM Micro Metal Gear Motors (4WD)</em>
     </td>
     <td align="center" width="50%">
-      <img src="wheel_3d_render.png" width="300" /><br/>
-      <strong>Wheel 3D model &times;4</strong><br/>
-      <em>Custom 3D-Printed Drive Wheels (Original Robojunkies.step)</em>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%">
-      <img src="ultrasonic_sensor.png" width="300" /><br/>
-      <strong>HC-SR04 Ultrasonic Sensors &times;3</strong><br/>
-      <em>Acoustic 3-Way Distance Sensors</em>
-    </td>
-    <td align="center" width="50%">
-      <img src="battery.jpg" width="300" /><br/>
-      <strong>Orange 7.4V 850mAh 2S LiPo Battery</strong><br/>
-      <em>High-Discharge 2S Lithium Polymer Battery Pack</em>
+      <img src="jumper_wires.png" width="300" /><br/>
+      <strong>Multi-Color Jumper Wires</strong><br/>
+      <em>DuPont Signal & Power Interconnects</em>
     </td>
   </tr>
   <tr>
@@ -138,16 +137,16 @@ This repository includes a **complete, standalone interactive documentation webp
       <em>Octopus Textured Wheel Tire Sleeves</em>
     </td>
     <td align="center" width="50%">
-      <img src="jumper_wires.png" width="300" /><br/>
-      <strong>Multi-Color Jumper Wires</strong><br/>
-      <em>DuPont Signal & Power Interconnects</em>
+      <img src="Automonus_racer_Bot_v2.jpg" width="300" /><br/>
+      <strong>4WD Robot Chassis Platform</strong><br/>
+      <em>3D-Printed Baseplate (AutonomousRacerBot.stl)</em>
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <img src="Automonus_racer_Bot_v2.jpg" width="300" /><br/>
-      <strong>4WD Robot Chassis Platform</strong><br/>
-      <em>3D-Printed Baseplate (AutonomousRacerBot.stl)</em>
+      <img src="wheel_3d_render.png" width="300" /><br/>
+      <strong>Wheel 3D model &times;4</strong><br/>
+      <em>Custom 3D-Printed Drive Wheels (Original Robojunkies.step)</em>
     </td>
     <td align="center" width="50%">
       <img src="motor_clamp.png" width="300" /><br/>
