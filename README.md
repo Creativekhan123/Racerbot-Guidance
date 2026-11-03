@@ -86,6 +86,8 @@ This repository includes a **complete, standalone interactive documentation webp
 | **Jumper Wires** | DuPont Male-to-Female & M-M | ~20 | Signal and power interconnects between boards and sensors | [Amazon India](https://www.amazon.in/Fly-Robo-Breadboard-Wires-10cm-Male-Female-Female-Female/dp/B0CYLN6Z17) |
 | **Cricket Bat Grip** | Octopus textured rubber sleeve for wheels | 1 | High-traction tire sleeves cut & stretched over 4 wheels | [Amazon India](https://www.amazon.in/DSC-Octopus-Cricket-Grip-Color/dp/B0BG8SYZB7) |
 | **3D-Printed Motor Clamps** | Custom brackets for N20/M20 motors (`motor clamp.stl`) | 4 | Clamp 4&times; micro gear motors firmly onto chassis | [Download STL](./motor%20clamp.stl) &bull; [3D Bundle](./3D_Models/3D_Models.zip) |
+| **M2 &times; 10mm Socket Head Cap Bolts** | Stainless steel 304 Allen cap bolts | 8–12 | Secure 3D-printed motor clamps (`motor clamp.stl`) to chassis | [Robokits](https://robokits.co.in/robot-parts/nut-bolts-standoffs/allen-cap-socket-head-bolts/m2-x-10mm-socket-head-cap-stainless-steel-304-bolt-moq-12-pcs?srsltid=AYCX9vIl3XfMImSpwQeJgNYU7eYxyWvO1huRkra0ZrYR0H0_df9LIzPK) |
+| **Stainless steel hex nuts &times;3** | EasyMech M2 stainless steel hex nuts | As req. | Fasten & lock M2 bolts underneath the chassis | [Robu.in](https://robu.in/product/easymech-m2-ss-hex-nut-50-pcs/) |
 
 ---
 
@@ -150,6 +152,18 @@ This repository includes a **complete, standalone interactive documentation webp
       <img src="motor_clamp.png" width="300" /><br/>
       <strong>3D-Printed Motor Mounting Clamps &times;4</strong><br/>
       <em>Chassis Motor Brackets (motor clamp.stl)</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="m2_socket_head_bolts.jpg" width="300" /><br/>
+      <strong>M2 &times; 10mm Socket Head Cap Bolts</strong><br/>
+      <em>Stainless Steel 304 Motor Clamp Fasteners</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="m2_hex_nuts.jpg" width="300" /><br/>
+      <strong>Stainless steel hex nuts &times;3</strong><br/>
+      <em>EasyMech M2 Stainless Steel Hex Nuts</em>
     </td>
   </tr>
 </table>
@@ -395,7 +409,7 @@ float getDistance(int trigPin, int echoPin) {
 ## 🔨 Assembly & Setup Steps
 
 1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four M20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
-2. **Mount 4x M20 Motors & Wheels (with 3D Clamps & Bat Grip)**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right) using the 3D-printed motor clamps (`motor clamp.stl`) tightened with M2/M2.5 screws. Cut four rings from the rubber cricket bat grip and stretch them securely over the four 3D-printed wheels (Original Robojunkies.step) for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.
+2. **Mount 4x M20 Motors & Wheels (with 3D Clamps & Bat Grip)**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right) using the 3D-printed motor clamps (`motor clamp.stl`) tightened with M2x10mm socket head cap bolts and locked with M2 stainless steel hex nuts. Cut four rings from the rubber cricket bat grip and stretch them securely over the four 3D-printed wheels (Original Robojunkies.step) for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.
 3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using mounting screws and standoffs.
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
@@ -415,6 +429,7 @@ float getDistance(int trigPin, int echoPin) {
 - [ ] Both left M20 motors rotate forward when commanded
 - [ ] Both right M20 motors rotate forward when commanded
 - [ ] All 4 M20 gear motors securely fastened to chassis with 3D-printed clamps (`motor clamp.stl`)
+- [ ] All M2x10mm socket head cap bolts and stainless steel hex nuts tightened securely
 - [ ] All 4 small wheels fitted with rubber bat grip tire sleeves, spinning freely without chassis contact
 - [ ] Left ultrasonic sensor displays accurate distance on Serial Monitor (D2/D3)
 - [ ] Center ultrasonic sensor displays accurate distance on Serial Monitor (D4/D5)
