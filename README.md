@@ -88,6 +88,7 @@ This repository includes a **complete, standalone interactive documentation webp
 | **3D-Printed Motor Clamps** | Custom brackets for N20/M20 motors (`motor clamp.stl`) | 4 | Clamp 4&times; micro gear motors firmly onto chassis | [Download STL](./motor%20clamp.stl) &bull; [3D Bundle](./3D_Models/3D_Models.zip) |
 | **M2 &times; 10mm Socket Head Cap Bolts** | Stainless steel 304 Allen cap bolts | 8–12 | Secure 3D-printed motor clamps (`motor clamp.stl`) to chassis | [Robokits](https://robokits.co.in/robot-parts/nut-bolts-standoffs/allen-cap-socket-head-bolts/m2-x-10mm-socket-head-cap-stainless-steel-304-bolt-moq-12-pcs?srsltid=AYCX9vIl3XfMImSpwQeJgNYU7eYxyWvO1huRkra0ZrYR0H0_df9LIzPK) |
 | **Stainless steel hex nuts &times;3** | EasyMech M2 stainless steel hex nuts | As req. | Fasten & lock M2 bolts underneath the chassis | [Robu.in](https://robu.in/product/easymech-m2-ss-hex-nut-50-pcs/) |
+| **M3 &times; 10mm Hex CSK Screws &times;3** | Grade 10.9 High Tensile Black Oxide (Dia 3mm, Length 10mm) | 3 | Flush-head structural chassis & board mounting | [OnlyScrews.in](https://onlyscrews.in/products/m3-x-10mm-hex-allen-csk-high-tensile10-9-black-oxide-screw-dia-3mm-length-10mm?currency=INR&country=IN&variant=51455871484217&stkn=6e84ebfba1b8&utm_source=google&utm_medium=cpc&utm_campaign=Inderans_Campaign&utm_content=Other_than_fasteners_wala_copy&gad_source=1&gad_campaignid=22229905346&gclid=EAIaIQobChMIh7HMhZfrlwMVhYhmAh0E0QY9EAQYBSABEgKS3_D_BwE) |
 
 ---
 
@@ -164,6 +165,20 @@ This repository includes a **complete, standalone interactive documentation webp
       <img src="m2_hex_nuts.jpg" width="300" /><br/>
       <strong>Stainless steel hex nuts &times;3</strong><br/>
       <em>EasyMech M2 Stainless Steel Hex Nuts</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="m3_csk_screws.jpg" width="300" /><br/>
+      <strong>M3 &times; 10mm Hex CSK Screws &times;3</strong><br/>
+      <em>Grade 10.9 High Tensile Black Oxide Screws</em>
+    </td>
+    <td align="center" width="50%">
+      <a href="Autonomous_Racer_Robot.html#components">
+        <img src="Autonomous Racer Robot Poster.png" width="300" style="object-fit:cover;height:180px;border-radius:8px;" /><br/>
+        <strong>Full Robot Assembly &amp; Documentation</strong><br/>
+        <em>Interactive Webpage &amp; 3D Model Viewers</em>
+      </a>
     </td>
   </tr>
 </table>
@@ -410,7 +425,7 @@ float getDistance(int trigPin, int echoPin) {
 
 1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four M20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
 2. **Mount 4x M20 Motors & Wheels (with 3D Clamps & Bat Grip)**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right) using the 3D-printed motor clamps (`motor clamp.stl`) tightened with M2x10mm socket head cap bolts and locked with M2 stainless steel hex nuts. Cut four rings from the rubber cricket bat grip and stretch them securely over the four 3D-printed wheels (Original Robojunkies.step) for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.
-3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using mounting screws and standoffs.
+3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using the three M3&times;10mm countersunk hex screws (`m3_csk_screws.jpg`) and standoffs, ensuring flush seating with the chassis base.
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
 6. **Connect Motor Terminals**: Wire the two left M20 motors in parallel to OUT1 & OUT2, and the two right M20 motors in parallel to OUT3 & OUT4. Connect IN1&rarr;D9, IN2&rarr;D8, IN3&rarr;D11, IN4&rarr;D12.
@@ -430,6 +445,7 @@ float getDistance(int trigPin, int echoPin) {
 - [ ] Both right M20 motors rotate forward when commanded
 - [ ] All 4 M20 gear motors securely fastened to chassis with 3D-printed clamps (`motor clamp.stl`)
 - [ ] All M2x10mm socket head cap bolts and stainless steel hex nuts tightened securely
+- [ ] All M3x10mm CSK countersunk hex screws seated flush and tightened securely
 - [ ] All 4 small wheels fitted with rubber bat grip tire sleeves, spinning freely without chassis contact
 - [ ] Left ultrasonic sensor displays accurate distance on Serial Monitor (D2/D3)
 - [ ] Center ultrasonic sensor displays accurate distance on Serial Monitor (D4/D5)

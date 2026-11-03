@@ -2199,9 +2199,16 @@
               <td>As required</td>
               <td class="price">&#8377;30 &ndash; &#8377;60 (pack)</td>
             </tr>
+            <tr>
+              <td>13</td>
+              <td>M3 &times; 10mm Hex CSK Screws &times;3</td>
+              <td>Grade 10.9 high-tensile black oxide Allen countersunk screws (Dia. 3mm, Length 10mm)</td>
+              <td>3</td>
+              <td class="price">&#8377;15 &ndash; &#8377;30</td>
+            </tr>
             <tr class="total-row">
               <td colspan="4"><strong>Approximate Project Total</strong></td>
-              <td class="price"><strong>&#8377;2,380 &ndash; &#8377;4,220</strong></td>
+              <td class="price"><strong>&#8377;2,395 &ndash; &#8377;4,250</strong></td>
             </tr>
           </tbody>
         </table>
@@ -2889,6 +2896,49 @@
           </div>
         </div>
 
+        <!-- CARD 13: M3 x 10mm Hex CSK Screws x3 -->
+        <div class="comp-card" id="card-c13">
+          <div class="comp-card-media" onclick="toggleComp('c13')">
+            <img class="comp-img-large"
+              src="m3_csk_screws.jpg"
+              alt="M3 x 10mm Hex (Allen) CSK High Tensile 10.9 Black Oxide Screw x3" loading="lazy">
+            <span class="comp-badge">Fasteners &middot; M3 &times; 10mm CSK</span>
+          </div>
+          <div class="comp-card-body">
+            <div class="comp-header-row" onclick="toggleComp('c13')">
+              <div>
+                <h3 class="comp-name">M3 &times; 10mm Hex CSK Screws &times;3</h3>
+                <div class="comp-subtitle">High Tensile Grade 10.9 Black Oxide Countersunk Screws</div>
+              </div>
+              <button class="toggle-btn" id="btn-c13" onclick="event.stopPropagation();toggleComp('c13')"
+                aria-label="Toggle details">Details &#9662;</button>
+            </div>
+            <p class="comp-desc">Three Grade 10.9 high-tensile black oxide countersunk (CSK) Allen screws (Dia. 3mm, Length 10mm) designed for flush, high-strength structural chassis and electronics fastening.</p>
+            <div class="comp-tags">
+              <span class="spec-tag">M3 Metric (3mm Dia.)</span>
+              <span class="spec-tag">10mm Length</span>
+              <span class="spec-tag">CSK Countersunk Flat Head</span>
+              <span class="spec-tag">Grade 10.9 High Tensile</span>
+              <span class="spec-tag">Black Oxide Coating</span>
+              <span class="spec-tag">Set of 3</span>
+            </div>
+            <div class="comp-details" id="c13">
+              <div class="comp-detail-box">
+                <h4>What is it?</h4>
+                <p>Heavy-duty Grade 10.9 alloy steel countersunk machine screws featuring a conical 90-degree flat head with an internal Allen hex socket drive and black oxide anti-corrosion finish.</p>
+              </div>
+              <div class="comp-detail-box">
+                <h4>Why do we use it?</h4>
+                <p>The countersunk head sits completely flush with the 3D-printed chassis baseplate, preventing protruding screw heads from catching on obstacles or floor carpet while securely mounting structural chassis elements and electronics standoffs.</p>
+              </div>
+            </div>
+
+            <a class="buy-btn" href="https://onlyscrews.in/products/m3-x-10mm-hex-allen-csk-high-tensile10-9-black-oxide-screw-dia-3mm-length-10mm?currency=INR&amp;country=IN&amp;variant=51455871484217&amp;stkn=6e84ebfba1b8&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=Inderans_Campaign&amp;utm_content=Other_than_fasteners_wala_copy&amp;gad_source=1&amp;gad_campaignid=22229905346&amp;gclid=EAIaIQobChMIh7HMhZfrlwMVhYhmAh0E0QY9EAQYBSABEgKS3_D_BwE" target="_blank" rel="noopener noreferrer">
+              <span class="buy-btn-icon">&#128722;</span> Buy on OnlyScrews.in
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -3399,7 +3449,7 @@ float getDistance(int trigPin, int echoPin) {
           <div class="step-num"></div>
           <div class="step-content">
             <h3>Mount Arduino UNO and L298N Motor Driver</h3>
-            <p>Fasten the Arduino UNO and the L298N motor driver module securely onto the chassis platform using mounting screws and standoffs.</p>
+            <p>Fasten the Arduino UNO and the L298N motor driver module securely onto the chassis platform using the three M3&times;10mm countersunk hex screws (<code>m3_csk_screws.jpg</code>) and standoffs, ensuring flush seating with the chassis baseplate.</p>
           </div>
         </li>
         <li>
@@ -3484,6 +3534,10 @@ float getDistance(int trigPin, int echoPin) {
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
               onclick="toggleCheck(this.previousElementSibling)">All M2&times;10mm socket head cap bolts and stainless steel hex nuts tightened securely</span>
+          </li>
+          <li>
+            <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
+              onclick="toggleCheck(this.previousElementSibling)">All M3&times;10mm CSK countersunk hex screws seated flush and tightened securely</span>
           </li>
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
