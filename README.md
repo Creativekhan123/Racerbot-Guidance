@@ -79,7 +79,7 @@ This repository includes a **complete, standalone interactive documentation webp
 | **Arduino UNO** | ATmega328P, 5V, 16 MHz | 1 | Central controller executing sensor logic and motor commands | [Amazon India](https://www.amazon.in/Arduino-Uno-Rev3-SMD-A000073/dp/B00CL79U6S) |
 | **L298N Motor Driver Module** | Dual H-Bridge driver board (2A/ch) | 1 | High-current driver switching power to 4 DC motors | [Robu.in](https://robu.in/product/l298n-2a-based-motor-driver-module-good-quality/?gad_source=1&gad_campaignid=20387462343&gbraid=0AAAAADvLFWdPHBJ4WOo7tem7nL7nw4T4g&gclid=CjwKCAiAhqHXBhAXEiwATbksU4IZXTA4FEj_z3hYBTVaAXA_3XAA7-emdi2HB8lAHeeJk7ujOfHiMhoCWfEQAvD_BwE) |
 | **M20 / N20 DC Gear Motors** | Micro metal gearbox, 300 RPM | 4 | All-metal geared motors providing 4WD drive torque | [Robu.in](https://robu.in/product/n20-6v-300-rpm-micro-metal-gear-motor/) |
-| **Rubber Small Wheels** | 34mm Mini Car M20 Motor Rubber Small Wheels | 4 | High-traction 34mm drive wheels fitted to M20 motor shafts | [Robu.in](https://robu.in/product/34mm-mini-car-n20-motor-wheel-rubber-small-wheel/?gad_source=1&gad_campaignid=17416544847&gbraid=0AAAAADvLFWcHvOTniwRAQEpJrKrLpmSVW&gclid=CjwKCAiAhqHXBhAXEiwATbksU61hYYp_wvljWj5A_-Gvl6YYXVfN_y5UQ4nzknSyss5boBUNTxuBMBoCiMMQAvD_BwE) &bull; [Download Wheel STEP](./Original%20Robojunkies.step) |
+| **Wheel 3D model &times;4** | Custom 3D-printed drive wheels with M20/N20 D-shaft hub (`Original Robojunkies.step`) | 4 | 3D-printed drive wheels fitted with octopus bat grip tire sleeves | [Download STEP](./Original%20Robojunkies.step) &bull; [Download STL](./Original_Robojunkies_wheel.stl) |
 | **Ultrasonic Sensors** | HC-SR04 (40 kHz sound) | 3 | 3-way distance measurement (Left, Center, Right) | [Amazon India](https://www.amazon.in/REES52-Ultrasonic-Distance-Sensor-Arduino/dp/B01FDI6AHS) |
 | **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors | [Download AutonomousRacerBot.stl](./AutonomousRacerBot.stl) |
 | **Battery Pack** | Orange 7.4V 850mAh 2S LiPo Battery | 1 | High-discharge power source for motors and Arduino | [Robu.in](https://robu.in/product/orange-850mah-2s-30c-60c-lithium-polymer-battery-pack-lipo/) |
@@ -111,9 +111,9 @@ This repository includes a **complete, standalone interactive documentation webp
       <em>300 RPM Micro Metal Gear Motors (4WD)</em>
     </td>
     <td align="center" width="50%">
-      <img src="wheels.jpg" width="300" /><br/>
-      <strong>34mm Mini Car M20 Motor Rubber Small Wheels &times;4</strong><br/>
-      <em>34mm High-Traction Micro Drive Wheels</em>
+      <img src="wheel_3d_render.png" width="300" /><br/>
+      <strong>Wheel 3D model &times;4</strong><br/>
+      <em>Custom 3D-Printed Drive Wheels (Original Robojunkies.step)</em>
     </td>
   </tr>
   <tr>
@@ -395,7 +395,7 @@ float getDistance(int trigPin, int echoPin) {
 ## 🔨 Assembly & Setup Steps
 
 1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four M20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
-2. **Mount 4x M20 Motors & Wheels (with 3D Clamps & Bat Grip)**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right) using the 3D-printed motor clamps (`motor clamp.stl`) tightened with M2/M2.5 screws. Cut four rings from the rubber cricket bat grip and stretch them securely over the 34mm small wheels for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.
+2. **Mount 4x M20 Motors & Wheels (with 3D Clamps & Bat Grip)**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right) using the 3D-printed motor clamps (`motor clamp.stl`) tightened with M2/M2.5 screws. Cut four rings from the rubber cricket bat grip and stretch them securely over the four 3D-printed wheels (Original Robojunkies.step) for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.
 3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using mounting screws and standoffs.
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.

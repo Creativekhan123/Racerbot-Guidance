@@ -2027,6 +2027,7 @@
   <!-- Preload 3D Model Asset -->
   <link rel="preload" href="3D_Models/AutonomousRacerBot.glb" as="fetch" type="model/gltf-binary" crossorigin>
   <link rel="preload" href="3D_Models/motor_clamp.glb" as="fetch" type="model/gltf-binary" crossorigin>
+  <link rel="preload" href="3D_Models/Original_Robojunkies_wheel.glb" as="fetch" type="model/gltf-binary" crossorigin>
   <!-- Google model-viewer for Interactive 3D Model Inspection -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
   <script type="module">
@@ -2137,10 +2138,10 @@
             </tr>
             <tr>
               <td>4</td>
-              <td>34mm Mini Car M20 Motor Rubber Small Wheels</td>
-              <td>34mm diameter, rubber grip, micro D-shaft fit (CAD: Original Robojunkies.step)</td>
+              <td>Wheel 3D model &times;4</td>
+              <td>Custom 3D-printable drive wheels with N20/M20 D-shaft fit (CAD: <code>Original Robojunkies.step</code>)</td>
               <td>4</td>
-              <td class="price">&#8377;100 &ndash; &#8377;200 (set of 4)</td>
+              <td class="price">&#8377;40 &ndash; &#8377;100 (4&times; 3D printed)</td>
             </tr>
             <tr>
               <td>5</td>
@@ -2186,7 +2187,7 @@
             </tr>
             <tr class="total-row">
               <td colspan="4"><strong>Approximate Project Total</strong></td>
-              <td class="price"><strong>&#8377;2,380 &ndash; &#8377;4,200</strong></td>
+              <td class="price"><strong>&#8377;2,320 &ndash; &#8377;4,100</strong></td>
             </tr>
           </tbody>
         </table>
@@ -2332,52 +2333,98 @@
           </div>
         </div>
 
-        <!-- CARD 4: 34mm Mini Car M20 Motor Rubber Small Wheels x4 -->
+        <!-- CARD 4: Wheel 3D model x4 (Original Robojunkies.step) -->
         <div class="comp-card" id="card-c4">
-          <div class="comp-card-media" onclick="toggleComp('c4')">
-            <img class="comp-img-large"
-              src="wheels.jpg"
-              alt="34mm Mini Car M20 Motor Rubber Small Wheels" loading="lazy">
-            <span class="comp-badge">Traction &middot; 4-Wheel Drive</span>
+          <div class="comp-card-media comp-card-media-3d" id="media-c4">
+            <model-viewer
+              id="wheelModelViewer"
+              src="3D_Models/Original_Robojunkies_wheel.glb"
+              alt="Interactive 3D Model of 3D-Printed Drive Wheel (Original Robojunkies.step)"
+              camera-controls
+              touch-action="pan-y"
+              auto-rotate
+              auto-rotate-delay="1200"
+              rotation-per-second="25deg"
+              shadow-intensity="1.2"
+              shadow-softness="0.5"
+              exposure="1.15"
+              interaction-prompt="auto"
+              loading="eager"
+              reveal="auto"
+              ar-status="not-presenting">
+              <div slot="poster" class="model-loading-placeholder">
+                <div class="model-spinner"></div>
+                <span>Loading 3D Model (Original Robojunkies.step)...</span>
+              </div>
+            </model-viewer>
+
+            <span class="comp-badge">3D Print &middot; Original Robojunkies.step</span>
+
+            <!-- Fullscreen / Expand Button in Top-Right Corner -->
+            <button type="button" class="viewer-fullscreen-btn" id="wheelFullscreenBtn" onclick="toggle3DFullscreen(event, 'media-c4')" aria-label="Toggle Fullscreen" title="Inspect 3D wheel model in fullscreen">
+              <svg class="icon-expand" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+              </svg>
+              <svg class="icon-compress" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M10 14L3 21"/>
+              </svg>
+            </button>
+
+            <!-- Obvious Exit Fullscreen Button visible in Fullscreen mode -->
+            <button type="button" class="viewer-exit-btn" id="wheelExitBtn" onclick="exit3DFullscreen(event, 'media-c4')" aria-label="Exit fullscreen" title="Exit fullscreen mode">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              <span>Exit Fullscreen</span>
+            </button>
+
+            <!-- Interaction hint for users -->
+            <div class="viewer-3d-hint" id="wheel3dHint">
+              <span>&#x27F2; Rotate &bull; Pinch / Scroll to zoom</span>
+            </div>
           </div>
           <div class="comp-card-body">
             <div class="comp-header-row" onclick="toggleComp('c4')">
               <div>
-                <h3 class="comp-name">34mm Mini Car M20 Motor Rubber Small Wheels &times;4</h3>
-                <div class="comp-subtitle">34mm High-Grip Drive Wheels (CAD: Original Robojunkies.step)</div>
+                <h3 class="comp-name">Wheel 3D model &times;4</h3>
+                <div class="comp-subtitle">3D-Printed Custom Drive Wheels (Original Robojunkies.step)</div>
               </div>
               <button class="toggle-btn" id="btn-c4" onclick="event.stopPropagation();toggleComp('c4')"
                 aria-label="Toggle details">Details &#9662;</button>
             </div>
-            <p class="comp-desc">Four compact 34mm rubber wheels engineered for micro gear motors, providing optimal traction, smooth rolling, and responsive cornering. Includes 3D CAD design file.</p>
+            <p class="comp-desc">Four custom 3D-printed drive wheels engineered with a precision D-shaft hub fitting N20/M20 gear motors. 3D print directly from CAD; wrap with rubber bat grip for high surface traction.</p>
             <div class="comp-tags">
-              <span class="spec-tag">34mm Diameter</span>
               <span class="spec-tag">Original Robojunkies.step</span>
-              <span class="spec-tag">M20/N20 D-Shaft Fit</span>
-              <span class="spec-tag">Rubber Grip Tread</span>
-              <span class="spec-tag">3D Printable / CNC</span>
+              <span class="spec-tag">3D Printable PLA / PETG</span>
+              <span class="spec-tag">M20/N20 D-Shaft Hub</span>
+              <span class="spec-tag">29mm Rim / 34mm with Grip</span>
+              <span class="spec-tag">4WD Set of 4</span>
             </div>
             <div class="comp-details" id="c4">
               <div class="comp-detail-box">
                 <h4>What is it?</h4>
-                <p>34mm diameter mini car wheels featuring a lightweight, durable white 3-spoke rim, non-slip black rubber treaded tire, and precision molded D-shaped center hub fitting micro gear motor shafts.</p>
+                <p>Custom 3D-printable drive wheels featuring a lightweight 3-spoke rim, outer tire bead retention flange, and a precision-molded D-shaped center hub fitting standard N20/M20 micro gear motor shafts.</p>
               </div>
               <div class="comp-detail-box">
                 <h4>Why do we use it?</h4>
-                <p>The compact 34mm diameter and high-friction rubber tread match the 300 RPM speed and torque of M20 gear motors perfectly, providing rapid acceleration and crisp, skid-free cornering on smooth indoor floors.</p>
+                <p>Enables 100% in-house manufacturing on any desktop 3D printer without buying commercial wheels. Paired with high-friction rubber bat grip tire sleeves, it provides rapid acceleration and skid-free differential cornering.</p>
               </div>
               <div class="comp-detail-box">
-                <h4>3D CAD Wheel Design (STEP Format)</h4>
-                <p>The original CAD model <code>Original Robojunkies.step</code> is included directly in the project. Teachers, students, and makers can import it into Autodesk Fusion 360, SolidWorks, or FreeCAD to 3D print custom wheel hubs or customize wheel dimensions.</p>
+                <h4>3D Printing Recommendations</h4>
+                <p>Print 4 pieces in PLA, PETG, or ABS with <strong>0.15mm layer height</strong> and <strong>60&ndash;100% infill</strong> to ensure a durable, snug D-shaft hub connection that won't strip under motor torque.</p>
               </div>
             </div>
 
             <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-              <a class="buy-btn" style="flex:1;min-width:140px;margin-top:0" href="https://robu.in/product/34mm-mini-car-n20-motor-wheel-rubber-small-wheel/?gad_source=1&amp;gad_campaignid=17416544847&amp;gbraid=0AAAAADvLFWcHvOTniwRAQEpJrKrLpmSVW&amp;gclid=CjwKCAiAhqHXBhAXEiwATbksU61hYYp_wvljWj5A_-Gvl6YYXVfN_y5UQ4nzknSyss5boBUNTxuBMBoCiMMQAvD_BwE" target="_blank" rel="noopener noreferrer">
-                <span class="buy-btn-icon">&#128722;</span> Buy on Robu.in
+              <a class="buy-btn comp-download-btn" style="flex:1;min-width:130px;margin-top:0" href="Original Robojunkies.step" download="Original Robojunkies.step" title="Download Original Robojunkies.step 3D CAD File">
+                <span class="buy-btn-icon">&#128190;</span> Download CAD (.STEP)
               </a>
-              <a class="buy-btn comp-download-btn" style="flex:1;min-width:140px;margin-top:0" href="Original Robojunkies.step" download="Original Robojunkies.step" title="Download Original Robojunkies.step 3D CAD File">
-                <span class="buy-btn-icon">&#128190;</span> Download Wheel CAD (.STEP)
+              <a class="buy-btn comp-download-btn" style="flex:1;min-width:130px;margin-top:0" href="Original_Robojunkies_wheel.stl" download="Original_Robojunkies_wheel.stl" title="Download 3D Printable STL File">
+                <span class="buy-btn-icon">&#128190;</span> Download Print (.STL)
+              </a>
+              <a class="buy-btn comp-download-btn" style="flex:1;min-width:130px;margin-top:0;background:linear-gradient(135deg,#059669,#10b981)" href="3D_Models/3D_Models.zip" download="3D_Models.zip" title="Download All 3D Files Package">
+                <span class="buy-btn-icon">&#128230;</span> All 3D Files (.ZIP)
               </a>
             </div>
           </div>
@@ -3802,7 +3849,8 @@ float getDistance(int trigPin, int echoPin) {
     (function init3DViewer() {
       var viewers = [
         { mvId: 'chassisModelViewer', hintId: 'chassis3dHint', fallback: '3D_Models/AutonomousRacerBot.glb' },
-        { mvId: 'clampModelViewer', hintId: 'clamp3dHint', fallback: '3D_Models/motor_clamp.glb' }
+        { mvId: 'clampModelViewer', hintId: 'clamp3dHint', fallback: '3D_Models/motor_clamp.glb' },
+        { mvId: 'wheelModelViewer', hintId: 'wheel3dHint', fallback: '3D_Models/Original_Robojunkies_wheel.glb' }
       ];
 
       viewers.forEach(function (item) {
