@@ -5,7 +5,7 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://creativekhan123.github.io/Racerbot-Guidance/)
 [![Documentation](https://img.shields.io/badge/Documentation-Interactive%20HTML-blueviolet?style=for-the-badge)](./Autonomous_Racer_Robot.html)
 [![Sensors](https://img.shields.io/badge/Sensors-HC--SR04%20x3-green?style=for-the-badge)]()
-[![Motors](https://img.shields.io/badge/Motors-M20%20300%20RPM%20x4-orange?style=for-the-badge)]()
+[![Motors](https://img.shields.io/badge/Motors-N20%20300%20RPM%20x4-orange?style=for-the-badge)]()
 [![Driver](https://img.shields.io/badge/Driver-L298N%20Dual%20H--Bridge-red?style=for-the-badge)]()
 [![Power](https://img.shields.io/badge/Power-7.4V%20850mAh%20LiPo-yellow?style=for-the-badge)]()
 [![Status](https://img.shields.io/badge/Status-Complete%20%26%20Tested-brightgreen?style=for-the-badge)]()
@@ -18,7 +18,7 @@
 
 <div align="center">
   <img src="Automonus_racer_Bot_v2.jpg" alt="Autonomous Racer Robot 4WD" width="600" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
-  <p><em>The assembled 4WD Autonomous Racer Robot ("Fork Robot") equipped with 3 forward-facing ultrasonic sensors in an angled bumper, L298N dual H-bridge motor driver, and 4 high-traction orange treaded wheels driven by M20 micro gear motors.</em></p>
+  <p><em>The assembled 4WD Autonomous Racer Robot ("Fork Robot") equipped with 3 forward-facing ultrasonic sensors in an angled bumper, L298N dual H-bridge motor driver, and 4 high-traction orange treaded wheels driven by N20 micro gear motors.</em></p>
 </div>
 
 ---
@@ -49,7 +49,7 @@ The **Autonomous Racer Robot** (nicknamed **"Fork Robot"** due to its three forw
 ### Key Capabilities:
 - **3-Way Real-Time Radar Perception**: Continuously scans distance on the **Left**, **Center**, and **Right** using three HC-SR04 ultrasonic sensors mounted at optimal forward detection angles.
 - **Dynamic 4WD Obstacle Avoidance**: Automatically steers away from walls, obstacles, and dead ends without human intervention using high-traction 4-wheel differential steering.
-- **4× M20 300 RPM Micro Gear Motors**: Heavy-duty metal reduction gearboxes provide all-wheel drive pulling power, stable low-noise running, and responsive cornering.
+- **4× N20 300 RPM Micro Gear Motors**: Heavy-duty metal reduction gearboxes provide all-wheel drive pulling power, stable low-noise running, and responsive cornering.
 - **L298N Dual H-Bridge Motor Driver**: Proven high-current dual motor driver switching 7.4V LiPo battery power smoothly across the left and right motor pairs.
 - **Beginner & Classroom Friendly**: Uses standard Arduino built-in functions with zero external dependencies, making it an ideal STEM robotics curriculum project.
 
@@ -80,12 +80,12 @@ This repository includes a **complete, standalone interactive documentation webp
 | **Ultrasonic Sensors** | HC-SR04 (40 kHz acoustic radar) | 3 | 3-way distance measurement (Left, Center, Right) | [Amazon India](https://www.amazon.in/REES52-Ultrasonic-Distance-Sensor-Arduino/dp/B01FDI6AHS) |
 | **Battery Pack** | Orange 7.4V 850mAh 2S LiPo Battery | 1 | High-discharge power source for motors and Arduino | [Robu.in](https://robu.in/product/orange-850mah-2s-30c-60c-lithium-polymer-battery-pack-lipo/) |
 | **L298N Motor Driver Module** | Dual H-Bridge driver board (2A/ch) | 1 | High-current driver switching power to 4 DC motors | [Robu.in](https://robu.in/product/l298n-2a-based-motor-driver-module-good-quality/?gad_source=1&gad_campaignid=20387462343&gbraid=0AAAAADvLFWdPHBJ4WOo7tem7nL7nw4T4g&gclid=CjwKCAiAhqHXBhAXEiwATbksU4IZXTA4FEj_z3hYBTVaAXA_3XAA7-emdi2HB8lAHeeJk7ujOfHiMhoCWfEQAvD_BwE) |
-| **M20 / N20 DC Gear Motors** | Micro metal gearbox, 300 RPM | 4 | All-metal geared motors providing 4WD drive torque | [Robu.in](https://robu.in/product/n20-6v-300-rpm-micro-metal-gear-motor/) |
+| **N20 DC Gear Motors &times;4** | Micro metal gearbox, 300 RPM | 4 | All-metal geared motors providing 4WD drive torque | [Robu.in](https://robu.in/product/n20-6v-300-rpm-micro-metal-gear-motor/) |
 | **Jumper Wires** | DuPont Male-to-Female & M-M | ~20 | Signal and power interconnects between boards and sensors | [Amazon India](https://www.amazon.in/Fly-Robo-Breadboard-Wires-10cm-Male-Female-Female-Female/dp/B0CYLN6Z17) |
 | **Cricket Bat Grip** | Octopus textured rubber sleeve for wheels | 1 | High-traction tire sleeves cut & stretched over 4 wheels | [Amazon India](https://www.amazon.in/DSC-Octopus-Cricket-Grip-Color/dp/B0BG8SYZB7) |
 | **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors | [Download AutonomousRacerBot.stl](./AutonomousRacerBot.stl) |
-| **Wheel 3D model &times;4** | Custom 3D-printed drive wheels with M20/N20 D-shaft hub (`Original Robojunkies.step`) | 4 | 3D-printed drive wheels fitted with octopus bat grip tire sleeves | [Download STEP](./Original%20Robojunkies.step) &bull; [Download STL](./Original_Robojunkies_wheel.stl) |
-| **3D-Printed Motor Clamps** | Custom brackets for N20/M20 motors (`motor clamp.stl`) | 4 | Clamp 4&times; micro gear motors firmly onto chassis | [Download STL](./motor%20clamp.stl) &bull; [3D Bundle](./3D_Models/3D_Models.zip) |
+| **Wheel 3D model &times;4** | Custom 3D-printed drive wheels with N20 D-shaft hub (`Original Robojunkies.step`) | 4 | 3D-printed drive wheels fitted with octopus bat grip tire sleeves | [Download STEP](./Original%20Robojunkies.step) &bull; [Download STL](./Original_Robojunkies_wheel.stl) |
+| **3D-Printed Motor Clamps** | Custom brackets for N20 motors (`motor clamp.stl`) | 4 | Clamp 4&times; micro gear motors firmly onto chassis | [Download STL](./motor%20clamp.stl) &bull; [3D Bundle](./3D_Models/3D_Models.zip) |
 | **M2 &times; 10mm Socket Head Cap Bolts** | Stainless steel 304 Allen cap bolts | 8–12 | Secure 3D-printed motor clamps (`motor clamp.stl`) to chassis | [Robokits](https://robokits.co.in/robot-parts/nut-bolts-standoffs/allen-cap-socket-head-bolts/m2-x-10mm-socket-head-cap-stainless-steel-304-bolt-moq-12-pcs?srsltid=AYCX9vIl3XfMImSpwQeJgNYU7eYxyWvO1huRkra0ZrYR0H0_df9LIzPK) |
 | **Stainless steel hex nuts &times;3** | EasyMech M2 stainless steel hex nuts | As req. | Fasten & lock M2 bolts underneath the chassis | [Robu.in](https://robu.in/product/easymech-m2-ss-hex-nut-50-pcs/) |
 | **M3 &times; 10mm Hex CSK Screws &times;3** | Grade 10.9 High Tensile Black Oxide (Dia 3mm, Length 10mm) | 3 | Flush-head structural chassis & board mounting | [OnlyScrews.in](https://onlyscrews.in/products/m3-x-10mm-hex-allen-csk-high-tensile10-9-black-oxide-screw-dia-3mm-length-10mm?currency=INR&country=IN&variant=51455871484217&stkn=6e84ebfba1b8&utm_source=google&utm_medium=cpc&utm_campaign=Inderans_Campaign&utm_content=Other_than_fasteners_wala_copy&gad_source=1&gad_campaignid=22229905346&gclid=EAIaIQobChMIh7HMhZfrlwMVhYhmAh0E0QY9EAQYBSABEgKS3_D_BwE) |
@@ -121,7 +121,7 @@ This repository includes a **complete, standalone interactive documentation webp
   <tr>
     <td align="center" width="50%">
       <img src="M20_Motor.jpg" width="300" /><br/>
-      <strong>M20 DC Gear Motors &times;4</strong><br/>
+      <strong>N20 DC Gear Motors &times;4</strong><br/>
       <em>300 RPM Micro Metal Gear Motors (4WD)</em>
     </td>
     <td align="center" width="50%">
@@ -188,7 +188,7 @@ This repository includes a **complete, standalone interactive documentation webp
 
 <div align="center">
   <img src="circuit_image.png" alt="Autonomous Racer Robot 4WD Circuit Diagram" width="850" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
-  <p><em>Full 4WD Circuit Diagram — Arduino UNO, L298N Dual H-Bridge Motor Driver, 3× HC-SR04 Ultrasonic Sensors, 4× M20 Motors, and 7.4V LiPo Battery.</em></p>
+  <p><em>Full 4WD Circuit Diagram — Arduino UNO, L298N Dual H-Bridge Motor Driver, 3× HC-SR04 Ultrasonic Sensors, 4× N20 Motors, and 7.4V LiPo Battery.</em></p>
 </div>
 
 ---
@@ -216,7 +216,7 @@ All three HC-SR04 sensors share standard `5V` and `GND` power rails from the Ard
 
 ### 2. L298N Motor Driver Connections
 
-The L298N driver receives logic signals from the Arduino and powers the 4 M20 motors (two left motors in parallel, two right motors in parallel):
+The L298N driver receives logic signals from the Arduino and powers the 4 N20 motors (two left motors in parallel, two right motors in parallel):
 
 | L298N Pin / Terminal | Connected To | Arduino Pin | Description |
 | :--- | :--- | :--- | :--- |
@@ -225,8 +225,8 @@ The L298N driver receives logic signals from the Arduino and powers the 4 M20 mo
 | **IN3** | Right Motors PWM Speed | `D11` | Speed PWM signal for right motor pair |
 | **IN4** | Right Motors Direction | `D12` | Direction control for right motor pair |
 | **ENA & ENB** | 5V Jumper Caps | Fitted | Keep jumpers fitted to enable both channels |
-| **OUT1 & OUT2** | Left M20 Motors (&times;2) | Motor Terminals | 2 Left motors connected in parallel |
-| **OUT3 & OUT4** | Right M20 Motors (&times;2) | Motor Terminals | 2 Right motors connected in parallel |
+| **OUT1 & OUT2** | Left N20 Motors (&times;2) | Motor Terminals | 2 Left motors connected in parallel |
+| **OUT3 & OUT4** | Right N20 Motors (&times;2) | Motor Terminals | 2 Right motors connected in parallel |
 
 ---
 
@@ -234,7 +234,7 @@ The L298N driver receives logic signals from the Arduino and powers the 4 M20 mo
 
 | Terminal | Power Wire | Voltage | Notes |
 | :--- | :--- | :--- | :--- |
-| **L298N 12V / VMS (+)** | 7.4V Battery Red Wire (+) | `+7.4V` | Powers the 4 M20 motors. **Verify polarity!** |
+| **L298N 12V / VMS (+)** | 7.4V Battery Red Wire (+) | `+7.4V` | Powers the 4 N20 motors. **Verify polarity!** |
 | **L298N GND (-)** | 7.4V Battery Black Wire (-) | `0V (GND)` | Ground reference from battery |
 | **L298N GND (-)** | Arduino GND Pin | `GND` | **Crucial!** Common ground reference |
 | **L298N 5V Out** | Arduino 5V / VIN Pin | `5V` | Optional regulated 5V to power Arduino |
@@ -422,12 +422,12 @@ float getDistance(int trigPin, int echoPin) {
 
 ## 🔨 Assembly & Setup Steps
 
-1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four M20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
-2. **Mount 4x M20 Motors & Wheels (with 3D Clamps & Bat Grip)**: Secure the four 300 RPM M20 micro gear motors into side mounting brackets (2 left, 2 right) using the 3D-printed motor clamps (`motor clamp.stl`) tightened with M2x10mm socket head cap bolts and locked with M2 stainless steel hex nuts. Cut four rings from the rubber cricket bat grip and stretch them securely over the four 3D-printed wheels (Original Robojunkies.step) for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.
+1. **Prepare 4WD Chassis**: Unpack the 4WD chassis base and identify mounting slots for the four N20 motors, L298N driver, Arduino, battery, and 3-sensor bumper.
+2. **Mount 4x N20 Motors & Wheels (with 3D Clamps & Bat Grip)**: Secure the four 300 RPM N20 micro gear motors into side mounting brackets (2 left, 2 right) using the 3D-printed motor clamps (`motor clamp.stl`) tightened with M2x10mm socket head cap bolts and locked with M2 stainless steel hex nuts. Cut four rings from the rubber cricket bat grip and stretch them securely over the four 3D-printed wheels (Original Robojunkies.step) for enhanced octopus-pattern traction, then press each wheel firmly onto the motor output shaft.
 3. **Mount Arduino & L298N Module**: Fasten the Arduino UNO and the L298N motor driver module onto the chassis using the three M3&times;10mm countersunk hex screws (`m3_csk_screws.jpg`) and standoffs, ensuring flush seating with the chassis base.
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
-6. **Connect Motor Terminals**: Wire the two left M20 motors in parallel to OUT1 & OUT2, and the two right M20 motors in parallel to OUT3 & OUT4. Connect IN1&rarr;D9, IN2&rarr;D8, IN3&rarr;D11, IN4&rarr;D12.
+6. **Connect Motor Terminals**: Wire the two left N20 motors in parallel to OUT1 & OUT2, and the two right N20 motors in parallel to OUT3 & OUT4. Connect IN1&rarr;D9, IN2&rarr;D8, IN3&rarr;D11, IN4&rarr;D12.
 7. **Connect 7.4V Power Supply**: Connect the 7.4V LiPo battery (+) to the L298N 12V terminal, battery (-) to GND, and link L298N GND to Arduino GND (common ground). **Check polarity!**
 8. **Upload Arduino Program**: Connect Arduino to computer via USB, open `autoracerl298n.ino` in Arduino IDE, select **Arduino UNO**, and click **Upload**.
 9. **Field Test**: Place the 4WD robot on a clear floor, power on the 7.4V LiPo battery, and watch it cruise and steer smoothly around obstacles!
@@ -440,9 +440,9 @@ float getDistance(int trigPin, int echoPin) {
 - [ ] L298N motor driver power LED lit steadily
 - [ ] Common ground connected between L298N GND and Arduino GND
 - [ ] 7.4V LiPo Battery polarity verified (`+` Red, `-` Black)
-- [ ] Both left M20 motors rotate forward when commanded
-- [ ] Both right M20 motors rotate forward when commanded
-- [ ] All 4 M20 gear motors securely fastened to chassis with 3D-printed clamps (`motor clamp.stl`)
+- [ ] Both left N20 motors rotate forward when commanded
+- [ ] Both right N20 motors rotate forward when commanded
+- [ ] All 4 N20 gear motors securely fastened to chassis with 3D-printed clamps (`motor clamp.stl`)
 - [ ] All M2x10mm socket head cap bolts and stainless steel hex nuts tightened securely
 - [ ] All M3x10mm CSK countersunk hex screws seated flush and tightened securely
 - [ ] All 4 small wheels fitted with rubber bat grip tire sleeves, spinning freely without chassis contact
