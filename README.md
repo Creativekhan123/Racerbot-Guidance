@@ -83,6 +83,7 @@ This repository includes a **complete, standalone interactive documentation webp
 | **N20 DC Gear Motors &times;4** | Micro metal gearbox, 300 RPM | 4 | All-metal geared motors providing 4WD drive torque | [Robu.in](https://robu.in/product/n20-6v-300-rpm-micro-metal-gear-motor/) |
 | **Jumper Wires** | DuPont Male-to-Female & M-M | ~20 | Signal and power interconnects between boards and sensors | [Amazon India](https://www.amazon.in/Fly-Robo-Breadboard-Wires-10cm-Male-Female-Female-Female/dp/B0CYLN6Z17) |
 | **Cricket Bat Grip** | Octopus textured rubber sleeve for wheels | 1 | High-traction tire sleeves cut & stretched over 4 wheels | [Amazon India](https://www.amazon.in/DSC-Octopus-Cricket-Grip-Color/dp/B0BG8SYZB7) |
+| **Double-Sided Tape** | Heavy-duty acrylic/foam mounting tape | 1 Roll | Secure battery pack, sensor mounts & electronics with vibration damping | [Amazon India](https://www.amazon.in/NUOVI-Double-Sided-Heavy-Duty-Furniture-Decoration/dp/B0F2N1VTHD) |
 | **Robot Chassis** | 4WD platform with angled bumper | 1 | Structural skeleton holding all 4 motors, driver, and sensors | [Download AutonomousRacerBot.stl](./AutonomousRacerBot.stl) |
 | **Wheel 3D model &times;4** | Custom 3D-printed drive wheels with N20 D-shaft hub (`Original Robojunkies.step`) | 4 | 3D-printed drive wheels fitted with octopus bat grip tire sleeves | [Download STEP](./Original%20Robojunkies.step) &bull; [Download STL](./Original_Robojunkies_wheel.stl) |
 | **3D-Printed Motor Clamps** | Custom brackets for N20 motors (`motor clamp.stl`) | 4 | Clamp 4&times; micro gear motors firmly onto chassis | [Download STL](./motor%20clamp.stl) &bull; [3D Bundle](./3D_Models/3D_Models.zip) |
@@ -137,44 +138,51 @@ This repository includes a **complete, standalone interactive documentation webp
       <em>Octopus Textured Wheel Tire Sleeves</em>
     </td>
     <td align="center" width="50%">
+      <img src="Double_sided_tape.png" width="300" /><br/>
+      <strong>Double-Sided Tape</strong><br/>
+      <em>Heavy-Duty Component Adhesive Mounting Tape</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
       <img src="Automonus_racer_Bot_v2.jpg" width="300" /><br/>
       <strong>4WD Robot Chassis Platform</strong><br/>
       <em>3D-Printed Baseplate (AutonomousRacerBot.stl)</em>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="50%">
       <img src="wheel_3d_render.png" width="300" /><br/>
       <strong>Wheel 3D model &times;4</strong><br/>
       <em>Custom 3D-Printed Drive Wheels (Original Robojunkies.step)</em>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="50%">
       <img src="motor_clamp.png" width="300" /><br/>
       <strong>3D-Printed Motor Mounting Clamps &times;4</strong><br/>
       <em>Chassis Motor Brackets (motor clamp.stl)</em>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="50%">
       <img src="m2_socket_head_bolts.jpg" width="300" /><br/>
       <strong>M2 &times; 10mm Socket Head Cap Bolts</strong><br/>
       <em>Stainless Steel 304 Motor Clamp Fasteners</em>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="50%">
       <img src="m2_hex_nuts.jpg" width="300" /><br/>
       <strong>Stainless steel hex nuts &times;3</strong><br/>
       <em>EasyMech M2 Stainless Steel Hex Nuts</em>
     </td>
-  </tr>
-  <tr>
     <td align="center" width="50%">
       <img src="m3_csk_screws.jpg" width="300" /><br/>
       <strong>M3 &times; 10mm Hex CSK Screws &times;3</strong><br/>
       <em>Grade 10.9 High Tensile Black Oxide Screws</em>
     </td>
-    <td align="center" width="50%">
+  </tr>
+  <tr>
+    <td align="center" colspan="2" width="100%">
       <a href="Autonomous_Racer_Robot.html#components">
-        <img src="Autonomous Racer Robot Poster.png" width="300" style="object-fit:cover;height:180px;border-radius:8px;" /><br/>
+        <img src="Autonomous Racer Robot Poster.png" width="500" style="object-fit:cover;max-height:220px;border-radius:8px;" /><br/>
         <strong>Full Robot Assembly &amp; Documentation</strong><br/>
         <em>Interactive Webpage &amp; 3D Model Viewers</em>
       </a>
@@ -428,7 +436,7 @@ float getDistance(int trigPin, int echoPin) {
 4. **Mount 3 Ultrasonic Sensors**: Insert the three HC-SR04 sensors into the angled front bumper housing facing Left, Center, and Right.
 5. **Connect Sensor Wiring**: Connect VCC&rarr;5V, GND&rarr;GND, Left TRIG/ECHO&rarr;D2/D3, Center TRIG/ECHO&rarr;D4/D5, and Right TRIG/ECHO&rarr;D6/D7.
 6. **Connect Motor Terminals**: Wire the two left N20 motors in parallel to OUT1 & OUT2, and the two right N20 motors in parallel to OUT3 & OUT4. Connect IN1&rarr;D9, IN2&rarr;D8, IN3&rarr;D11, IN4&rarr;D12.
-7. **Connect 7.4V Power Supply**: Connect the 7.4V LiPo battery (+) to the L298N 12V terminal, battery (-) to GND, and link L298N GND to Arduino GND (common ground). **Check polarity!**
+7. **Mount Battery & Connect 7.4V Power Supply**: Secure the 7.4V LiPo battery pack firmly to the chassis using heavy-duty double-sided mounting tape for vibration damping. Connect battery (+) to the L298N 12V terminal, battery (-) to GND, and link L298N GND to Arduino GND (common ground). **Check polarity!**
 8. **Upload Arduino Program**: Connect Arduino to computer via USB, open `autoracerl298n.ino` in Arduino IDE, select **Arduino UNO**, and click **Upload**.
 9. **Field Test**: Place the 4WD robot on a clear floor, power on the 7.4V LiPo battery, and watch it cruise and steer smoothly around obstacles!
 
