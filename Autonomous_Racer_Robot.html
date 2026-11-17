@@ -3038,10 +3038,10 @@
           <div class="card" style="margin-bottom:0">
             <h3>Decision Rules (from the code)</h3>
             <ul style="font-size:13.5px;margin-top:10px;line-height:1.6">
-              <li><strong>Emergency Reverse &amp; Turn (Center &lt; 15 cm)</strong>: Back up straight (220 ms at -200 PWM), then pivot left in place (220 ms at left -200, right +200 PWM).</li>
-              <li><strong>Left Obstacle Evade (Left &lt; 12 cm)</strong>: Differential spin right in place (left +200, right -200 PWM).</li>
-              <li><strong>Right Obstacle Evade (Right &lt; 12 cm)</strong>: Differential spin left in place (left -200, right +200 PWM).</li>
-              <li><strong>Clear Path</strong>: Move forward smoothly at PWM <strong>130</strong> on all four wheels.</li>
+              <li><strong>Front Obstacle (Center &lt; 15 cm)</strong>: Compare clearances and steer towards the open side &mdash; if Left &gt; Right, pivot turn left (left 0, right 255); if Right &gt; Left, pivot turn right (left 255, right 0).</li>
+              <li><strong>Left Obstacle Evade (Left &lt; 17 cm)</strong>: Pivot turn right (left 200, right 0 PWM).</li>
+              <li><strong>Right Obstacle Evade (Right &lt; 17 cm)</strong>: Pivot turn left (left 0, right 255 PWM).</li>
+              <li><strong>Clear Path</strong>: Move forward at full speed PWM <strong>255</strong> on all four wheels.</li>
             </ul>
           </div>
         </div>
@@ -3065,31 +3065,31 @@
             <tbody>
               <tr>
                 <td style="white-space:nowrap"><strong>Path Ahead Clear</strong></td>
-                <td>Center &ge; 15 cm, Left &amp; Right &ge; 12 cm</td>
-                <td>Cruise forward smoothly</td>
-                <td style="text-align:center"><span class="pin-badge">FORWARD (130)</span></td>
-                <td style="text-align:center"><span class="pin-badge">FORWARD (130)</span></td>
+                <td>Center &ge; 15 cm, Left &amp; Right &ge; 17 cm</td>
+                <td>Cruise forward at full speed</td>
+                <td style="text-align:center"><span class="pin-badge">FORWARD (255)</span></td>
+                <td style="text-align:center"><span class="pin-badge">FORWARD (255)</span></td>
               </tr>
               <tr>
                 <td style="white-space:nowrap"><strong>Obstacle on Left</strong></td>
-                <td>Left &lt; 12 cm, Right &ge; 12 cm</td>
-                <td>Differential pivot right</td>
+                <td>Left &lt; 17 cm, Right &ge; 17 cm</td>
+                <td>Pivot turn right</td>
                 <td style="text-align:center"><span class="pin-badge">FORWARD (200)</span></td>
-                <td style="text-align:center"><span class="pin-badge">REVERSE (-200)</span></td>
+                <td style="text-align:center"><span class="pin-badge">STOP (0)</span></td>
               </tr>
               <tr>
                 <td style="white-space:nowrap"><strong>Obstacle on Right</strong></td>
-                <td>Right &lt; 12 cm, Left &ge; 12 cm</td>
-                <td>Differential pivot left</td>
-                <td style="text-align:center"><span class="pin-badge">REVERSE (-200)</span></td>
-                <td style="text-align:center"><span class="pin-badge">FORWARD (200)</span></td>
+                <td>Right &lt; 17 cm, Left &ge; 17 cm</td>
+                <td>Pivot turn left</td>
+                <td style="text-align:center"><span class="pin-badge">STOP (0)</span></td>
+                <td style="text-align:center"><span class="pin-badge">FORWARD (255)</span></td>
               </tr>
               <tr>
                 <td style="white-space:nowrap"><strong>Front Obstacle / Corner</strong></td>
                 <td>Center &lt; 15 cm</td>
-                <td>1. Reverse 220 ms<br/>2. Pivot Left 220 ms</td>
-                <td style="text-align:center;line-height:2">1. <span class="pin-badge">REVERSE (-200)</span><br/>2. <span class="pin-badge">REVERSE (-200)</span></td>
-                <td style="text-align:center;line-height:2">1. <span class="pin-badge">REVERSE (-200)</span><br/>2. <span class="pin-badge">FORWARD (200)</span></td>
+                <td>Compare clearance &amp; steer away (Left &gt; Right: Turn Left, Right &gt; Left: Turn Right)</td>
+                <td style="text-align:center;line-height:2">If Left &gt; Right: <span class="pin-badge">STOP (0)</span><br/>If Right &gt; Left: <span class="pin-badge">FORWARD (255)</span></td>
+                <td style="text-align:center;line-height:2">If Left &gt; Right: <span class="pin-badge">FORWARD (255)</span><br/>If Right &gt; Left: <span class="pin-badge">STOP (0)</span></td>
               </tr>
             </tbody>
           </table>
@@ -3354,7 +3354,7 @@ const int trig3 = 6;  const int echo3 = 7;   // Right sensor
 
 const float MAX_SENSOR_DISTANCE       = 200.0;  // cm
 const float FRONT_OBSTACLE_THRESHOLD  = 15.0;   // cm - center sensor triggers backup + turn
-const float SIDE_OBSTACLE_THRESHOLD   = 12.0;   // cm - left/right sensors trigger turn
+const float SIDE_OBSTACLE_THRESHOLD   = 17.0;   // cm - left/right sensors trigger turn
 const unsigned long SENSOR_INTERVAL   = 50;     // ms between sensor reads
 const unsigned long BACKUP_DURATION   = 220;    // ms to reverse when front obstacle detected
 
@@ -3434,19 +3434,22 @@ void loop() {
 
     if (centerDist < FRONT_OBSTACLE_THRESHOLD) {
       // Back up briefly, then turn left for the same duration
-      motorControl(-200, -200);
-      delay(BACKUP_DURATION);
-      motorControl(-200, 200);  // Turn Left in place
-      delay(BACKUP_DURATION);
+
+      if(leftDist>rightDist){
+        motorControl(0, 255);
+      }
+      else if(rightDist>leftDist){
+        motorControl(255, 0);
+      }
     }
     else if (leftDist < SIDE_OBSTACLE_THRESHOLD) {
-      motorControl(200, -200);  // Turn Right in place
+      motorControl(200, 0);  // Turn Right in place
     }
     else if (rightDist < SIDE_OBSTACLE_THRESHOLD) {
-      motorControl(-200, 200);  // Turn Left in place
+      motorControl(0, 255);  // Turn Left in place
     }
     else {
-      motorControl(130, 130);   // Go Forward
+      motorControl(255, 255);   // Go Forward
     }
   }
 }
@@ -3552,7 +3555,7 @@ float getDistance(int trigPin, int echoPin) {
           <div class="step-num"></div>
           <div class="step-content">
             <h3>Test the Robot</h3>
-            <p>Place the robot on a clear floor, switch on the 7.4V battery, and observe it cruising forward smoothly at PWM 130 and steering away from obstacles when detected!</p>
+            <p>Place the robot on a clear floor, switch on the 7.4V battery, and observe it cruising forward smoothly at PWM 255 and steering away from obstacles when detected!</p>
           </div>
         </li>
       </ol>
@@ -3618,19 +3621,19 @@ float getDistance(int trigPin, int echoPin) {
           </li>
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
-              onclick="toggleCheck(this.previousElementSibling)">Robot cruises forward smoothly at PWM 130 when path is clear</span>
+              onclick="toggleCheck(this.previousElementSibling)">Robot cruises forward smoothly at PWM 255 when path is clear</span>
           </li>
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
-              onclick="toggleCheck(this.previousElementSibling)">Robot turns right in place when obstacle placed &lt; 12 cm near left sensor</span>
+              onclick="toggleCheck(this.previousElementSibling)">Robot turns right when obstacle placed &lt; 17 cm near left sensor</span>
           </li>
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
-              onclick="toggleCheck(this.previousElementSibling)">Robot turns left in place when obstacle placed &lt; 12 cm near right sensor</span>
+              onclick="toggleCheck(this.previousElementSibling)">Robot turns left when obstacle placed &lt; 17 cm near right sensor</span>
           </li>
           <li>
             <div class="check-box" onclick="toggleCheck(this)"></div><span class="checklist-label"
-              onclick="toggleCheck(this.previousElementSibling)">Robot backs up (220 ms) and turns when front obstacle is &lt; 15 cm</span>
+              onclick="toggleCheck(this.previousElementSibling)">Robot compares clearance and steers towards open side when front obstacle is &lt; 15 cm</span>
           </li>
         </ul>
       </div>

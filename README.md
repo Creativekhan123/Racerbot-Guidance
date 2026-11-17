@@ -269,19 +269,19 @@ The robot operates using a continuous sense-think-act control loop:
      ▼                                                       ▼
 [Center < 15 cm?]                                      [Center Clear (>= 15 cm)]
      │ YES                                                   │
-     ▼                                                       ├─ Left < 12 cm?  ──► Turn RIGHT (+200, -200)
-[Reverse & Turn]                                             ├─ Right < 12 cm? ──► Turn LEFT  (-200, +200)
-(Back up 220ms, then pivot left 220ms)                       └─ Both Clear?    ──► Cruise FORWARD (130, 130)
+     ▼                                                       ├─ Left < 17 cm?  ──► Turn RIGHT (200, 0)
+[Compare Clearance]                                         ├─ Right < 17 cm? ──► Turn LEFT  (0, 255)
+(Left > Right: Turn Left; Right > Left: Turn Right)         └─ Both Clear?    ──► Cruise FORWARD (255, 255)
 ```
 
 ### Decision Matrix:
 
 | Sensor Condition | Distance Thresholds | Robot Action | Left Motors | Right Motors |
 | :--- | :--- | :--- | :---: | :---: |
-| **Path Ahead Clear** | Center &ge; 15cm, Left & Right &ge; 12cm | Cruise forward smoothly | `FORWARD (PWM 130)` | `FORWARD (PWM 130)` |
-| **Obstacle on Left** | Left &lt; 12cm, Right &ge; 12cm | Steer right in place | `FORWARD (PWM 200)` | `REVERSE (PWM 200)` |
-| **Obstacle on Right** | Right &lt; 12cm, Left &ge; 12cm | Steer left in place | `REVERSE (PWM 200)` | `FORWARD (PWM 200)` |
-| **Front Obstacle / Corner** | Center &lt; 15cm | 1. Reverse 220ms<br/>2. Pivot Left 220ms | 1. `REVERSE (-200)`<br/>2. `REVERSE (-200)` | 1. `REVERSE (-200)`<br/>2. `FORWARD (+200)` |
+| **Path Ahead Clear** | Center &ge; 15cm, Left & Right &ge; 17cm | Cruise forward at full speed | `FORWARD (PWM 255)` | `FORWARD (PWM 255)` |
+| **Obstacle on Left** | Left &lt; 17cm, Right &ge; 17cm | Pivot right | `FORWARD (PWM 200)` | `STOP (0)` |
+| **Obstacle on Right** | Right &lt; 17cm, Left &ge; 17cm | Pivot left | `STOP (0)` | `FORWARD (PWM 255)` |
+| **Front Obstacle / Corner** | Center &lt; 15cm | Steer towards more clearance | Left > Right: `STOP (0)`<br/>Right > Left: `FORWARD (255)` | Left > Right: `FORWARD (255)`<br/>Right > Left: `STOP (0)` |
 
 ---
 
@@ -307,7 +307,7 @@ const int trig3 = 6;  const int echo3 = 7;   // Right sensor
 
 const float MAX_SENSOR_DISTANCE       = 200.0;  // cm
 const float FRONT_OBSTACLE_THRESHOLD  = 15.0;   // cm - center sensor triggers backup + turn
-const float SIDE_OBSTACLE_THRESHOLD   = 12.0;   // cm - left/right sensors trigger turn
+const float SIDE_OBSTACLE_THRESHOLD   = 17.0;   // cm - left/right sensors trigger turn
 const unsigned long SENSOR_INTERVAL   = 50;     // ms between sensor reads
 const unsigned long BACKUP_DURATION   = 220;    // ms to reverse when front obstacle detected
 
@@ -387,19 +387,22 @@ void loop() {
 
     if (centerDist < FRONT_OBSTACLE_THRESHOLD) {
       // Back up briefly, then turn left for the same duration
-      motorControl(-200, -200);
-      delay(BACKUP_DURATION);
-      motorControl(-200, 200);  // Turn Left in place
-      delay(BACKUP_DURATION);
+
+      if(leftDist>rightDist){
+        motorControl(0, 255);
+      }
+      else if(rightDist>leftDist){
+        motorControl(255, 0);
+      }
     }
     else if (leftDist < SIDE_OBSTACLE_THRESHOLD) {
-      motorControl(200, -200);  // Turn Right in place
+      motorControl(200, 0);  // Turn Right in place
     }
     else if (rightDist < SIDE_OBSTACLE_THRESHOLD) {
-      motorControl(-200, 200);  // Turn Left in place
+      motorControl(0, 255);  // Turn Left in place
     }
     else {
-      motorControl(130, 130);   // Go Forward
+      motorControl(255, 255);   // Go Forward
     }
   }
 }
@@ -457,10 +460,10 @@ float getDistance(int trigPin, int echoPin) {
 - [ ] Left ultrasonic sensor displays accurate distance on Serial Monitor (D2/D3)
 - [ ] Center ultrasonic sensor displays accurate distance on Serial Monitor (D4/D5)
 - [ ] Right ultrasonic sensor displays accurate distance on Serial Monitor (D6/D7)
-- [ ] Robot cruises forward smoothly (PWM 130) when path is clear
-- [ ] Robot turns right in place when obstacle placed &lt; 12 cm near left sensor
-- [ ] Robot turns left in place when obstacle placed &lt; 12 cm near right sensor
-- [ ] Robot reverses (220 ms) and pivots when obstacle &lt; 15 cm directly in front
+- [ ] Robot cruises forward smoothly (PWM 255) when path is clear
+- [ ] Robot turns right when obstacle placed &lt; 17 cm near left sensor
+- [ ] Robot turns left when obstacle placed &lt; 17 cm near right sensor
+- [ ] Robot compares clearance and steers towards open side when obstacle &lt; 15 cm directly in front
 
 ---
 
