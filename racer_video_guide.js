@@ -1284,7 +1284,7 @@
           robot.setSonarVisual('right', true, 16, t, 0x38bdf8);
           callouts = [
             { pos: new THREE.Vector3(0, 4.8, 9.2), text: '3× HC-SR04 Radar', color: '#38bdf8' },
-            { pos: new THREE.Vector3(0, 3.6, -5.5), text: 'Arduino UNO Brain', color: '#10b981' },
+            { pos: new THREE.Vector3(0.68, 3.8, -5.8), text: 'Arduino UNO Brain', color: '#10b981' },
             { pos: new THREE.Vector3(6.2, 2.2, 3.6), text: '4WD Bat-Grip Wheels', color: '#f97316' }
           ];
         } else if (t < 18) {
@@ -1485,7 +1485,9 @@
           state.camLookGoal.set(0.5, 2.2, -1.2);
           callouts = c3 < 30.5
             ? [{ pos: new THREE.Vector3(0, 3.0, -0.3), text: 'Tape + 7.4V LiPo Bay', color: '#f97316' }]
-            : [{ pos: new THREE.Vector3(0, 3.8, -5.5), text: 'Arduino UNO + M3 CSK Screws', color: '#10b981' }];
+            : (c3 < 33.2
+              ? [{ pos: new THREE.Vector3(-0.28, 4.8, 4.12), text: 'L298N Dual H-Bridge', color: '#ef4444' }]
+              : [{ pos: new THREE.Vector3(0.68, 3.8, -5.8), text: 'Arduino UNO + M3 CSK Screws', color: '#10b981' }]);
         } else {
           state.camPosGoal.set(10.5, 10.0, 22.0);
           state.camLookGoal.set(0.5, 3.2, 7.5);

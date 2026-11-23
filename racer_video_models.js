@@ -388,122 +388,141 @@
 
   function buildArduinoUno() {
     var grp = new THREE.Group();
+    var visualHolder = new THREE.Group();
+    grp.add(visualHolder);
+
+    var fallback = new THREE.Group();
     var pcbTex = makeArduinoTexture();
     var topMat = new THREE.MeshStandardMaterial({ map: pcbTex, roughness: 0.42, metalness: 0.12 });
     var sideMat = new THREE.MeshStandardMaterial({ color: 0x00656b, roughness: 0.5 });
 
-    // PCB (6.86 cm along X, 5.33 cm along Z — mounted sideways across rear deck)
+    // PCB (6.86 cm along X, 5.33 cm along Z, bottom at Y = 0)
+    // Oriented to match real CAD standoffs: USB-B at (+X, +Z), Digital header at +Z, Power/Analog at -Z
     var pcb = new THREE.Mesh(
-      new THREE.BoxGeometry(6.86, 0.18, 5.33),
+      new THREE.BoxGeometry(6.86, 0.16, 5.33),
       [sideMat, sideMat, topMat, sideMat, sideMat, sideMat]
     );
+    pcb.position.y = 0.08;
     pcb.castShadow = true;
     pcb.receiveShadow = true;
-    grp.add(pcb);
+    fallback.add(pcb);
 
-    // Brushed aluminum USB-B connector (left/rear edge)
+    // Brushed aluminum USB-B connector (+X, +Z corner)
     var metalMat = new THREE.MeshStandardMaterial({ color: 0xdbeafe, roughness: 0.24, metalness: 0.9 });
-    var usb = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.05, 1.2), metalMat);
-    usb.position.set(-2.95, 0.6, -1.25);
+    var usb = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.08, 1.2), metalMat);
+    usb.position.set(3.25, 0.70, 1.15);
     usb.castShadow = true;
-    grp.add(usb);
+    fallback.add(usb);
 
-    // Black DC barrel jack
+    // Black DC barrel jack (+X, -Z corner)
     var blackPlastic = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.55, metalness: 0.15 });
-    var barrel = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.05, 0.9), blackPlastic);
-    barrel.position.set(-2.95, 0.6, 1.65);
-    grp.add(barrel);
+    var barrel = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.08, 0.9), blackPlastic);
+    barrel.position.set(2.95, 0.70, -1.82);
+    fallback.add(barrel);
 
     // ATmega328P IC
     var chip = new THREE.Mesh(new THREE.BoxGeometry(3.4, 0.36, 0.8), blackPlastic);
-    chip.position.set(1.1, 0.27, 0.95);
-    grp.add(chip);
+    chip.position.set(-0.9, 0.34, -0.95);
+    fallback.add(chip);
 
-    // Female Digital Header Strip (Front/Top edge: Z = -2.25)
-    var headerDig = new THREE.Mesh(new THREE.BoxGeometry(4.9, 0.72, 0.28), blackPlastic);
-    headerDig.position.set(0.6, 0.45, -2.28);
-    grp.add(headerDig);
+    // Female Digital Header Strip (+Z front edge: SCL..D0 from +X to -X)
+    var headerDig = new THREE.Mesh(new THREE.BoxGeometry(4.9, 0.88, 0.28), blackPlastic);
+    headerDig.position.set(-0.58, 0.60, 2.38);
+    fallback.add(headerDig);
 
-    // Female Power & Analog Header Strip (Back/Bottom edge: Z = +2.28)
-    var headerPwr = new THREE.Mesh(new THREE.BoxGeometry(4.1, 0.72, 0.28), blackPlastic);
-    headerPwr.position.set(0.95, 0.45, 2.28);
-    grp.add(headerPwr);
+    // Female Power & Analog Header Strip (-Z rear edge: NC..A5 from +X to -X)
+    var headerPwr = new THREE.Mesh(new THREE.BoxGeometry(3.9, 0.88, 0.28), blackPlastic);
+    headerPwr.position.set(-1.14, 0.60, -2.38);
+    fallback.add(headerPwr);
 
     // Reset Tactile Button
     var resetBtn = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.25, 12), new THREE.MeshStandardMaterial({ color: 0xef4444, roughness: 0.4 }));
-    resetBtn.position.set(-2.7, 0.25, -2.1);
-    grp.add(resetBtn);
+    resetBtn.position.set(2.8, 0.28, 2.15);
+    fallback.add(resetBtn);
 
-    // Live Status LEDs
+    visualHolder.add(fallback);
+
+    // Live Status LEDs (mounted on grp so they stay glowing on top of the real GLB PCB!)
     var onLedMat = new THREE.MeshStandardMaterial({
       color: 0x22c55e, emissive: 0x22c55e, emissiveIntensity: 0.1, roughness: 0.2
     });
-    var onLed = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.14, 0.14), onLedMat);
-    onLed.position.set(2.6, 0.16, -0.5);
+    var onLed = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.12, 0.16), onLedMat);
+    onLed.position.set(-2.15, 0.26, 0.75);
     grp.add(onLed);
 
     var txLedMat = new THREE.MeshStandardMaterial({
       color: 0xf59e0b, emissive: 0xf59e0b, emissiveIntensity: 0.0, roughness: 0.2
     });
-    var txLed = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.14, 0.14), txLedMat);
-    txLed.position.set(-0.6, 0.16, -0.9);
+    var txLed = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.12, 0.16), txLedMat);
+    txLed.position.set(1.35, 0.26, 0.55);
     grp.add(txLed);
 
-    // Pin Map in Arduino local coordinates
-    // Digital pins along Z = -2.28, X from -1.4 (D13) to +2.8 (D2)
-    var pinX = function (dNum) {
-      // D13 -> -1.35, D2 -> +2.60
-      return -1.35 + (13 - dNum) * 0.355;
-    };
+    // Exact Pin Map in Arduino local coordinates (matches real Elegoo/UNO R3 GLB @ rotY=+90deg, 2.54mm pitch!)
+    // Digital header along Z = +2.38 (front edge facing L298N/sensors), D12..D2 going from +X toward -X
+    // Power header along Z = -2.38 (rear edge), 5V/GND/GND/VIN going from +X toward -X
     var localPins = {
-      D12: new THREE.Vector3(pinX(12), 0.82, -2.28),
-      D11: new THREE.Vector3(pinX(11), 0.82, -2.28),
-      D9:  new THREE.Vector3(pinX(9),  0.82, -2.28),
-      D8:  new THREE.Vector3(pinX(8),  0.82, -2.28),
-      D7:  new THREE.Vector3(pinX(7),  0.82, -2.28),
-      D6:  new THREE.Vector3(pinX(6),  0.82, -2.28),
-      D5:  new THREE.Vector3(pinX(5),  0.82, -2.28),
-      D4:  new THREE.Vector3(pinX(4),  0.82, -2.28),
-      D3:  new THREE.Vector3(pinX(3),  0.82, -2.28),
-      D2:  new THREE.Vector3(pinX(2),  0.82, -2.28),
-      '5V':  new THREE.Vector3(-0.65, 0.82, 2.28),
-      GND:   new THREE.Vector3(-0.25, 0.82, 2.28),
-      GND2:  new THREE.Vector3(0.15,  0.82, 2.28),
-      VIN:   new THREE.Vector3(0.55,  0.82, 2.28)
+      D12: new THREE.Vector3( 0.47, 1.08,  2.38),
+      D11: new THREE.Vector3( 0.22, 1.08,  2.38),
+      D9:  new THREE.Vector3(-0.29, 1.08,  2.38),
+      D8:  new THREE.Vector3(-0.55, 1.08,  2.38),
+      D7:  new THREE.Vector3(-0.95, 1.08,  2.38),
+      D6:  new THREE.Vector3(-1.21, 1.08,  2.38),
+      D5:  new THREE.Vector3(-1.46, 1.08,  2.38),
+      D4:  new THREE.Vector3(-1.71, 1.08,  2.38),
+      D3:  new THREE.Vector3(-1.97, 1.08,  2.38),
+      D2:  new THREE.Vector3(-2.22, 1.08,  2.38),
+      '5V':  new THREE.Vector3(-0.38, 1.08, -2.38),
+      GND:   new THREE.Vector3(-0.63, 1.08, -2.38),
+      GND2:  new THREE.Vector3(-0.88, 1.08, -2.38),
+      VIN:   new THREE.Vector3(-1.14, 1.08, -2.38)
     };
 
-    return { group: grp, onLedMat: onLedMat, txLedMat: txLedMat, localPins: localPins };
+    return {
+      group: grp,
+      visualHolder: visualHolder,
+      fallback: fallback,
+      onLedMat: onLedMat,
+      txLedMat: txLedMat,
+      localPins: localPins
+    };
   }
 
   function buildL298N() {
     var grp = new THREE.Group();
+    var visualHolder = new THREE.Group();
+    grp.add(visualHolder);
+
+    var fallback = new THREE.Group();
     var pcbTex = makeL298NTexture();
     var topMat = new THREE.MeshStandardMaterial({ map: pcbTex, roughness: 0.42, metalness: 0.14 });
     var sideMat = new THREE.MeshStandardMaterial({ color: 0x991b1b, roughness: 0.5 });
 
+    // PCB (4.30 cm x 4.37 cm, bottom at Y = 0)
+    // Oriented to match real CAD & robot photo: Heatsink at +Z (front), Power block (+X, -Z) & Logic pins (-X, -Z)
     var pcb = new THREE.Mesh(
-      new THREE.BoxGeometry(4.3, 0.18, 4.3),
+      new THREE.BoxGeometry(4.30, 0.16, 4.37),
       [sideMat, sideMat, topMat, sideMat, sideMat, sideMat]
     );
+    pcb.position.y = 0.08;
     pcb.castShadow = true;
     pcb.receiveShadow = true;
-    grp.add(pcb);
+    fallback.add(pcb);
 
-    // Finned black heatsink
-    var hsMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.4, metalness: 0.72 });
-    var hsBase = new THREE.Mesh(new THREE.BoxGeometry(2.3, 2.2, 0.45), hsMat);
-    hsBase.position.set(0, 1.18, 0.85);
+    // Finned black heatsink (+Z front edge)
+    var hsMat = new THREE.MeshStandardMaterial({ color: 0x1a1f2b, roughness: 0.36, metalness: 0.68 });
+    var hsBase = new THREE.Mesh(new THREE.BoxGeometry(2.3, 2.4, 0.45), hsMat);
+    hsBase.position.set(0, 1.36, 1.25);
     hsBase.castShadow = true;
-    grp.add(hsBase);
+    fallback.add(hsBase);
     for (var f = -2; f <= 2; f++) {
-      var fin = new THREE.Mesh(new THREE.BoxGeometry(0.18, 2.2, 1.05), hsMat);
-      fin.position.set(f * 0.48, 1.18, 1.25);
+      var fin = new THREE.Mesh(new THREE.BoxGeometry(0.18, 2.4, 1.05), hsMat);
+      fin.position.set(f * 0.48, 1.36, 1.65);
       fin.castShadow = true;
-      grp.add(fin);
+      fallback.add(fin);
     }
 
     // Screw terminal blocks (Blue plastic + silver screws)
-    var blueMat = new THREE.MeshStandardMaterial({ color: 0x1d4ed8, roughness: 0.45 });
+    var blueMat = new THREE.MeshStandardMaterial({ color: 0x1d4ed8, roughness: 0.40 });
     var screwMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.25, metalness: 0.9 });
 
     function makeTermBlock(w, h, d, count) {
@@ -523,75 +542,80 @@
     }
 
     // Left motor outputs OUT1/OUT2 (+X edge)
-    var outL = makeTermBlock(0.75, 0.95, 1.35, 2);
-    outL.position.set(1.78, 0.56, 0.2);
-    grp.add(outL);
+    var outL = makeTermBlock(0.75, 0.98, 1.05, 2);
+    outL.position.set(1.68, 0.65, -0.70);
+    fallback.add(outL);
 
     // Right motor outputs OUT3/OUT4 (-X edge)
-    var outR = makeTermBlock(0.75, 0.95, 1.35, 2);
-    outR.position.set(-1.78, 0.56, 0.2);
-    grp.add(outR);
+    var outR = makeTermBlock(0.75, 0.98, 1.05, 2);
+    outR.position.set(-1.68, 0.65, -0.70);
+    fallback.add(outR);
 
-    // Power block (12V, GND, 5V) facing rear (-Z edge, left half)
-    var pwrBlock = makeTermBlock(1.65, 0.95, 0.78, 3);
-    pwrBlock.position.set(-0.95, 0.56, -1.72);
-    grp.add(pwrBlock);
+    // Power block (12V, GND, 5V) facing rear (-Z edge, +X half)
+    var pwrBlock = makeTermBlock(1.55, 0.98, 0.72, 3);
+    pwrBlock.position.set(0.73, 0.65, -1.69);
+    fallback.add(pwrBlock);
 
     // Electrolytic Capacitors
     var capMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.3, metalness: 0.6 });
     var capTopMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.25, metalness: 0.9 });
-    [[-0.9, -0.35], [0.85, -0.35]].forEach(function (pos) {
+    [[-0.85, 0.25], [0.85, 0.25]].forEach(function (pos) {
       var c = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.95, 16), capMat);
-      c.position.set(pos[0], 0.56, pos[1]);
+      c.position.set(pos[0], 0.64, pos[1]);
       var ct = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.05, 16), capTopMat);
-      ct.position.set(pos[0], 1.04, pos[1]);
-      grp.add(c, ct);
+      ct.position.set(pos[0], 1.12, pos[1]);
+      fallback.add(c, ct);
     });
 
-    // Pin Header Strip (ENA, IN1, IN2, IN3, IN4, ENB) along -Z right half
+    // Pin Header Strip (ENA, IN1, IN2, IN3, IN4, ENB) along -Z (-X half)
     var pinStrip = new THREE.Mesh(
-      new THREE.BoxGeometry(1.75, 0.25, 0.32),
+      new THREE.BoxGeometry(1.55, 0.25, 0.48),
       new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.6 })
     );
-    pinStrip.position.set(0.95, 0.22, -1.78);
-    grp.add(pinStrip);
+    pinStrip.position.set(-0.83, 0.28, -1.78);
+    fallback.add(pinStrip);
 
     // Removable Yellow 5V Jumper Caps on ENA and ENB (highlighted in Chapter 5!)
     var jumperMat = new THREE.MeshStandardMaterial({
       color: 0xfacc15, emissive: 0xf59e0b, emissiveIntensity: 0.15, roughness: 0.35
     });
-    var enaJumper = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.62, 0.38), jumperMat);
-    enaJumper.position.set(0.25, 0.52, -1.78);
-    var enbJumper = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.62, 0.38), jumperMat);
-    enbJumper.position.set(1.65, 0.52, -1.78);
-    grp.add(enaJumper, enbJumper);
+    var enaJumper = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.60, 0.48), jumperMat);
+    enaJumper.position.set(-0.20, 0.70, -1.78);
+    var enbJumper = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.60, 0.48), jumperMat);
+    enbJumper.position.set(-1.46, 0.70, -1.78);
+    fallback.add(enaJumper, enbJumper);
 
-    // Live Red Power LED
+    visualHolder.add(fallback);
+
+    // Live Red Power LED (mounted on grp right above real GLB SMD LED so it lights up live!)
     var pwrLedMat = new THREE.MeshStandardMaterial({
       color: 0xef4444, emissive: 0xef4444, emissiveIntensity: 0.05, roughness: 0.2
     });
-    var pwrLed = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.14, 0.18), pwrLedMat);
-    pwrLed.position.set(-0.05, 0.16, -0.95);
+    var pwrLed = new THREE.Mesh(new THREE.BoxGeometry(0.20, 0.12, 0.24), pwrLedMat);
+    pwrLed.position.set(0.10, 0.32, -1.10);
     grp.add(pwrLed);
 
+    // Exact Pin Map matching real L298N GLB (centered, PCB bottom Y=0, rotY=180deg)
     var localPins = {
-      V12:  new THREE.Vector3(-1.45, 1.05, -1.72),
-      GND:  new THREE.Vector3(-0.95, 1.05, -1.72),
-      V5:   new THREE.Vector3(-0.45, 1.05, -1.72),
-      IN1:  new THREE.Vector3(0.55,  0.65, -1.78),
-      IN2:  new THREE.Vector3(0.82,  0.65, -1.78),
-      IN3:  new THREE.Vector3(1.10,  0.65, -1.78),
-      IN4:  new THREE.Vector3(1.38,  0.65, -1.78),
-      OUT1: new THREE.Vector3(1.92,  0.95,  0.52),
-      OUT2: new THREE.Vector3(1.92,  0.95, -0.15),
-      OUT3: new THREE.Vector3(-1.92, 0.95,  0.52),
-      OUT4: new THREE.Vector3(-1.92, 0.95, -0.15),
-      ENA:  new THREE.Vector3(0.25,  0.85, -1.78),
-      ENB:  new THREE.Vector3(1.65,  0.85, -1.78)
+      V12:  new THREE.Vector3( 1.23, 1.16, -1.69),
+      GND:  new THREE.Vector3( 0.73, 1.16, -1.69),
+      V5:   new THREE.Vector3( 0.23, 1.16, -1.69),
+      ENA:  new THREE.Vector3(-0.20, 1.05, -1.78),
+      IN1:  new THREE.Vector3(-0.45, 1.05, -1.78),
+      IN2:  new THREE.Vector3(-0.71, 1.05, -1.78),
+      IN3:  new THREE.Vector3(-0.96, 1.05, -1.78),
+      IN4:  new THREE.Vector3(-1.21, 1.05, -1.78),
+      ENB:  new THREE.Vector3(-1.46, 1.05, -1.78),
+      OUT1: new THREE.Vector3( 1.65, 1.16, -0.45),
+      OUT2: new THREE.Vector3( 1.65, 1.16, -0.95),
+      OUT3: new THREE.Vector3(-1.65, 1.16, -0.45),
+      OUT4: new THREE.Vector3(-1.65, 1.16, -0.95)
     };
 
     return {
       group: grp,
+      visualHolder: visualHolder,
+      fallback: fallback,
       pwrLedMat: pwrLedMat,
       jumperMat: jumperMat,
       localPins: localPins
@@ -612,10 +636,10 @@
     pack.castShadow = true;
     grp.add(pack);
 
-    // Yellow XT60 Plug on side
+    // Yellow XT60 Plug on +X side (Robot Left — matches real robot build & aligns cleanly with L298N 12V/GND!)
     var xtMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.45 });
     var xt60 = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.65, 0.55), xtMat);
-    xt60.position.set(-3.15, 0.72, 0.45);
+    xt60.position.set(3.15, 0.72, 0.45);
     grp.add(xt60);
 
     // White JST-XH Balance Plug
@@ -623,12 +647,12 @@
       new THREE.BoxGeometry(0.55, 0.38, 0.7),
       new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.5 })
     );
-    jst.position.set(3.0, 0.62, -0.5);
+    jst.position.set(-3.0, 0.62, -0.5);
     grp.add(jst);
 
     var localPins = {
-      POS: new THREE.Vector3(-3.2, 0.85, 0.62),
-      NEG: new THREE.Vector3(-3.2, 0.85, 0.26)
+      POS: new THREE.Vector3(3.2, 0.85, 0.62),
+      NEG: new THREE.Vector3(3.2, 0.85, 0.26)
     };
 
     // Double-sided heavy-duty foam tape strip (separately animated!)
@@ -859,25 +883,27 @@
     batParts.batteryGroup.userData = { target: batTarget.clone() };
     root.add(batParts.batteryGroup);
 
-    // 4. L298N Dual H-Bridge Motor Driver (Front Deck behind bumper)
+    // 4. L298N Dual H-Bridge Motor Driver (Rests flush on 4 front CAD standoffs @ Y=1.80 cm!)
     var l298n = buildL298N();
-    var l298Target = new THREE.Vector3(0, 0.58, 4.15);
+    var l298Target = new THREE.Vector3(-0.28, 1.80, 4.12);
     l298n.group.position.copy(l298Target);
     l298n.group.userData = { target: l298Target.clone() };
     root.add(l298n.group);
 
-    // 5. Arduino UNO (Rear Deck) + 3x M3x10mm Black CSK Screws
+    // 5. Arduino UNO (Rests flush on 4 rear CAD standoffs @ Y=2.00 cm!) + M3x10mm Black CSK Screws
     var arduino = buildArduinoUno();
-    var ardTarget = new THREE.Vector3(0, 2.02, -5.55);
+    var ardTarget = new THREE.Vector3(0.68, 2.00, -5.835);
     arduino.group.position.copy(ardTarget);
     arduino.group.userData = { target: ardTarget.clone() };
     root.add(arduino.group);
 
+    // Exact CAD standoff hole centers for Arduino UNO R3 (matched to AutonomousRacerBot.glb to 0.2mm!)
     var m3Screws = [];
     [
-      new THREE.Vector3(-2.6, 2.12, -7.7),
-      new THREE.Vector3(2.8,  2.12, -7.7),
-      new THREE.Vector3(2.8,  2.12, -3.5)
+      new THREE.Vector3(-2.49, 2.20, -7.74),
+      new THREE.Vector3(-2.49, 2.20, -5.01),
+      new THREE.Vector3( 2.59, 2.20, -3.44),
+      new THREE.Vector3( 2.71, 2.20, -8.25)
     ].forEach(function (pos) {
       var sc = buildM3CSKScrew();
       sc.position.copy(pos);
@@ -998,52 +1024,52 @@
     }
 
     // Group: 'us_pwr' (Shared 5V & GND rails to all 3 HC-SR04 sensors)
-    addWire('us_vcc_l', 'us_pwr', arch(pinMap.ard['5V'], pinMap.usLeft.VCC,   3.3,  2.2, 0), 0xef4444, 0.075);
-    addWire('us_vcc_c', 'us_pwr', arch(pinMap.ard['5V'], pinMap.usCenter.VCC, 3.6,  0.4, 0), 0xef4444, 0.075);
+    addWire('us_vcc_l', 'us_pwr', arch(pinMap.ard['5V'], pinMap.usLeft.VCC,   3.3,  2.4, 0), 0xef4444, 0.075);
+    addWire('us_vcc_c', 'us_pwr', arch(pinMap.ard['5V'], pinMap.usCenter.VCC, 3.6,  0.6, 0), 0xef4444, 0.075);
     addWire('us_vcc_r', 'us_pwr', arch(pinMap.ard['5V'], pinMap.usRight.VCC,  3.3, -2.0, 0), 0xef4444, 0.075);
-    addWire('us_gnd_l', 'us_pwr', arch(pinMap.ard.GND,   pinMap.usLeft.GND,   3.0,  2.4, 0), 0x334155, 0.075);
-    addWire('us_gnd_c', 'us_pwr', arch(pinMap.ard.GND,   pinMap.usCenter.GND, 3.3,  0.6, 0), 0x334155, 0.075);
+    addWire('us_gnd_l', 'us_pwr', arch(pinMap.ard.GND,   pinMap.usLeft.GND,   3.0,  2.6, 0), 0x334155, 0.075);
+    addWire('us_gnd_c', 'us_pwr', arch(pinMap.ard.GND,   pinMap.usCenter.GND, 3.3,  0.8, 0), 0x334155, 0.075);
     addWire('us_gnd_r', 'us_pwr', arch(pinMap.ard.GND,   pinMap.usRight.GND,  3.0, -1.8, 0), 0x334155, 0.075);
 
     // Group: 'us_left' (Left TRIG D2, ECHO D3)
-    addWire('us_l_trig', 'us_left', arch(pinMap.ard.D2, pinMap.usLeft.TRIG, 3.5, 2.0, 0), 0x3b82f6, 0.09);
-    addWire('us_l_echo', 'us_left', arch(pinMap.ard.D3, pinMap.usLeft.ECHO, 3.8, 1.8, 0), 0x06b6d4, 0.09);
+    addWire('us_l_trig', 'us_left', arch(pinMap.ard.D2, pinMap.usLeft.TRIG, 3.3, 1.8, 0), 0x3b82f6, 0.09);
+    addWire('us_l_echo', 'us_left', arch(pinMap.ard.D3, pinMap.usLeft.ECHO, 3.6, 1.6, 0), 0x06b6d4, 0.09);
 
     // Group: 'us_center' (Center TRIG D4, ECHO D5)
-    addWire('us_c_trig', 'us_center', arch(pinMap.ard.D4, pinMap.usCenter.TRIG, 4.1, 0.2, 0), 0x22c55e, 0.09);
-    addWire('us_c_echo', 'us_center', arch(pinMap.ard.D5, pinMap.usCenter.ECHO, 4.4, -0.1, 0), 0xeab308, 0.09);
+    addWire('us_c_trig', 'us_center', arch(pinMap.ard.D4, pinMap.usCenter.TRIG, 3.8,  0.2, 0), 0x22c55e, 0.09);
+    addWire('us_c_echo', 'us_center', arch(pinMap.ard.D5, pinMap.usCenter.ECHO, 4.1, -0.1, 0), 0xeab308, 0.09);
 
     // Group: 'us_right' (Right TRIG D6, ECHO D7)
-    addWire('us_r_trig', 'us_right', arch(pinMap.ard.D6, pinMap.usRight.TRIG, 3.6, -1.8, 0), 0xf97316, 0.09);
-    addWire('us_r_echo', 'us_right', arch(pinMap.ard.D7, pinMap.usRight.ECHO, 3.9, -2.0, 0), 0xa855f7, 0.09);
+    addWire('us_r_trig', 'us_right', arch(pinMap.ard.D6, pinMap.usRight.TRIG, 3.4, -1.6, 0), 0xf97316, 0.09);
+    addWire('us_r_echo', 'us_right', arch(pinMap.ard.D7, pinMap.usRight.ECHO, 3.7, -1.8, 0), 0xa855f7, 0.09);
 
     // Group: 'l298_logic' (IN1->D9, IN2->D8, IN3->D11, IN4->D12)
-    addWire('in1_d9',  'l298_logic', arch(pinMap.ard.D9,  pinMap.l298.IN1, 2.3,  0.5, 0), 0xfacc15, 0.095);
-    addWire('in2_d8',  'l298_logic', arch(pinMap.ard.D8,  pinMap.l298.IN2, 2.6,  0.7, 0), 0x38bdf8, 0.095);
-    addWire('in3_d11', 'l298_logic', arch(pinMap.ard.D11, pinMap.l298.IN3, 2.5,  0.1, 0), 0xec4899, 0.095);
-    addWire('in4_d12', 'l298_logic', arch(pinMap.ard.D12, pinMap.l298.IN4, 2.8, -0.1, 0), 0xc084fc, 0.095);
+    addWire('in1_d9',  'l298_logic', arch(pinMap.ard.D9,  pinMap.l298.IN1, 1.9, -0.2, 0), 0xfacc15, 0.095);
+    addWire('in2_d8',  'l298_logic', arch(pinMap.ard.D8,  pinMap.l298.IN2, 2.2, -0.4, 0), 0x38bdf8, 0.095);
+    addWire('in3_d11', 'l298_logic', arch(pinMap.ard.D11, pinMap.l298.IN3, 2.5, -0.5, 0), 0xec4899, 0.095);
+    addWire('in4_d12', 'l298_logic', arch(pinMap.ard.D12, pinMap.l298.IN4, 2.8, -0.7, 0), 0xc084fc, 0.095);
 
     // Group: 'motors_left' (OUT1 & OUT2 -> Front-Left & Rear-Left in parallel)
-    addWire('m_fl_a', 'motors_left', arch(pinMap.l298.OUT1, pinMap.motors.FL_A, 0.9, 0.3, 0), 0xf43f5e, 0.09);
-    addWire('m_fl_b', 'motors_left', arch(pinMap.l298.OUT2, pinMap.motors.FL_B, 0.7, 0.3, 0), 0xfb7185, 0.09);
-    addWire('m_rl_a', 'motors_left', arch(pinMap.l298.OUT1, pinMap.motors.RL_A, 1.3, 1.3, 0), 0xf43f5e, 0.09);
-    addWire('m_rl_b', 'motors_left', arch(pinMap.l298.OUT2, pinMap.motors.RL_B, 1.1, 1.1, 0), 0xfb7185, 0.09);
+    addWire('m_fl_a', 'motors_left', arch(pinMap.l298.OUT1, pinMap.motors.FL_A, 0.8, 0.5, 0), 0xf43f5e, 0.09);
+    addWire('m_fl_b', 'motors_left', arch(pinMap.l298.OUT2, pinMap.motors.FL_B, 0.6, 0.5, 0), 0xfb7185, 0.09);
+    addWire('m_rl_a', 'motors_left', arch(pinMap.l298.OUT1, pinMap.motors.RL_A, 1.2, 1.6, 0), 0xf43f5e, 0.09);
+    addWire('m_rl_b', 'motors_left', arch(pinMap.l298.OUT2, pinMap.motors.RL_B, 1.0, 1.4, 0), 0xfb7185, 0.09);
 
     // Group: 'motors_right' (OUT3 & OUT4 -> Front-Right & Rear-Right in parallel)
-    addWire('m_fr_a', 'motors_right', arch(pinMap.l298.OUT3, pinMap.motors.FR_A, 0.9, -0.3, 0), 0x10b981, 0.09);
-    addWire('m_fr_b', 'motors_right', arch(pinMap.l298.OUT4, pinMap.motors.FR_B, 0.7, -0.3, 0), 0x2dd4bf, 0.09);
-    addWire('m_rr_a', 'motors_right', arch(pinMap.l298.OUT3, pinMap.motors.RR_A, 1.3, -1.3, 0), 0x10b981, 0.09);
-    addWire('m_rr_b', 'motors_right', arch(pinMap.l298.OUT4, pinMap.motors.RR_B, 1.1, -1.1, 0), 0x2dd4bf, 0.09);
+    addWire('m_fr_a', 'motors_right', arch(pinMap.l298.OUT3, pinMap.motors.FR_A, 0.8, -0.5, 0), 0x10b981, 0.09);
+    addWire('m_fr_b', 'motors_right', arch(pinMap.l298.OUT4, pinMap.motors.FR_B, 0.6, -0.5, 0), 0x2dd4bf, 0.09);
+    addWire('m_rr_a', 'motors_right', arch(pinMap.l298.OUT3, pinMap.motors.RR_A, 1.2, -1.4, 0), 0x10b981, 0.09);
+    addWire('m_rr_b', 'motors_right', arch(pinMap.l298.OUT4, pinMap.motors.RR_B, 1.0, -1.2, 0), 0x2dd4bf, 0.09);
 
-    // Group: 'pwr_lipo' (7.4V Battery -> L298N 12V & GND)
-    addWire('bat_pos', 'pwr_lipo', arch(pinMap.bat.POS, pinMap.l298.V12, 1.4, -0.8, 0), 0xdc2626, 0.13);
-    addWire('bat_neg', 'pwr_lipo', arch(pinMap.bat.NEG, pinMap.l298.GND, 1.2, -0.5, 0), 0x1e293b, 0.13);
+    // Group: 'pwr_lipo' (7.4V Battery XT60 on +X -> L298N 12V & GND)
+    addWire('bat_pos', 'pwr_lipo', arch(pinMap.bat.POS, pinMap.l298.V12, 1.1, 0.8, 0), 0xdc2626, 0.13);
+    addWire('bat_neg', 'pwr_lipo', arch(pinMap.bat.NEG, pinMap.l298.GND, 0.9, 0.5, 0), 0x1e293b, 0.13);
 
     // Group: 'pwr_gnd' (CRITICAL Common Ground: L298N GND <-> Arduino GND)
-    addWire('common_gnd', 'pwr_gnd', arch(pinMap.l298.GND, pinMap.ard.GND2, 2.2, -1.3, 0), 0x10b981, 0.125);
+    addWire('common_gnd', 'pwr_gnd', arch(pinMap.l298.GND, pinMap.ard.GND2, 2.3, 1.5, 0), 0x10b981, 0.125);
 
     // Group: 'pwr_5v' (Regulated 5V Out: L298N 5V -> Arduino 5V/VIN)
-    addWire('reg_5v', 'pwr_5v', arch(pinMap.l298.V5, pinMap.ard.VIN, 2.5, -0.9, 0), 0xf97316, 0.115);
+    addWire('reg_5v', 'pwr_5v', arch(pinMap.l298.V5, pinMap.ard.VIN, 2.6, 1.1, 0), 0xf97316, 0.115);
 
     /* ---------- Try Loading Real 3D CAD (.glb) Models Seamlessly ---------- */
     if (typeof THREE.GLTFLoader === 'function' && window.location.protocol !== 'file:') {
@@ -1129,6 +1155,63 @@
         });
         if (onCadLoaded) onCadLoaded('clamps');
       }, undefined, function () { /* Keep procedural clamps cleanly */ });
+
+      // Load Real Arduino UNO R3 Photorealistic 3D Model (exact 6.86cm x 5.33cm PCB, aligned to all 4 CAD standoffs!)
+      loader.load('3D_Models/arduino_uno.glb?v=1', function (gltf) {
+        var mesh = gltf.scene;
+        // Exact PCB calibration: raw PCB W=1.1423 (5.33cm), L=1.4724 (6.86cm) => scale = 4.6626
+        // Center pure PCB at (0, 0) and place PCB bottom flush at Y = 0
+        var sc = 4.6626;
+        mesh.scale.set(sc, sc, sc);
+        mesh.position.set(-0.02305 * sc, -0.0363 * sc, 0.15685 * sc);
+        mesh.traverse(function (c) {
+          if (c.isMesh) {
+            c.castShadow = true;
+            c.receiveShadow = true;
+            if (c.material) {
+              c.material.side = THREE.DoubleSide;
+              c.material.needsUpdate = true;
+            }
+          }
+        });
+        var wrapper = new THREE.Group();
+        wrapper.add(mesh);
+        wrapper.rotation.y = Math.PI / 2; // USB-B at (+X, +Z), Digital header at +Z, Power/Analog at -Z
+        arduino.visualHolder.remove(arduino.fallback);
+        arduino.visualHolder.add(wrapper);
+        if (onCadLoaded) onCadLoaded('arduino');
+      }, undefined, function () { /* Keep procedural Arduino cleanly */ });
+
+      // Load Real L298N Dual H-Bridge 3D Model (exact 4.30cm x 4.37cm PCB, flush on 4 front CAD standoffs!)
+      loader.load('3D_Models/l298n.glb?v=1', function (gltf) {
+        var mesh = gltf.scene;
+        // Raw model is in real-world meters (0.0430m x 0.0437m) => scale 100 -> cm
+        // Center PCB at (0, 0) and place PCB bottom flush at Y = 0
+        mesh.scale.set(100, 100, 100);
+        mesh.position.set(0.076, 0.418, 0.673);
+        mesh.traverse(function (c) {
+          if (c.isMesh) {
+            c.castShadow = true;
+            c.receiveShadow = true;
+            if (c.material) {
+              c.material.side = THREE.DoubleSide;
+              // Bind real yellow jumper cap material (Amarelo.001) to live Chapter 5 highlight pulse!
+              if (c.material.name === 'Amarelo.001') {
+                c.material.emissive = new THREE.Color(0xf59e0b);
+                c.material.emissiveIntensity = 0.15;
+                l298n.jumperMat = c.material;
+              }
+              c.material.needsUpdate = true;
+            }
+          }
+        });
+        var wrapper = new THREE.Group();
+        wrapper.add(mesh);
+        wrapper.rotation.y = Math.PI; // Heatsink faces +Z (front bumper), Power & Logic pins face -Z (rear)
+        l298n.visualHolder.remove(l298n.fallback);
+        l298n.visualHolder.add(wrapper);
+        if (onCadLoaded) onCadLoaded('l298n');
+      }, undefined, function () { /* Keep procedural L298N cleanly */ });
     }
 
     /* ---------- Helper to Control Wires, Sonar, Explode & Assembly ---------- */
