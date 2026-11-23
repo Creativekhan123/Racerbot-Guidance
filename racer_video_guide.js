@@ -913,7 +913,7 @@
     renderer.toneMappingExposure = 1.15;
     canvasHost.appendChild(renderer.domElement);
 
-    // Three-point Robotics Lab Studio Lighting
+    // Original Three-point Robotics Lab Studio Lighting (clean crisp contrast)
     var hemiLight = new THREE.HemisphereLight(0xdbeafe, 0x0f172a, 0.95);
     scene.add(hemiLight);
 
@@ -1472,7 +1472,7 @@
           state.camPosGoal.set(16.5, 9.5, 8.0);
           state.camLookGoal.set(3.8, 1.4, 1.5);
           callouts = [
-            { pos: new THREE.Vector3(4.3, 2.3, 3.6), text: 'N20 + Orange Clamp + M2 Bolts', color: '#f59e0b' }
+            { pos: new THREE.Vector3(4.3, 2.3, 3.6), text: 'N20 + Blue Clamp + M2 Bolts', color: '#3b82f6' }
           ];
         } else if (c3 < 25) {
           state.camPosGoal.set(17.5, 6.5, 4.5);

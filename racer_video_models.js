@@ -218,8 +218,8 @@
   function buildProceduralChassis() {
     var grp = new THREE.Group();
     var mat = new THREE.MeshStandardMaterial({
-      color: 0x4f6885,
-      roughness: 0.58,
+      color: 0xf5c518, // Vibrant Racing Yellow chassis — pops cleanly against dark blue grid & all mounted modules
+      roughness: 0.48,
       metalness: 0.08
     });
 
@@ -278,8 +278,8 @@
   function buildProceduralClamp() {
     var grp = new THREE.Group();
     var mat = new THREE.MeshStandardMaterial({
-      color: 0xf57322,
-      roughness: 0.5,
+      color: 0x2e80f5, // Electric Cobalt Blue motor clamps — clearly distinct from yellow chassis & brass motors
+      roughness: 0.45,
       metalness: 0.08
     });
     // Bridge arch over N20 motor + two screw ears
@@ -1049,19 +1049,25 @@
     if (typeof THREE.GLTFLoader === 'function' && window.location.protocol !== 'file:') {
       var loader = new THREE.GLTFLoader();
 
-      // Load Real Chassis CAD
-      loader.load('3D_Models/AutonomousRacerBot.glb', function (gltf) {
+      // Load Real Chassis CAD — Vibrant Racing Yellow (distinct from blue grid, blue clamps, orange tires, red L298N, teal Arduino)
+      loader.load('3D_Models/AutonomousRacerBot.glb?v=4', function (gltf) {
         var mesh = gltf.scene;
         mesh.scale.set(0.1, 0.1, 0.1);
+        var chassisMat = new THREE.MeshStandardMaterial({
+          color: 0xf5c518,
+          roughness: 0.48,
+          metalness: 0.08,
+          flatShading: true,
+          side: THREE.DoubleSide
+        });
         mesh.traverse(function (c) {
           if (c.isMesh) {
+            if (c.geometry && !c.geometry.attributes.normal) {
+              c.geometry.computeVertexNormals();
+            }
             c.castShadow = true;
             c.receiveShadow = true;
-            c.material = new THREE.MeshStandardMaterial({
-              color: 0x4f6885,
-              roughness: 0.56,
-              metalness: 0.08
-            });
+            c.material = chassisMat;
           }
         });
         chassisHolder.remove(fallbackChassis);
@@ -1069,18 +1075,24 @@
         if (onCadLoaded) onCadLoaded('chassis');
       }, undefined, function () { /* Keep procedural chassis cleanly */ });
 
-      // Load Real 3D-Printed Wheel CAD
-      loader.load('3D_Models/Original_Robojunkies_wheel.glb', function (gltf) {
+      // Load Real 3D-Printed Wheel CAD — Crisp Pearl White Spokes inside Orange Bat-Grip Tires
+      loader.load('3D_Models/Original_Robojunkies_wheel.glb?v=4', function (gltf) {
         var template = gltf.scene;
         template.scale.set(0.1, 0.1, 0.1);
+        var wheelMat = new THREE.MeshStandardMaterial({
+          color: 0xf4f7fb,
+          roughness: 0.40,
+          metalness: 0.06,
+          side: THREE.DoubleSide
+        });
         template.traverse(function (c) {
           if (c.isMesh) {
+            if (c.geometry && !c.geometry.attributes.normal) {
+              c.geometry.computeVertexNormals();
+            }
             c.castShadow = true;
-            c.material = new THREE.MeshStandardMaterial({
-              color: 0xf1f5f9,
-              roughness: 0.42,
-              metalness: 0.08
-            });
+            c.receiveShadow = true;
+            c.material = wheelMat;
           }
         });
         wheelRimHolders.forEach(function (holder) {
@@ -1090,18 +1102,25 @@
         if (onCadLoaded) onCadLoaded('wheels');
       }, undefined, function () { /* Keep procedural wheels cleanly */ });
 
-      // Load Real 3D-Printed Motor Clamp CAD
-      loader.load('3D_Models/motor_clamp.glb', function (gltf) {
+      // Load Real 3D-Printed Motor Clamp CAD — Electric Cobalt Blue (distinct from yellow chassis & brass N20 motors!)
+      loader.load('3D_Models/motor_clamp.glb?v=4', function (gltf) {
         var template = gltf.scene;
         template.scale.set(0.1, 0.1, 0.1);
+        var clampMat = new THREE.MeshStandardMaterial({
+          color: 0x2e80f5,
+          roughness: 0.45,
+          metalness: 0.08,
+          flatShading: true,
+          side: THREE.DoubleSide
+        });
         template.traverse(function (c) {
           if (c.isMesh) {
+            if (c.geometry && !c.geometry.attributes.normal) {
+              c.geometry.computeVertexNormals();
+            }
             c.castShadow = true;
-            c.material = new THREE.MeshStandardMaterial({
-              color: 0xf57322,
-              roughness: 0.48,
-              metalness: 0.08
-            });
+            c.receiveShadow = true;
+            c.material = clampMat;
           }
         });
         clamps.forEach(function (holder) {
