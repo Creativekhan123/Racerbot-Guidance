@@ -2024,6 +2024,8 @@
     })();
 
   </script>
+  <!-- Interactive 3D Video Guide Stylesheet -->
+  <link rel="stylesheet" href="racer_video_guide.css">
   <!-- Preload 3D Model Asset -->
   <link rel="preload" href="3D_Models/AutonomousRacerBot.glb" as="fetch" type="model/gltf-binary" crossorigin>
   <link rel="preload" href="3D_Models/motor_clamp.glb" as="fetch" type="model/gltf-binary" crossorigin>
@@ -2048,6 +2050,7 @@
       </div>
       <div class="nav-links" id="navLinks">
         <a href="#overview">Overview</a>
+        <a href="#video-guide">3D Video Guide</a>
         <a href="#components">Components</a>
         <a href="#guide">Component Guide</a>
         <a href="#how-it-works">How It Works</a>
@@ -2095,8 +2098,21 @@
             <span class="badge">7.4V LiPo Power</span>
             <span class="badge">4WD All-Wheel Drive</span>
           </div>
+          <button type="button" class="hero-video-cta" onclick="scrollToVideoAndPlay()">
+            <span>&#9654;</span> Watch Interactive 3D Video Guide (4:20)
+          </button>
         </div>
       </div>
+    </section>
+
+    <!-- SECTION 1B: INTERACTIVE 3D GUIDED VIDEO MASTERCLASS -->
+    <section id="video-guide">
+      <div class="rvg-section-header">
+        <h2>&#127916; Interactive 3D Build, Wiring &amp; Code Video Guide</h2>
+        <span class="rvg-duration-pill"><span class="rvg-duration-dot"></span> 4:20 &bull; 8 Chapters &bull; Interactive 3D</span>
+      </div>
+      <p>Watch the entire Autonomous Racer Robot come together in 3D &mdash; all 14 components, step-by-step mechanical assembly, pin-by-pin ultrasonic &amp; L298N wiring, live Arduino code sync, and an autonomous obstacle course run. Pause and drag anytime to inspect any screw or wire up close!</p>
+      <div id="racerVideoGuideMount"></div>
     </section>
 
     <!-- SECTION 2: COMPONENTS -->
@@ -4101,6 +4117,23 @@ float getDistance(int trigPin, int echoPin) {
 
   <!-- Back to Top Floating Button -->
   <button id="backToTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <!-- Three.js Offline Engine + ElevenLabs Narration & Studio SFX Manifests + Interactive 3D Video Guide -->
+  <script src="3D_Models/three.min.js"></script>
+  <script src="3D_Models/GLTFLoader.js"></script>
+  <script src="audio/narration_manifest.js"></script>
+  <script src="audio/sfx_manifest.js"></script>
+  <script src="racer_video_models.js"></script>
+  <script src="racer_video_guide.js"></script>
+  <script>
+    function scrollToVideoAndPlay() {
+      var sec = document.getElementById('video-guide');
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(function () {
+        if (window.RacerVideoGuideAPI) window.RacerVideoGuideAPI.play();
+      }, 350);
+    }
+  </script>
 
 </body>
 

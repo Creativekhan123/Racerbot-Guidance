@@ -1,0 +1,14 @@
+{
+  "name": "autonomous-racer-robot-guide",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Autonomous Racer Robot 4WD Interactive Guide & ElevenLabs Human Teacher Narration Pipeline",
+  "scripts": {
+    "generate:narration": "node --env-file=.env.local scripts/generate_narration.mjs",
+    "generate:sfx": "node --env-file=.env.local scripts/generate_sfx.mjs"
+  },
+  "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.79.0"
+  }
+}

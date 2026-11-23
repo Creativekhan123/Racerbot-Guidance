@@ -7,3 +7,6 @@ desktop.ini
 # Temporary build scripts
 *.pyc
 __pycache__/
+# Local secrets written by `elevenlabs onboard`
+/.env.local
+node_modules/

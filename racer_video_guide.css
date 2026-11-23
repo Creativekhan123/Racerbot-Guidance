@@ -1,0 +1,1157 @@
+/* ==========================================================================
+   Autonomous Racer Robot — Interactive 3D Video Guide Stylesheet
+   Scoped under .rvg-* to integrate seamlessly with Light & Dark modes
+   ========================================================================== */
+
+.rvg-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.rvg-section-header h2 {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.rvg-duration-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: var(--hero-tag-bg);
+  color: var(--hero-tag-text);
+  border: 1px solid var(--hero-tag-border);
+}
+
+.rvg-duration-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.75);
+  animation: rvgPulseDot 1.6s ease-in-out infinite;
+}
+
+@keyframes rvgPulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.82); }
+}
+
+/* Main Player Frame */
+.rvg-shell {
+  position: relative;
+  background: #070d1a;
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 38px rgba(2, 6, 23, 0.28);
+  color: #f1f5f9;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+[data-theme="dark"] .rvg-shell {
+  border-color: #243554;
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.58);
+}
+
+.rvg-shell.rvg-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999990 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  display: flex;
+  flex-direction: column;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* 16:9 Cinema Stage */
+.rvg-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 360px;
+  background: radial-gradient(circle at 50% 42%, #11203d 0%, #070d1a 72%, #040811 100%);
+  overflow: hidden;
+  cursor: grab;
+}
+
+.rvg-stage:active {
+  cursor: grabbing;
+}
+
+.rvg-shell.rvg-fullscreen .rvg-stage {
+  flex: 1;
+  aspect-ratio: auto;
+  height: 100%;
+}
+
+.rvg-canvas-host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rvg-canvas-host canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Top HUD Bar */
+.rvg-top-hud {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  z-index: 12;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.rvg-chapter-tag {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  background: rgba(7, 13, 26, 0.76);
+  border: 1px solid rgba(56, 189, 248, 0.34);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 8px 14px;
+  border-radius: 12px;
+  max-width: min(440px, 68vw);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.rvg-chapter-eyebrow {
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.rvg-chapter-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1.25;
+}
+
+.rvg-top-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.rvg-cam-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background: rgba(7, 13, 26, 0.76);
+  color: #cbd5e1;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.rvg-cam-pill:hover {
+  border-color: #38bdf8;
+  color: #ffffff;
+  background: rgba(14, 116, 144, 0.38);
+}
+
+.rvg-cam-pill.active {
+  border-color: #f59e0b;
+  color: #fde68a;
+  background: rgba(217, 119, 6, 0.28);
+}
+
+.rvg-rec-indicator {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(220, 38, 38, 0.9);
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.65);
+}
+
+.rvg-rec-indicator.recording {
+  display: inline-flex;
+}
+
+/* 3D Projected Callout Layer */
+.rvg-callouts-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rvg-callout {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(7, 13, 26, 0.88);
+  border: 1.5px solid #38bdf8;
+  color: #f8fafc;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  transition: opacity 0.25s ease;
+}
+
+.rvg-callout::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 6px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.rvg-callout-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Dynamic Right Context Side Panel */
+.rvg-side-panel {
+  position: absolute;
+  top: 72px;
+  right: 16px;
+  bottom: 78px;
+  width: min(320px, 40%);
+  z-index: 13;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.rvg-side-panel.hidden {
+  opacity: 0;
+  transform: translateX(18px);
+}
+
+.rvg-card {
+  background: rgba(9, 16, 32, 0.84);
+  border: 1px solid rgba(96, 165, 250, 0.28);
+  border-radius: 14px;
+  padding: 13px 15px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  color: #e2e8f0;
+  max-height: 100%;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+
+.rvg-card::-webkit-scrollbar {
+  width: 5px;
+}
+
+.rvg-card::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 99px;
+}
+
+.rvg-card-kicker {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #38bdf8;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rvg-card-heading {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.rvg-card-text {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* Component Spotlight Photo inside Side Card */
+.rvg-comp-thumb-wrap {
+  width: 100%;
+  height: 104px;
+  background: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  margin-bottom: 9px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.rvg-comp-thumb-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.rvg-comp-grid-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.rvg-mini-chip {
+  background: rgba(30, 41, 59, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.rvg-mini-chip strong {
+  display: block;
+  color: #ffffff;
+  font-size: 11.5px;
+}
+
+.rvg-mini-chip span {
+  color: #94a3b8;
+  font-size: 10.5px;
+}
+
+/* Assembly Step Tracker */
+.rvg-asm-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rvg-asm-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  color: #94a3b8;
+  transition: all 0.25s ease;
+}
+
+.rvg-asm-item.active {
+  background: rgba(37, 99, 235, 0.25);
+  border-color: #60a5fa;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.28);
+}
+
+.rvg-asm-item.done {
+  background: rgba(5, 150, 105, 0.2);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #a7f3d0;
+}
+
+.rvg-asm-badge {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10.5px;
+  font-weight: 800;
+  flex-shrink: 0;
+  background: rgba(148, 163, 184, 0.2);
+  color: #cbd5e1;
+}
+
+.rvg-asm-item.active .rvg-asm-badge {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.rvg-asm-item.done .rvg-asm-badge {
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* Live Wiring Rows */
+.rvg-wire-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.rvg-wire-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  font-size: 11.5px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+  transition: all 0.25s ease;
+}
+
+.rvg-wire-row.active {
+  background: rgba(30, 58, 138, 0.42);
+  border-color: #38bdf8;
+  color: #ffffff;
+  transform: translateX(-2px);
+}
+
+.rvg-wire-row.done {
+  color: #e2e8f0;
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+.rvg-wire-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.rvg-wire-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+}
+
+.rvg-wire-pin {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.18);
+  color: #7dd3fc;
+  white-space: nowrap;
+}
+
+.rvg-safety-alert {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  color: #fde68a;
+  font-size: 11px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+/* Live Code Walkthrough Card */
+.rvg-code-panel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  line-height: 1.55;
+  background: #040812;
+  border: 1px solid rgba(56, 189, 248, 0.26);
+  border-radius: 9px;
+  padding: 8px 0;
+  margin-top: 6px;
+  overflow-x: auto;
+}
+
+.rvg-code-line {
+  display: flex;
+  gap: 8px;
+  padding: 1.5px 10px;
+  color: #94a3b8;
+  white-space: pre;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.rvg-code-line.hl {
+  background: rgba(56, 189, 248, 0.22);
+  border-left: 3px solid #38bdf8;
+  padding-left: 7px;
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.rvg-code-ln {
+  color: #475569;
+  min-width: 20px;
+  text-align: right;
+  user-select: none;
+}
+
+/* Live Autonomous Telemetry HUD */
+.rvg-tele-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 8px 0;
+}
+
+.rvg-tele-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.rvg-tele-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.rvg-tele-track {
+  position: relative;
+  height: 8px;
+  background: rgba(30, 41, 59, 0.9);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.rvg-tele-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.08s linear, background-color 0.15s ease;
+}
+
+.rvg-tele-thresh {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #f8fafc;
+  opacity: 0.7;
+}
+
+.rvg-motor-gauges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.rvg-motor-box {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 8px;
+  padding: 7px 8px;
+  text-align: center;
+}
+
+.rvg-motor-box span {
+  display: block;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+}
+
+.rvg-motor-box strong {
+  display: block;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #38bdf8;
+  margin-top: 2px;
+}
+
+.rvg-decision-pill {
+  margin-top: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  background: rgba(16, 185, 129, 0.22);
+  border: 1px solid rgba(16, 185, 129, 0.55);
+  color: #6ee7b7;
+}
+
+.rvg-decision-pill.warn {
+  background: rgba(245, 158, 11, 0.24);
+  border-color: rgba(251, 191, 36, 0.65);
+  color: #fde68a;
+}
+
+.rvg-decision-pill.danger {
+  background: rgba(239, 68, 68, 0.26);
+  border-color: rgba(248, 113, 113, 0.7);
+  color: #fecaca;
+}
+
+/* Subtitle Caption Bar */
+.rvg-caption-wrap {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  z-index: 14;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.rvg-caption-wrap.hidden {
+  opacity: 0;
+}
+
+.rvg-caption-box {
+  background: rgba(3, 7, 18, 0.84);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f8fafc;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: center;
+  max-width: min(740px, 92%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.rvg-caption-box strong {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+/* Cinema Poster / Start Overlay */
+.rvg-poster-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 45%, rgba(15, 28, 56, 0.55) 0%, rgba(4, 9, 20, 0.88) 85%);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.rvg-poster-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.rvg-poster-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #7dd3fc;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.rvg-poster-title {
+  font-size: clamp(20px, 3.2vw, 30px);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.rvg-poster-sub {
+  font-size: 13.5px;
+  color: #cbd5e1;
+  max-width: 560px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.rvg-big-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(147, 197, 253, 0.6);
+  background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.52);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+}
+
+.rvg-big-play-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(14, 165, 233, 0.62);
+}
+
+.rvg-big-play-btn:active {
+  transform: scale(0.98);
+}
+
+.rvg-poster-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 18px;
+  max-width: 620px;
+}
+
+.rvg-poster-chip {
+  font-size: 11px;
+  font-weight: 600;
+  color: #e2e8f0;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+/* End Screen Overlay */
+.rvg-end-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.rvg-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: rgba(15, 23, 42, 0.85);
+  color: #f8fafc;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  text-decoration: none !important;
+}
+
+.rvg-secondary-btn:hover {
+  border-color: #38bdf8;
+  background: rgba(30, 58, 138, 0.5);
+  color: #ffffff;
+}
+
+/* Control Deck Bar */
+.rvg-controls {
+  background: #0b1222;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+  padding: 10px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+/* Scrubber Timeline with Chapter Segments */
+.rvg-timeline-wrap {
+  position: relative;
+  padding: 6px 0 2px;
+  cursor: pointer;
+}
+
+.rvg-timeline-track {
+  position: relative;
+  height: 7px;
+  background: rgba(148, 163, 184, 0.22);
+  border-radius: 99px;
+  overflow: visible;
+}
+
+.rvg-timeline-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6 0%, #38bdf8 55%, #10b981 100%);
+  border-radius: 99px;
+  pointer-events: none;
+}
+
+.rvg-timeline-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2.5px solid #38bdf8;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+  pointer-events: none;
+  transition: transform 0.12s ease;
+}
+
+.rvg-timeline-wrap:hover .rvg-timeline-thumb {
+  transform: translate(-50%, -50%) scale(1.22);
+}
+
+.rvg-chapter-tick {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 2px;
+  background: #0b1222;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.rvg-timeline-tooltip {
+  position: absolute;
+  bottom: 20px;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #f8fafc;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  z-index: 30;
+}
+
+.rvg-timeline-wrap:hover .rvg-timeline-tooltip {
+  opacity: 1;
+}
+
+/* Controls Row */
+.rvg-ctrl-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rvg-ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.rvg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(30, 41, 59, 0.72);
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.rvg-btn:hover {
+  background: rgba(51, 65, 85, 0.95);
+  border-color: #60a5fa;
+  color: #ffffff;
+}
+
+.rvg-btn.primary {
+  background: #2563eb;
+  border-color: #3b82f6;
+  color: #ffffff;
+  padding: 0 14px;
+}
+
+.rvg-btn.primary:hover {
+  background: #1d4ed8;
+}
+
+.rvg-btn.active {
+  background: rgba(14, 165, 233, 0.24);
+  border-color: #38bdf8;
+  color: #7dd3fc;
+}
+
+.rvg-btn.rec-active {
+  background: rgba(220, 38, 38, 0.85);
+  border-color: #f87171;
+  color: #ffffff;
+}
+
+.rvg-time-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+/* Quick Chapter Strip below Player */
+.rvg-chapter-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.rvg-chap-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.rvg-chap-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+}
+
+.rvg-chap-btn.active {
+  border-color: var(--accent);
+  background: var(--hero-tag-bg);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.rvg-chap-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--badge-bg);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.rvg-chap-btn.active .rvg-chap-num {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.rvg-chap-meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rvg-chap-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rvg-chap-time {
+  font-size: 10.5px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-muted);
+}
+
+/* Hero CTA Button to jump to Video Guide */
+.hero-video-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+  color: #ffffff !important;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none !important;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.32);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+}
+
+.hero-video-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.42);
+  color: #ffffff !important;
+}
+
+.rvg-shortcuts-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rvg-kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 860px) {
+  .rvg-chapter-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .rvg-side-panel {
+    width: min(260px, 46%);
+    top: 64px;
+    bottom: 66px;
+  }
+  .rvg-card {
+    padding: 10px 11px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rvg-stage {
+    aspect-ratio: 4 / 3;
+    min-height: 320px;
+  }
+  .rvg-side-panel {
+    position: absolute;
+    top: auto;
+    right: 8px;
+    left: 8px;
+    bottom: 58px;
+    width: auto;
+    max-height: 40%;
+  }
+  .rvg-comp-thumb-wrap {
+    height: 64px;
+  }
+  .rvg-caption-box {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .rvg-btn .rvg-btn-txt {
+    display: none;
+  }
+  .rvg-btn.primary .rvg-btn-txt {
+    display: inline;
+  }
+  .rvg-chapter-title {
+    font-size: 13px;
+  }
+}
+
+@media print {
+  #video-guide,
+  .hero-video-cta {
+    display: none !important;
+  }
+}
